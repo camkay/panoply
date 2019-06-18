@@ -15,6 +15,8 @@ column_alpha(pattern, data, full = FALSE, verbose = FALSE,
 \item{full}{if TRUE, the full reliability analysis produced by the `psych` package is returned. If FALSE, only the raw alpha value is returned.}
 
 \item{verbose}{specifies whether all column names should be listed, regardless of length.}
+
+\item{na.rm}{a logical value indicating whether `NA` values should be removed prior to computation.}
 }
 \description{
 Estimates Cronbach's Alpha--an indicator of internal consistency--using only columns that have names that match a pattern. The analysis relies relies on `psych::alpha`.

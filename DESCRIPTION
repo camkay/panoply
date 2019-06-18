@@ -8,6 +8,8 @@ Authors@R:
            email = "cameronstuartkay@gmail.com",
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: This package contains a number of miscellaneous functions for making data analysis more efficient. 
+Depends: R (>= 3.3.0)
+Imports: psych
 License: MIT License
 Encoding: UTF-8
 LazyData: true

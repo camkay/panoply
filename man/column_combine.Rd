@@ -15,6 +15,8 @@ column_combine(pattern, data, sum = FALSE, verbose = FALSE,
 \item{sum}{column_combine produces rowwise means by default. However, if `sum` equal TRUE, rowwise sums are produced.}
 
 \item{verbose}{specifies whether all column names should be listed, regardless of length.}
+
+\item{na.rm}{a logical value indicating whether `NA` values should be removed prior to computation.}
 }
 \description{
 Calculates rowwise means or sums using only columns in a data frame that have names that match a pattern.
