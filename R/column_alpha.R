@@ -1,6 +1,6 @@
 #' column_alpha
 #'
-#' Estimates Cronbach's Alpha--an indicator of internal consistency--using only columns that have names that match a pattern. 
+#' Estimates Cronbach's Alpha--an indicator of internal consistency--using only columns that have names that match a pattern. The analysis relies relies on `psych::alpha`. 
 #' @param pattern a character string that is used to find the columns of interest. It can be a regular expression.
 #' @param data a data frame. 
 #' @param full if TRUE, the full reliability analysis produced by the `psych` package is returned. If FALSE, only the raw alpha value is returned.
@@ -17,42 +17,29 @@
 #' column_alpha(pattern = "x", data = x, full = FALSE)
 #' 
 
-column_alpha <- function(pattern, data, full = TRUE, na.rm = TRUE) {
+column_alpha <- function(pattern, data, full = FALSE, na.rm = TRUE) {
+  
+  # check arguments
+  argument_check(pattern, "pattern", "character", len_check = TRUE)
+  argument_check(data, "data", "data.frame")
+  argument_check(full, "full", "logical", len_check = TRUE)
+  argument_check(na.rm, "na.rm", "logical", len_check = TRUE)
   
   # drop columns not including the pattern
-  data_found <- str_cols_find(pattern, data, return = "data")
+  data_found <- column_find(pattern, data, return = "data.frame")
   
-  # message user what columns were used
-  num_cols <- ncol(data_found)
-  
-  if (num_cols == 0) {
-    stop("No columns matched the provided string.")
-  } else if (num_cols  <= 4) {
-    col_names <- paste(names(data_found), collapse = ", ")
-  } else {
-    col_names <- paste0(paste(names(data_found)[1:3], collapse = ", "), ", and ", num_cols - 3, " more")
-  }
-  
-  message(paste0("Cronbach's Alpha was calculated using ", 
-                num_cols, 
-                " columns: ",
-                col_names,
-                "."))
+  # message user how the composites were created
+  column_messager(data_found, "Cronbach's Alpha")
   
   # calculate and extract the alpha value
-  alpha_output <- psych::alpha(x = data_found, warnings = FALSE, na.rm = na.rm)
+  alpha_out <- psych::alpha(x = data_found, na.rm = na.rm)
   
   # return only raw alpha if FULL == FALSE
-  if (full == TRUE) {
-  } else if (full == FALSE) {
-    alpha_output <- alpha_output[["total"]][["raw_alpha"]]  
-  } else {
-    warning(paste("Full must be TRUE or FALSE. \n",
-                  full, "was provided. \n",
-                  "Output obtined using the default (TRUE)."))
-  }
+  if (full == FALSE) {
+    alpha_out <- alpha_out[["total"]][["raw_alpha"]]  
+  } 
   
   # return alphas
-  alpha_output
+  alpha_out
 
 }
