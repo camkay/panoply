@@ -33,7 +33,7 @@ column_alpha <- function(pattern, data, full = FALSE, verbose = FALSE, na.rm = T
   column_message(data_found, "Cronbach's Alpha", verbose = verbose)
   
   # calculate and extract the alpha value
-  alpha_out <- psych::alpha(x = data_found, na.rm = na.rm)
+  alpha_out <- psych::alpha(x = data_found, na.rm = na.rm, warnings = FALSE)
   
   # return only raw alpha if FULL == FALSE
   if (full == FALSE) {
