@@ -1,4 +1,4 @@
-#' Argument Check
+#' argument Check
 #'
 #' A function for streamlining the argument-checking process. It is not exported. 
 #' @param x an argument.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/column_message.R
 \name{column_message}
 \alias{column_message}
-\title{Column message}
+\title{column message}
 \usage{
 column_message(data, function_operation, verbose = FALSE)
 }

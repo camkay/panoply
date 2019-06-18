@@ -1,4 +1,4 @@
-#' Column message
+#' column message
 #'
 #' A function for creating messages when an action is performed on the results of column_find. 
 #' @param x the results of column_find.
