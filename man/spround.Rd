@@ -19,8 +19,4 @@ Round and specify knitted decimal places all in one step.
 \examples{
 spround(x = c(0.1078, 9.9930, 42.4242), digits = 2, leading0 = TRUE)
 spround(x = c(0.1078, 9.9930, 42.4242), digits = 2, leading0 = FALSE)
-
 }
-\keyword{knit}
-\keyword{round}
-\keyword{sprintf}
