@@ -2,7 +2,7 @@
 % Please edit documentation in R/spround.R
 \name{spround}
 \alias{spround}
-\title{Spround}
+\title{spround}
 \usage{
 spround(x, digits = 2, leading0 = TRUE)
 }

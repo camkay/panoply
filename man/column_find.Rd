@@ -11,7 +11,7 @@ column_find(pattern, data, return = "logical")
 
 \item{data}{a data frame.}
 
-\item{return}{a string `specifying`` the output desired. "logical" (the default) returns a logical vector with TRUE indicating that a column name includes the pattern. "numeric" returns a numeric vector that identifies the column numbers matching the pattern. "character" returns a character vector with the column names that match the pattern. "data.frame" returns a data frame that includes only those columns whose names match the pattern.}
+\item{return}{a string specifying the output desired. "logical" (the default) returns a logical vector with TRUE indicating that a column name includes the pattern. "numeric" returns a numeric vector that identifies the column numbers matching the pattern. "character" returns a character vector with the column names that match the pattern. "data.frame" returns a data frame that includes only those columns whose names match the pattern.}
 }
 \description{
 Identifies or extracts columns in a dataframe using a string.
