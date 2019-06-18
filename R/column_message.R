@@ -1,11 +1,11 @@
-#' Column messager
+#' Column message
 #'
 #' A function for creating messages when an action is performed on the results of column_find. 
 #' @param x the results of column_find.
 #' @param function_operation the operation to be performed on the results of column_find. 
 
 
-column_messager <- function(data, function_operation) {
+column_message <- function(data, function_operation) {
   
   # calculate number of columns
   num_cols <- ncol(data)
