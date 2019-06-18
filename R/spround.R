@@ -1,4 +1,4 @@
-#' Spround
+#' spround
 #'
 #' Round and specify knitted decimal places all in one step.
 #' @param x a numeric/character scalar or vector.
