@@ -5,6 +5,7 @@
 #' @param data a data frame. 
 #' @param sum column_combine produces rowwise means by default. However, if `sum` equal TRUE, rowwise sums are produced. 
 #' @param verbose specifies whether all column names should be listed, regardless of length. 
+#' @param na.rm a logical value indicating whether `NA` values should be removed prior to computation.
 #' @export
 #' @examples
 #' x <- data.frame(my_column_x  = 1:10,

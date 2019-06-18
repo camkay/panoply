@@ -5,6 +5,7 @@
 #' @param data a data frame. 
 #' @param full if TRUE, the full reliability analysis produced by the `psych` package is returned. If FALSE, only the raw alpha value is returned.
 #' @param verbose specifies whether all column names should be listed, regardless of length. 
+#' @param na.rm a logical value indicating whether `NA` values should be removed prior to computation.
 #' @export
 #' @examples
 #' x <- data.frame(my_column_x  = 1:10,
