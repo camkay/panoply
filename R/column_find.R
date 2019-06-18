@@ -13,10 +13,10 @@
 #'                 my_column_y2 = 11:20 * rnorm(10, mean = 1),
 #'                 my_column_y3 = 11:20 * rnorm(10, mean = 1))
 #' 
-#' str_cols_find(pattern = "x", data = x, return = "logical")
-#' str_cols_find(pattern = "x", data = x, return = "numeric")
-#' str_cols_find(pattern = "x", data = x, return = "character")
-#' str_cols_find(pattern = "x", data = x, return = "data.frame")
+#' column_find(pattern = "x", data = x, return = "logical")
+#' column_find(pattern = "x", data = x, return = "numeric")
+#' column_find(pattern = "x", data = x, return = "character")
+#' column_find(pattern = "x", data = x, return = "data.frame")
 #' 
 
 column_find <- function(pattern, data, return = "logical") {
@@ -45,7 +45,4 @@ column_find <- function(pattern, data, return = "logical") {
   out
 }
 
-
-mtcars
-column_find("t$", data = mtcars, return = c("logical", "logical"))
 

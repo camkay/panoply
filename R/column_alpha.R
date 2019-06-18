@@ -1,11 +1,9 @@
-#' str_alpha
+#' column_alpha
 #'
 #' Estimates Cronbach's Alpha--an indicator of internal consistency--using only columns that have names that match a pattern. 
 #' @param pattern a character string that is used to find the columns of interest. It can be a regular expression.
 #' @param data a data frame. 
-#' @param full if TRUE, the full reliability analysis is returned. If FALSE, only the raw alpha value is returned.
-#' @keywords cronbach's alpha
-#' @keywords string
+#' @param full if TRUE, the full reliability analysis produced by the `psych` package is returned. If FALSE, only the raw alpha value is returned.
 #' @export
 #' @examples
 #' x <- data.frame(my_column_x  = 1:10,
@@ -15,11 +13,11 @@
 #'                 my_column_y2 = 11:20 * rnorm(10, mean = 1),
 #'                 my_column_y3 = 11:20 * rnorm(10, mean = 1))
 #' 
-#' str_alpha(pattern = "x", data = x, full = TRUE)
-#' str_alpha(pattern = "x", data = x, full = FALSE)
+#' column_alpha(pattern = "x", data = x, full = TRUE)
+#' column_alpha(pattern = "x", data = x, full = FALSE)
 #' 
 
-str_alpha <- function(pattern, data, full = TRUE, na.rm = TRUE) {
+column_alpha <- function(pattern, data, full = TRUE, na.rm = TRUE) {
   
   # drop columns not including the pattern
   data_found <- str_cols_find(pattern, data, return = "data")
