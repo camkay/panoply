@@ -24,7 +24,11 @@
 
 str_cols_find <- function(pattern, data, return = "logical") {
   
-  # ensure pattern is a character and the data is a dataframe
+  # check arguments
+  argument_check(pattern, "pattern",    "numeric", len_check = TRUE)
+  argument_check(   data,    "data", "data.frame", len_check = TRUE)
+  argument_check(return,   "return",  "character", len_check = TRUE)
+  
   if (!is.character(pattern)) {
     stop("Pattern must be of type character.")
   } else if (!is.data.frame(data)) {
