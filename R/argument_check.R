@@ -4,14 +4,14 @@
 #' @param x an argument.
 #' @param name the name of the argument.
 #' @param type a string indicating what type the argument should be.
-#' @param length_check a logical scalar indicating whether the argument should be checked for length.
-#' @param length_req a numeric scalar indicating the required length for the argument. 
+#' @param len_check a logical scalar indicating whether the argument should be checked for length.
+#' @param len_req a numeric scalar indicating the required length for the argument. 
 
 argument_check <- function(x, 
                            name, 
                            type, 
-                           length_check = FALSE, 
-                           length_req   = 1) {
+                           len_check = FALSE, 
+                           len_req   = 1) {
   
   # create type_check function for testing
   type_check  <- get(paste0("is.", type))
@@ -22,10 +22,10 @@ argument_check <- function(x,
          name, " must be of type ",      type,  ".")
     }
   
-  # check if x is of the correct length (if length_check is TRUE)
-  if (length_check) {
-    if (length(x) != length_req) {
-      stop(name, " must be of length ", length_req, ". ",
+  # check if x is of the correct length (if len_check is TRUE)
+  if (len_check) {
+    if (length(x) != len_req) {
+      stop(name, " must be of length ", len_req, ". ",
            name,      " is of length ",  length(x), ".")
     }
   }
