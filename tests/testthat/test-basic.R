@@ -46,17 +46,31 @@ test_that("column_find returns the correct parts of the data frame", {
 test_that("column_alpha returns correct values", {
   expect_equal(column_alpha(pattern = "scale1", 
                             data    = data_example), 
-               0.9740398,
-               tolerance = .000001)
-  expect_message(column_alpha(pattern = "scale1", 
-                              data    = data_example), 
-               "scale1_item3")
+               0.974039829302987)
   expect_equal(column_alpha(pattern = "scale1", 
                               data    = data_example,
                               full    = TRUE)[[1]],
-                 alpha(data_example[, 1:3], warnings = FALSE)[[1]])
+               alpha(data_example[, 1:3], warnings = FALSE)[[1]])
+  expect_message(column_alpha(pattern = "scale1", 
+                            data    = data_example), 
+                 "scale1_item3")
 })
 
+# test column_combine
+test_that("column_combine returns correct values", {
+  expect_equal(column_combine(pattern = "scale1", 
+                              data    = data_example), 
+               c(7, 1.33333333333333, 
+                 4, 
+                 4.33333333333333, 
+                 4.33333333333333, 
+                 8.66666666666667, 
+                 8.66666666666667))
+  expect_equal(column_combine(pattern = "scale1", 
+                              data    = data_example,
+                              sum     = TRUE), 
+             c(21, 4, 12, 13, 13, 26, 26))
+})
 
 
 # test spround
