@@ -8,6 +8,8 @@
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![Travis build
 status](https://travis-ci.org/camkay/panoply.svg?branch=master)](https://travis-ci.org/camkay/panoply)
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/camkay/panoply?branch=master&svg=true)](https://ci.appveyor.com/project/camkay/panoply)
 <!-- badges: end -->
 
 A panoply of miscellaneous functions: `column_find`, `column_alpha`,
