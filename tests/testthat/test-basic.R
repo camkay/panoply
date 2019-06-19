@@ -158,6 +158,23 @@ test_that("check paste_paren is combining the values correctly", {
                  regexp = "The y value")
 })
 
+# test perble
+test_that("check paste_paren is combining the values correctly", {
+  expect_equal(perble(char_example),
+               structure(list(group = c("cat", "dog", "giraffe"), 
+                              count = c(2, 2, 1), 
+                              proportion = c(0.4, 0.4, 0.2), 
+                              percent = c(40, 40, 20)), 
+                         class     = "data.frame", 
+                         row.names = c(NA, -3L)))
+  expect_equal(perble(char_example, tidy = FALSE),
+               structure(c(2, 0.4, 40, 2, 0.4, 40, 1, 0.2, 20), 
+                         .Dim = c(3L, 3L), 
+                         .Dimnames = list(c("count", "proportion", "percent"), 
+                                          c("cat", "dog", "giraffe"))))
+})
+
+perble(char_example)
 # test column_message
 test_that("check column_message is producing correct messages", {
   expect_message(column_message(data_example, "test"),
@@ -176,7 +193,6 @@ test_that("check column_message is producing correct messages", {
                               "test"),
                "No columns matched the provided string.")
 })
-
 
 
 # test argument_check
