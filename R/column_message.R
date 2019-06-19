@@ -1,7 +1,7 @@
 #' column message
 #'
 #' A function for creating messages when an action is performed on the results of column_find. 
-#' @param x the results of column_find.
+#' @param data the results of column_find.
 #' @param function_operation the operation to be performed on the results of column_find. 
 #' @param verbose specifies whether all column names should be listed, regardless of length. 
 
