@@ -113,6 +113,18 @@ test_that("scuttle returns correct values", {
   expect_warning(scuttle(num_example, split = "hello"), "split options")
 })
 
+# test column message
+test_that("check column_message is producing correct messages", {
+  expect_message(column_message(data_example, "test"),
+                 "test was calculated")
+  expect_message(column_message(data_example, "test2"),
+                 "test2 was calculated")
+  expect_message(column_message(data_example, "test", verbose = FALSE),
+                 "and 2 more.")
+  expect_message(column_message(data_example, "test", verbose = TRUE),
+                 "scale2_item2")
+})
+
 # test argument_check
 test_that("check errors is producing errors", {
   expect_error(argument_check(300, "x", "character", len_check = TRUE))
