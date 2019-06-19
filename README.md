@@ -225,3 +225,30 @@ spround(x = num_example, digits = 3, leading0 = FALSE)
 #>  [1] "5.000" "1.000" ".000"  ".500"  ".100"  ".050"  ".010"  ".005" 
 #>  [9] ".001"  ".000"  ".000"
 ```
+
+### perble
+
+`perble` extends `table` by including proportions and percentages. By
+default the results are put into [tidy
+format](https://en.wikipedia.org/wiki/Tidy_data). Results will be
+returned as a numeric matrix if the `tidy` argument is set to `FALSE`.
+
+``` r
+# look at example character vector
+char_example
+#> [1] "cat"     "cat"     "dog"     "cat"     "dog"     "giraffe"
+
+# produce the counts, proportions, and percentages and present the results in tidy format
+perble(x = char_example, tidy = TRUE)
+#>     group count proportion  percent
+#> 1     cat     3  0.5000000 50.00000
+#> 2     dog     2  0.3333333 33.33333
+#> 3 giraffe     1  0.1666667 16.66667
+
+# produce the counts, proportions, and percentages and present the results as a numeric vector
+perble(x = char_example, tidy = FALSE)
+#>             cat        dog    giraffe
+#> count       3.0  2.0000000  1.0000000
+#> proportion  0.5  0.3333333  0.1666667
+#> percent    50.0 33.3333333 16.6666667
+```

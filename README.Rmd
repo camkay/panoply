@@ -47,6 +47,9 @@ data_example <- data.frame(scale1_item1 = c(6, 1, 3, 4, 5, 9, 9),
 
 # create example numeric vector
 num_example  <- c(5, 1, 0, .5, .1, .05, .01, .005, .001, .0005, .0001)
+
+# create example character vector
+char_example  <- c("cat", "cat", "dog", "cat", "dog", "giraffe")
 ```
 
 ### column_find
@@ -135,6 +138,19 @@ spround(x = num_example, digits = 3, leading0 = TRUE)
 spround(x = num_example, digits = 3, leading0 = FALSE)
 ```
 
+### perble
 
+`perble` extends `table` by including proportions and percentages. By default the results are put into [tidy format](https://en.wikipedia.org/wiki/Tidy_data). Results will be returned as a numeric matrix if the `tidy` argument is set to `FALSE`.
+
+```{r perble_example}
+# look at example character vector
+char_example
+
+# produce the counts, proportions, and percentages and present the results in tidy format
+perble(x = char_example, tidy = TRUE)
+
+# produce the counts, proportions, and percentages and present the results as a numeric vector
+perble(x = char_example, tidy = FALSE)
+```
 
 
