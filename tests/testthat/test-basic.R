@@ -54,7 +54,7 @@ test_that("spround returns correct values", {
 })
 
 # test pasterisk
-test_that("spround returns correct values", {
+test_that("pasterisk returns correct values", {
   expect_equal(pasterisk(num_example), 
                c("", "***", "", "", "", "*", "**", "**", "***"))
   expect_equal(pasterisk(num_example, sig_symbol = "+"), 
@@ -65,6 +65,53 @@ test_that("spround returns correct values", {
                c("", "++", "+", "+", "+", "++", "++", "++", "++"))
 })
 
+# test scuttle
+test_that("scuttle returns correct values", {
+  expect_equal(scuttle(num_example, split = "quantile"),
+               factor(c(3L, 1L, 3L, 3L, 2L, 2L, 2L, 1L, 1L), 
+                      labels = c("Low", "Mid", "High")))
+  expect_equal(scuttle(num_example, split = "sd"),
+               structure(c(3L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L), 
+                         .Label = c("Low", "Mid", "High"), 
+                         class = "factor"))
+  expect_equal(scuttle(num_example, split = "sd1"),
+               structure(c(3L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L), 
+                         .Label = c("Low", "Mid", "High"), 
+                         class = "factor"))
+  expect_equal(scuttle(num_example, split = "sd2"),
+               structure(c(3L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L),
+                         .Label = c("Low", "Mid", "High"), 
+                         class = "factor"))
+  expect_equal(scuttle(num_example, split = "sd3"),
+               structure(c(2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L), 
+                         .Label = c("Low", "Mid", "High"), 
+                         class = "factor"))
+  expect_equal(scuttle(num_example, split = "se"),
+               structure(c(3L, 1L, 2L, 2L, 1L, 1L, 1L, 1L, 1L), 
+                         .Label = c("Low", "Mid", "High"), 
+                         class = "factor"))
+  expect_equal(scuttle(num_example, split = "se1"),
+               structure(c(3L, 1L, 2L, 2L, 1L, 1L, 1L, 1L, 1L), 
+                         .Label = c("Low", "Mid", "High"), 
+                         class = "factor"))
+  expect_equal(scuttle(num_example, split = "se2"),
+               structure(c(3L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L),
+                         .Label = c("Low", "Mid", "High"), 
+                         class = "factor"))
+  expect_equal(scuttle(num_example, split = "se3"),
+               structure(c(3L, 2L, 2L, 2L, 2L, 2L, 2L, 2L, 2L), 
+                         .Label = c("Low", "Mid", "High"), 
+                         class = "factor"))
+  expect_equal(scuttle(num_example, 
+                       split = "quantile", 
+                       greedy_extremes = FALSE),
+             factor(c(3L, 1L, 3L, 2L, 2L, 2L, 2L, 2L, 1L), 
+                    labels = c("Low", "Mid", "High")))
+  expect_equal(scuttle(num_example, split = "quantile", as.factor = FALSE),
+               c("High", "Low", "High", "High", "Mid", 
+                 "Mid", "Mid", "Low", "Low"))
+  expect_warning(scuttle(num_example, split = "hello"), "split options")
+})
 
 # test argument_check
 test_that("check errors is producing errors", {
