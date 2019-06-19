@@ -113,7 +113,21 @@ test_that("scuttle returns correct values", {
   expect_warning(scuttle(num_example, split = "hello"), "split options")
 })
 
-# test column message
+# test paste_paren
+test_that("check paste_paren is combining the values correctly", {
+  expect_equal(paste_paren(5, 10),
+               "5(10)")
+  expect_equal(paste_paren(20.19, 2.20),
+               "20.19(2.2)")
+  expect_equal(paste_paren("20.19", "2.20"),
+               "20.19(2.20)")
+  expect_warning(paste_paren("20.19", c("2.20", "10.10")),
+                 "The x value")
+  expect_warning(paste_paren(c("2.20", "10.10"), "20.19"),
+                 regexp = "The y value")
+})
+
+# test column_message
 test_that("check column_message is producing correct messages", {
   expect_message(column_message(data_example, "test"),
                  "test was calculated")
