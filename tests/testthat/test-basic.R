@@ -1,6 +1,9 @@
 # create example character vector
 char_example <- c("cat", "dog", "cat", "dog", "giraffe")
 
+# create example numeric vector
+num_example  <- c(5, 1, 0, .5, .1, .05, .01, .005, .001, .0005)
+
 # create example data
 data_example <- data.frame(scale1_item1 = c(6, 1, 3, 4, 5, 9, 9),
                            scale1_item2 = c(7, 2, 4, 5, 4, 8, 9),
@@ -39,8 +42,13 @@ test_that("column_find returns the correct parts of the data frame", {
                regexp = "abcdefghijklmnopqrstuvwxyz is not a recognized return")
 })
 
-
-
+# test spround
+test_that("spround returns correct values", {
+  expect_equal(spround(x = 0.001, digits = 2, leading0 = TRUE), "0.00")
+  expect_equal(spround(x = 0.001, digits = 3, leading0 = TRUE), "0.001")
+  expect_equal(spround(x = 0.001, digits = 3, leading0 = FALSE), ".001")
+  expect_equal(spround(x = 10, digits = 2, leading0 = FALSE), "10.00")
+})
 
 
 # test argument_check
