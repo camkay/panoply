@@ -4,9 +4,9 @@
 \name{panoply-package}
 \alias{panoply}
 \alias{panoply-package}
-\title{panoply: A panoply of camkay's miscellaneous functions}
+\title{panoply: A Panoply of Miscellaneous Functions}
 \description{
-This package contains a number of miscellaneous functions for making data analysis more efficient.
+Contains a number of miscellaneous functions for making data analysis more efficient.
 }
 \author{
 \strong{Maintainer}: Cameron Kay \email{cameronstuartkay@gmail.com} (YOUR-ORCID-ID)

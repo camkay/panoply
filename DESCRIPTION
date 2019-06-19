@@ -1,5 +1,5 @@
 Package: panoply
-Title: A panoply of camkay's miscellaneous functions
+Title: A Panoply of Miscellaneous Functions
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Cameron",
@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "cameronstuartkay@gmail.com",
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: This package contains a number of miscellaneous functions for making data analysis more efficient. 
+Description: Contains a number of miscellaneous functions for making data analysis more efficient. 
 Depends: R (>= 3.3.0)
 Imports: psych
 License: MIT + file LICENSE
