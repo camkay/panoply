@@ -2,7 +2,7 @@
 char_example <- c("cat", "dog", "cat", "dog", "giraffe")
 
 # create example numeric vector
-num_example  <- c(5, 1, 0, .5, .1, .05, .01, .005, .001, .0005)
+num_example  <- c(5, 0, .5, .1, .05, .01, .005, .001, .0005)
 
 # create example data
 data_example <- data.frame(scale1_item1 = c(6, 1, 3, 4, 5, 9, 9),
@@ -48,6 +48,21 @@ test_that("spround returns correct values", {
   expect_equal(spround(x = 0.001, digits = 3, leading0 = TRUE), "0.001")
   expect_equal(spround(x = 0.001, digits = 3, leading0 = FALSE), ".001")
   expect_equal(spround(x = 10, digits = 2, leading0 = FALSE), "10.00")
+  expect_equal(spround(x = num_example, digits = 2, leading0 = FALSE),
+               c("5.00", ".00", ".50", ".10", ".05", 
+                 ".01", ".00", ".00", ".00"))
+})
+
+# test pasterisk
+test_that("spround returns correct values", {
+  expect_equal(pasterisk(num_example), 
+               c("", "***", "", "", "", "*", "**", "**", "***"))
+  expect_equal(pasterisk(num_example, sig_symbol = "+"), 
+               c("", "+++", "", "", "", "+", "++", "++", "+++"))
+  expect_equal(pasterisk(num_example, 
+                         sig_symbol = "+",
+                         thresholds = c(.03, 3)), 
+               c("", "++", "+", "+", "+", "++", "++", "++", "++"))
 })
 
 
