@@ -10,11 +10,10 @@
 status](https://travis-ci.org/camkay/panoply.svg?branch=master)](https://travis-ci.org/camkay/panoply)
 <!-- badges: end -->
 
-A panoply of [camkay](https://github.com/camkay)’s miscellaneous
-functions: `column_find`, `column_alpha`, `column_combine`, `scuttle`,
-`spround`, `perble`, `lenique`, `pasterisk`, and `paste_paren`.
-`scuttle` was created in collaboration with
-[AshLynnMiller](https://github.com/AshLynnMiller).
+A panoply of miscellaneous functions: `column_find`, `column_alpha`,
+`column_combine`, `scuttle`, `spround`, `perble`, `lenique`,
+`pasterisk`, and `paste_paren`. `scuttle` was created in collaboration
+with [AshLynnMiller](https://github.com/AshLynnMiller).
 
 ## Installation
 
