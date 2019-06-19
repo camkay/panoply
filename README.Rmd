@@ -98,3 +98,20 @@ column_combine(pattern = "scale1", sum = FALSE, data = data_example)
 column_combine(pattern = "scale1", sum = TRUE, data = data_example)
 
 ```
+
+### scuttle
+
+`scuttle` turns a continuous (i.e., numeric) variable into a categorical (i.e., character or factor) variable. Using the `split` argument, users can specify whether they want a (1) quantile-split, (2) split at 1, 2, or 3 standard deviations above or below the mean, (3) split at 1, 2, or 3 standard errors above or below the mean. Users can specify whether the output should be a factor or a character using the `as.factor` argument.
+
+```{r scuttle_example}
+# look at example data
+data_example
+
+# split the variable using a quantile-split method and return a factor
+scuttle(column = data_example$scale1_item1, split = "quantile", as.factor = TRUE)
+
+# split the variable using a 1sd-split method and return a character vector
+scuttle(column = data_example$scale1_item1, split = "sd1", as.factor = FALSE)
+```
+
+

@@ -170,3 +170,34 @@ column_combine(pattern = "scale1", sum = TRUE, data = data_example)
 #> A composite column (using rowSums) was calculated using 3 columns: scale1_item1, scale1_item2, scale1_item3.
 #> [1] 21  4 12 13 13 26 26
 ```
+
+### scuttle
+
+`scuttle` turns a continuous (i.e., numeric) variable into a categorical
+(i.e., character or factor) variable. Using the `split` argument, users
+can specify whether they want a (1) quantile-split, (2) split at 1, 2,
+or 3 standard deviations above or below the mean, (3) split at 1, 2, or
+3 standard errors above or below the mean. Users can specify whether the
+output should be a factor or a character using the `as.factor` argument.
+
+``` r
+# look at example data
+data_example
+#>   scale1_item1 scale1_item2 scale1_item3 scale2_item1 scale2_item2
+#> 1            6            7            8            9            7
+#> 2            1            2            1            9            8
+#> 3            3            4            5            9            7
+#> 4            4            5            4            8            9
+#> 5            5            4            4            4            5
+#> 6            9            8            9            2            1
+#> 7            9            9            8            2            2
+
+# split the variable using a quantile-split method and return a factor
+scuttle(column = data_example$scale1_item1, split = "quantile", as.factor = TRUE)
+#> [1] Mid  Low  Low  Mid  Mid  High High
+#> Levels: Low Mid High
+
+# split the variable using a 1sd-split method and return a character vector
+scuttle(column = data_example$scale1_item1, split = "sd1", as.factor = FALSE)
+#> [1] "Mid"  "Low"  "Mid"  "Mid"  "Mid"  "High" "High"
+```
