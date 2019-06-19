@@ -168,7 +168,16 @@ test_that("check column_message is producing correct messages", {
                  "and 2 more.")
   expect_message(column_message(data_example, "test", verbose = TRUE),
                  "scale2_item2")
+  expect_message(column_message(data_example, "test", verbose = TRUE),
+                 "scale2_item2")
+  expect_error(column_message(column_find("huh", 
+                                          data_example, 
+                                          return = "data.frame"), 
+                              "test"),
+               "No columns matched the provided string.")
 })
+
+
 
 # test argument_check
 test_that("check errors is producing errors", {
