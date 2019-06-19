@@ -42,6 +42,23 @@ test_that("column_find returns the correct parts of the data frame", {
                regexp = "abcdefghijklmnopqrstuvwxyz is not a recognized return")
 })
 
+# test column_alpha
+test_that("column_alpha returns correct values", {
+  expect_equal(column_alpha(pattern = "scale1", 
+                            data    = data_example), 
+               0.9740398,
+               tolerance = .000001)
+  expect_message(column_alpha(pattern = "scale1", 
+                              data    = data_example), 
+               "scale1_item3")
+  expect_equal(column_alpha(pattern = "scale1", 
+                              data    = data_example,
+                              full    = TRUE)[[1]],
+                 alpha(data_example[, 1:3], warnings = FALSE)[[1]])
+})
+
+
+
 # test spround
 test_that("spround returns correct values", {
   expect_equal(spround(x = 0.001, digits = 2, leading0 = TRUE), "0.00")
