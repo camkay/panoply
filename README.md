@@ -24,7 +24,7 @@ The development version of `panoply` can be installed from
 devtools::install_github("camkay/panoply")
 ```
 
-## Examples
+## Descriptions and Examples
 
 ### column\_find
 
@@ -99,7 +99,7 @@ data_example
 #> 6            9            8            9            2            1
 #> 7            9            9            8            2            2
 
-# return the full reliability analysis
+# return the full reliability analysis for scale 1
 column_alpha(pattern = "scale1", full = TRUE, data = data_example)
 #> Cronbach's Alpha was calculated using 3 columns: scale1_item1, scale1_item2, scale1_item3.
 #> 
@@ -134,21 +134,19 @@ column_alpha(pattern = "scale1", full = TRUE, data = data_example)
 #> scale1_item2 0.00 0.14 0.00 0.29 0.14 0.00 0.14 0.14 0.14    0
 #> scale1_item3 0.14 0.00 0.00 0.29 0.14 0.00 0.00 0.29 0.14    0
 
-# return only the raw Cronbach's Alpha
+# return only the raw Cronbach's Alpha for scale 1
 column_alpha(pattern = "scale1", full = FALSE, data = data_example)
 #> Cronbach's Alpha was calculated using 3 columns: scale1_item1, scale1_item2, scale1_item3.
 #> [1] 0.9740398
 ```
 
-### column\_alpha
+### column\_combine
 
-`column_alpha` estimates Cronbach’s Alpha–an indicator of internal
-consistency–using only columns that have names that match a `pattern`.
-The analysis relies on `psych::alpha`. If the `full` argument is `TRUE`,
-the full results of the reliability analysis produced by the `psych`
-package is returned. If `FALSE`, only the raw alpha value is returned.
-In both cases, a message is generated informing the users what columns
-were used to calculate the alpha value.
+`column_combine` calculates rowwise means or sums using only columns in
+a data frame that match a `pattern`. The argument `sum` specifies
+whether columns should be combined by averaging or summing. Averaging is
+the default. In both cases, a message is generated informing the users
+what columns were used to create the composite.
 
 ``` r
 # look at example data
@@ -162,43 +160,13 @@ data_example
 #> 6            9            8            9            2            1
 #> 7            9            9            8            2            2
 
-# return the full reliability analysis
-column_alpha(pattern = "scale1", full = TRUE, data = data_example)
-#> Cronbach's Alpha was calculated using 3 columns: scale1_item1, scale1_item2, scale1_item3.
-#> 
-#> Reliability analysis   
-#> Call: psych::alpha(x = data_found, na.rm = na.rm, warnings = FALSE)
-#> 
-#>   raw_alpha std.alpha G6(smc) average_r S/N   ase mean  sd median_r
-#>       0.97      0.98    0.97      0.93  43 0.016  5.5 2.7     0.94
-#> 
-#>  lower alpha upper     95% confidence boundaries
-#> 0.94 0.97 1.01 
-#> 
-#>  Reliability if an item is dropped:
-#>              raw_alpha std.alpha G6(smc) average_r S/N alpha se var.r
-#> scale1_item1      0.96      0.97    0.94      0.94  31    0.025    NA
-#> scale1_item2      0.95      0.95    0.91      0.91  20    0.036    NA
-#> scale1_item3      0.97      0.98    0.95      0.95  42    0.020    NA
-#>              med.r
-#> scale1_item1  0.94
-#> scale1_item2  0.91
-#> scale1_item3  0.95
-#> 
-#>  Item statistics 
-#>              n raw.r std.r r.cor r.drop mean  sd
-#> scale1_item1 7  0.98  0.98  0.96   0.94  5.3 3.0
-#> scale1_item2 7  0.99  0.99  0.98   0.97  5.6 2.5
-#> scale1_item3 7  0.97  0.97  0.95   0.93  5.6 2.9
-#> 
-#> Non missing response frequency for each item
-#>                 1    2    3    4    5    6    7    8    9 miss
-#> scale1_item1 0.14 0.00 0.14 0.14 0.14 0.14 0.00 0.00 0.29    0
-#> scale1_item2 0.00 0.14 0.00 0.29 0.14 0.00 0.14 0.14 0.14    0
-#> scale1_item3 0.14 0.00 0.00 0.29 0.14 0.00 0.00 0.29 0.14    0
+# return a vector of rowwise means for scale 1
+column_combine(pattern = "scale1", sum = FALSE, data = data_example)
+#> A composite column (using rowMeans) was calculated using 3 columns: scale1_item1, scale1_item2, scale1_item3.
+#> [1] 7.000000 1.333333 4.000000 4.333333 4.333333 8.666667 8.666667
 
-# return only the raw Cronbach's Alpha
-column_alpha(pattern = "scale1", full = FALSE, data = data_example)
-#> Cronbach's Alpha was calculated using 3 columns: scale1_item1, scale1_item2, scale1_item3.
-#> [1] 0.9740398
+# return a vector of rowwise sums for scale 1
+column_combine(pattern = "scale1", sum = TRUE, data = data_example)
+#> A composite column (using rowSums) was calculated using 3 columns: scale1_item1, scale1_item2, scale1_item3.
+#> [1] 21  4 12 13 13 26 26
 ```

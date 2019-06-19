@@ -29,7 +29,7 @@ The development version of `panoply` can be installed from [GitHub](https://gith
 devtools::install_github("camkay/panoply")
 ```
 
-## Examples
+## Descriptions and Examples
 
 ```{r setup, include = FALSE}
 # load panoply
@@ -75,26 +75,26 @@ column_find(pattern = "2$", return = "logical", data = data_example)
 # look at example data
 data_example
 
-# return the full reliability analysis
+# return the full reliability analysis for scale 1
 column_alpha(pattern = "scale1", full = TRUE, data = data_example)
 
-# return only the raw Cronbach's Alpha
+# return only the raw Cronbach's Alpha for scale 1
 column_alpha(pattern = "scale1", full = FALSE, data = data_example)
 
 ```
 
-### column_alpha
+### column_combine
 
-`column_alpha` estimates Cronbach's Alpha–an indicator of internal consistency–using only columns that have names that match a `pattern`. The analysis relies on `psych::alpha`. If the `full` argument is `TRUE`, the full results of the reliability analysis produced by the `psych` package is returned. If `FALSE`, only the raw alpha value is returned. In both cases, a message is generated informing the users what columns were used to calculate the alpha value. 
+`column_combine` calculates rowwise means or sums using only columns in a data frame that match a `pattern`. The argument `sum` specifies whether columns should be combined by averaging or summing. Averaging is the default. In both cases, a message is generated informing the users what columns were used to create the composite. 
 
 ```{r column_combine_example}
 # look at example data
 data_example
 
-# return the full reliability analysis
-column_alpha(pattern = "scale1", full = TRUE, data = data_example)
+# return a vector of rowwise means for scale 1
+column_combine(pattern = "scale1", sum = FALSE, data = data_example)
 
-# return only the raw Cronbach's Alpha
-column_alpha(pattern = "scale1", full = FALSE, data = data_example)
+# return a vector of rowwise sums for scale 1
+column_combine(pattern = "scale1", sum = TRUE, data = data_example)
 
 ```
