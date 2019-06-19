@@ -252,3 +252,19 @@ perble(x = char_example, tidy = FALSE)
 #> proportion  0.5  0.3333333  0.1666667
 #> percent    50.0 33.3333333 16.6666667
 ```
+
+### lenique
+
+`lenique` is a very simple wrapper that calculates the length of unique
+values in a vector in one step. It is identical to running
+`length(unique(x))`.
+
+``` r
+# look at the example character vector
+char_example
+#> [1] "cat"     "cat"     "dog"     "cat"     "dog"     "giraffe"
+
+# calculate the length of unique values in char_example
+lenique(x = char_example)
+#> [1] 3
+```

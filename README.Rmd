@@ -153,4 +153,17 @@ perble(x = char_example, tidy = TRUE)
 perble(x = char_example, tidy = FALSE)
 ```
 
+### lenique
+
+`lenique` is a very simple wrapper that calculates the length of unique values in a vector in one step. It is identical to running `length(unique(x))`.
+
+```{r lenique_example}
+# look at the example character vector
+char_example
+
+# calculate the length of unique values in char_example
+lenique(x = char_example)
+
+```
+
 
