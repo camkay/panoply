@@ -45,7 +45,7 @@ data_example <- data.frame(scale1_item1 = c(6, 1, 3, 4, 5, 9, 9),
 
 ### column_find
 
-`column_find` is a function for quickly identifying columns of a data frame that match a pattern specified through a string. The default behaviour is to return a logical vector, indicating the columns that match the pattern. Using the `return` argument, users can request that a vector of column numbers ("numeric") or column names ("character") be returned. Users can also request that a data frame with only those columns be returned ("data.frame"). `column_find` can interpret [regular expressions](https://en.wikipedia.org/wiki/Regular_expression).
+`column_find` is a function for quickly identifying columns of a data frame that match a `pattern` specified through a string. The default behaviour is to return a logical vector, indicating the columns that match the `pattern`. Using the `return` argument, users can request that a vector of column numbers ("numeric") or column names ("character") be returned. Users can also request that a data frame with only those columns be returned ("data.frame"). `column_find` can interpret [regular expressions](https://en.wikipedia.org/wiki/Regular_expression).
 
 ```{r column_find_example}
 # look at example data
@@ -69,12 +69,32 @@ column_find(pattern = "2$", return = "logical", data = data_example)
 
 ### column_alpha
 
-`column_alpha` estimates Cronbach's Alpha–an indicator of internal consistency–using only columns that have names that match a pattern. The analysis relies on 'psych::alpha'.
+`column_alpha` estimates Cronbach's Alpha–an indicator of internal consistency–using only columns that have names that match a `pattern`. The analysis relies on `psych::alpha`. If the `full` argument is `TRUE`, the full results of the reliability analysis produced by the `psych` package is returned. If `FALSE`, only the raw alpha value is returned. In both cases, a message is generated informing the users what columns were used to calculate the alpha value. 
 
 ```{r column_alpha_example}
 # look at example data
 data_example
 
-# return a logical vector of the columns that match the pattern
+# return the full reliability analysis
+column_alpha(pattern = "scale1", full = TRUE, data = data_example)
+
+# return only the raw Cronbach's Alpha
+column_alpha(pattern = "scale1", full = FALSE, data = data_example)
+
+```
+
+### column_alpha
+
+`column_alpha` estimates Cronbach's Alpha–an indicator of internal consistency–using only columns that have names that match a `pattern`. The analysis relies on `psych::alpha`. If the `full` argument is `TRUE`, the full results of the reliability analysis produced by the `psych` package is returned. If `FALSE`, only the raw alpha value is returned. In both cases, a message is generated informing the users what columns were used to calculate the alpha value. 
+
+```{r column_combine_example}
+# look at example data
+data_example
+
+# return the full reliability analysis
+column_alpha(pattern = "scale1", full = TRUE, data = data_example)
+
+# return only the raw Cronbach's Alpha
+column_alpha(pattern = "scale1", full = FALSE, data = data_example)
 
 ```
