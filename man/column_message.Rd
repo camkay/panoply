@@ -7,11 +7,11 @@
 column_message(data, function_operation, verbose = FALSE)
 }
 \arguments{
+\item{data}{the results of column_find.}
+
 \item{function_operation}{the operation to be performed on the results of column_find.}
 
 \item{verbose}{specifies whether all column names should be listed, regardless of length.}
-
-\item{x}{the results of column_find.}
 }
 \description{
 A function for creating messages when an action is performed on the results of column_find.
