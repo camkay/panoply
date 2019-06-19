@@ -4,7 +4,7 @@
 \name{panoply-package}
 \alias{panoply}
 \alias{panoply-package}
-\title{panoply: A panoply of camkay's miscellaneous functions.}
+\title{panoply: A panoply of camkay's miscellaneous functions}
 \description{
 This package contains a number of miscellaneous functions for making data analysis more efficient.
 }

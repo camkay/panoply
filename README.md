@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# panoply <img src="media/panoply_hex.png" width = 167 align="right"/>
+# panoply <img src="tools/panoply_hex.png" width = 167 align="right"/>
 
 <!-- badges: start -->
 

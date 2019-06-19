@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
-# panoply <img src="media/panoply_hex.png" width = 167 align="right"/>
+# panoply <img src="tools/panoply_hex.png" width = 167 align="right"/>
 
 <!-- badges: start -->
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
