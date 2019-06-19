@@ -213,17 +213,16 @@ Users can specify whether leading zeroes should be retained or not using
 # look at example numeric vector
 num_example
 #>  [1] 5.0000 1.0000 0.0000 0.5000 0.1000 0.0500 0.0100 0.0050 0.0010 0.0005
-#> [11] 0.0001
 
 # round num_example to three decimal places and retain leading zeroes
 spround(x = num_example, digits = 3, leading0 = TRUE)
 #>  [1] "5.000" "1.000" "0.000" "0.500" "0.100" "0.050" "0.010" "0.005"
-#>  [9] "0.001" "0.000" "0.000"
+#>  [9] "0.001" "0.000"
 
 # round num_example to three decimal places and drop leading zeroes
 spround(x = num_example, digits = 3, leading0 = FALSE)
 #>  [1] "5.000" "1.000" ".000"  ".500"  ".100"  ".050"  ".010"  ".005" 
-#>  [9] ".001"  ".000"  ".000"
+#>  [9] ".001"  ".000"
 ```
 
 ### perble
@@ -267,4 +266,31 @@ char_example
 # calculate the length of unique values in char_example
 lenique(x = char_example)
 #> [1] 3
+```
+
+### pasterisk
+
+`pasterisk` takes a scalar or atomic vector of, for example, p-values
+and returns a scalar or atomic vector of asterisks corresponding to
+different significance levels. The argument `thresholds` can be used to
+set the cut-off valuess for the different values. Any number of
+thresholds can be set. By default, an asterisk (i.e., "\*") is used as
+the `sig_symbol`, but any single character vector can be used.
+
+``` r
+# look at the example numeric vector
+num_example
+#>  [1] 5.0000 1.0000 0.0000 0.5000 0.1000 0.0500 0.0100 0.0050 0.0010 0.0005
+
+# create a vector of asterisks using the default thresholds
+pasterisk(p_vals = num_example, thresholds = c(0.05, 0.01, 0.001), sig_symbol = "*")
+#>  [1] ""    ""    "***" ""    ""    ""    "*"   "**"  "**"  "***"
+
+# create a vector of octothorps/hashtags/pound using the default thresholds
+pasterisk(p_vals = num_example, thresholds = c(0.05, 0.01, 0.001), sig_symbol = "#")
+#>  [1] ""    ""    "###" ""    ""    ""    "#"   "##"  "##"  "###"
+
+# create a vector of asterisks using custom thresholds
+pasterisk(p_vals = num_example, thresholds = c(0.10, 0.5), sig_symbol = "*")
+#>  [1] ""   ""   "**" ""   "*"  "**" "**" "**" "**" "**"
 ```
