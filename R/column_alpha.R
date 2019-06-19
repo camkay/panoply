@@ -1,10 +1,10 @@
 #' column_alpha
 #'
-#' Estimates Cronbach's Alpha--an indicator of internal consistency--using only columns that have names that match a pattern. The analysis relies relies on `psych::alpha`. 
+#' Estimates Cronbach's Alpha--an indicator of internal consistency--using only columns that have names that match a pattern. The analysis relies on `psych::alpha`. 
 #' @param pattern a character string that is used to find the columns of interest. It can be a regular expression.
 #' @param data a data frame. 
-#' @param full if TRUE, the full reliability analysis produced by the `psych` package is returned. If FALSE, only the raw alpha value is returned.
-#' @param verbose specifies whether all column names should be listed, regardless of length. 
+#' @param full if TRUE, the full results of the reliability analysis produced by the `psych` package is returned. If FALSE, only the raw alpha value is returned.
+#' @param verbose specifies whether all column names used should be listed in the message, regardless of length. 
 #' @param na.rm a logical value indicating whether `NA` values should be removed prior to computation.
 #' @export
 #' @examples
