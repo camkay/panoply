@@ -1,4 +1,12 @@
 # create example data
+char_example <- c("cat", "dog", "cat", "dog", "giraffe")
+
+# test
+test_that("lenique results are equal to length(unique(x)) results", {
+  expect_equal(lenique(char_example), length(unique(char_example)))
+})
+
+# create example data
 data_example <- data.frame(scale1_item1 = c(6, 1, 3, 4, 5, 9, 9),
                            scale1_item2 = c(7, 2, 4, 5, 4, 8, 9),
                            scale1_item3 = c(8, 1, 5, 4, 4, 9, 8),
