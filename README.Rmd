@@ -35,12 +35,18 @@ devtools::install_github("camkay/panoply")
 # load panoply
 library(panoply)
 
+# suppress scientific notation
+options(scipen = 999)
+
 # create example data
 data_example <- data.frame(scale1_item1 = c(6, 1, 3, 4, 5, 9, 9),
                            scale1_item2 = c(7, 2, 4, 5, 4, 8, 9),
                            scale1_item3 = c(8, 1, 5, 4, 4, 9, 8),
                            scale2_item1 = c(9, 9, 9, 8, 4, 2, 2),
                            scale2_item2 = c(7, 8, 7, 9, 5, 1, 2))
+
+# create example numeric vector
+num_example  <- c(5, 1, 0, .5, .1, .05, .01, .005, .001, .0005, .0001)
 ```
 
 ### column_find
@@ -107,11 +113,28 @@ column_combine(pattern = "scale1", sum = TRUE, data = data_example)
 # look at example data
 data_example
 
-# split the variable using a quantile-split method and return a factor
+# split scale1_item1 using a quantile-split method and return a factor
 scuttle(column = data_example$scale1_item1, split = "quantile", as.factor = TRUE)
 
-# split the variable using a 1sd-split method and return a character vector
+# split scale1_item1 using a 1sd-split method and return a character vector
 scuttle(column = data_example$scale1_item1, split = "sd1", as.factor = FALSE)
 ```
+
+### spround
+
+`spround` rounds a number or a vector of numbers (using `round`) and specifies knitted decimal places (using `sprintf`) all in one step. Users can specify whether leading zeroes should be retained or not using `leading0`.
+
+```{r spround_example}
+# look at example numeric vector
+num_example
+
+# round num_example to three decimal places and retain leading zeroes
+spround(x = num_example, digits = 3, leading0 = TRUE)
+
+# round num_example to three decimal places and drop leading zeroes
+spround(x = num_example, digits = 3, leading0 = FALSE)
+```
+
+
 
 

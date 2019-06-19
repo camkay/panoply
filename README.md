@@ -192,12 +192,36 @@ data_example
 #> 6            9            8            9            2            1
 #> 7            9            9            8            2            2
 
-# split the variable using a quantile-split method and return a factor
+# split scale1_item1 using a quantile-split method and return a factor
 scuttle(column = data_example$scale1_item1, split = "quantile", as.factor = TRUE)
 #> [1] Mid  Low  Low  Mid  Mid  High High
 #> Levels: Low Mid High
 
-# split the variable using a 1sd-split method and return a character vector
+# split scale1_item1 using a 1sd-split method and return a character vector
 scuttle(column = data_example$scale1_item1, split = "sd1", as.factor = FALSE)
 #> [1] "Mid"  "Low"  "Mid"  "Mid"  "Mid"  "High" "High"
+```
+
+### spround
+
+`spround` rounds a number or a vector of numbers (using `round`) and
+specifies knitted decimal places (using `sprintf`) all in one step.
+Users can specify whether leading zeroes should be retained or not using
+`leading0`.
+
+``` r
+# look at example numeric vector
+num_example
+#>  [1] 5.0000 1.0000 0.0000 0.5000 0.1000 0.0500 0.0100 0.0050 0.0010 0.0005
+#> [11] 0.0001
+
+# round num_example to three decimal places and retain leading zeroes
+spround(x = num_example, digits = 3, leading0 = TRUE)
+#>  [1] "5.000" "1.000" "0.000" "0.500" "0.100" "0.050" "0.010" "0.005"
+#>  [9] "0.001" "0.000" "0.000"
+
+# round num_example to three decimal places and drop leading zeroes
+spround(x = num_example, digits = 3, leading0 = FALSE)
+#>  [1] "5.000" "1.000" ".000"  ".500"  ".100"  ".050"  ".010"  ".005" 
+#>  [9] ".001"  ".000"  ".000"
 ```
