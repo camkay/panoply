@@ -14,7 +14,7 @@ test_that("lenique results are equal to length(unique(x)) results", {
 })
 
 # test column_find
-test_that("the correct parts of the data frame are returned", {
+test_that("column_find returns the correct parts of the data frame", {
   expect_equal(column_find(pattern = "scale1", 
                            return  = "logical", 
                            data    = data_example), 
@@ -33,10 +33,18 @@ test_that("the correct parts of the data frame are returned", {
                data.frame(scale1_item1 = c(6, 1, 3, 4, 5, 9, 9),
                           scale1_item2 = c(7, 2, 4, 5, 4, 8, 9),
                           scale1_item3 = c(8, 1, 5, 4, 4, 9, 8)))
+  expect_warning(column_find(pattern = "scale1", 
+                             return  = "abcdefghijklmnopqrstuvwxyz", 
+                             data    = data_example), 
+               regexp = "abcdefghijklmnopqrstuvwxyz is not a recognized return")
 })
 
-# test errors
-test_that("check errors", {
+
+
+
+
+# test argument_check
+test_that("check errors is producing errors", {
   expect_error(argument_check(300, "x", "character", len_check = TRUE))
   expect_error(argument_check(c("h", "i"), "x", "character", len_check = TRUE))
   expect_error(argument_check("hello", "x", "data.frame"))
