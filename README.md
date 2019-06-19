@@ -304,7 +304,8 @@ pasterisk(p_vals = num_example, thresholds = c(0.10, 0.5), sig_symbol = "*")
 
 `paste_paren` combines two numbers (e.g., 10.12 and 2.22) by wrapping
 the latter in parentheses (e.g., 10.12(2.22)). This function was made to
-streamline the creation of tables that are formatted “mean(sd)”.
+streamline the creation of tables that include cells as formatted
+“mean(sd)”.
 
 ``` r
 # combine two numbers

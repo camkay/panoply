@@ -1,6 +1,6 @@
 #' paste_paren
 #'
-#' Combines two numbers (e.g., 10.12 and 2.22) by wrapping the latter in parentheses (e.g., 10.12(2.22)). This function was made to streamline the creation of tables that are formatted mean(sd).
+#' Combines two numbers (e.g., 10.12 and 2.22) by wrapping the latter in parentheses (e.g., 10.12(2.22)). This function was made to streamline the creation of tables that include cells formatted mean(sd).
 #' @param x a scalar or an atomic vector. 
 #' @param y a second scalar or atomic vector that will be wrapped in parentheses.
 #' @export
