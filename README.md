@@ -294,3 +294,15 @@ pasterisk(p_vals = num_example, thresholds = c(0.05, 0.01, 0.001), sig_symbol = 
 pasterisk(p_vals = num_example, thresholds = c(0.10, 0.5), sig_symbol = "*")
 #>  [1] ""   ""   "**" ""   "*"  "**" "**" "**" "**" "**"
 ```
+
+### paste\_paren
+
+`paste_paren` combines two numbers (e.g., 10.12 and 2.22) by wrapping
+the latter in parentheses (e.g., 10.12(2.22)). This function was made to
+streamline the creation of tables that are formatted “mean(sd)”.
+
+``` r
+# combine two numbers
+paste_paren(10.12, 2.22)
+#> [1] "10.12(2.22)"
+```
