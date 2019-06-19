@@ -9,13 +9,19 @@
 #' @param na.rm a logical value indicating whether `NA` values should be removed prior to computation. 
 #' @export
 
-scuttle <- function(column, split = "quantile", labels = c("Low", "Mid", "High"), greedy_extremes = TRUE, as.factor = TRUE, na.rm = TRUE) {
+scuttle <- function(column, 
+                    split = "quantile", 
+                    labels = c("Low", "Mid", "High"), 
+                    greedy_extremes = TRUE, 
+                    as.factor = TRUE, 
+                    na.rm = TRUE) {
 
   # argument check
   argument_check(column, "column", "numeric")
   argument_check(split, "split", "character", len_check = TRUE)
   argument_check(labels, "labels", "character", len_check = TRUE, len_req = 3)
-  argument_check(greedy_extremes, "greedy_extremes", "logical", len_check = TRUE)
+  argument_check(greedy_extremes, "greedy_extremes", "logical", 
+                 len_check = TRUE)
   argument_check(as.factor, "as.factor", "logical", len_check = TRUE)
   argument_check(na.rm, "na.rm", "logical", len_check = TRUE)
   
@@ -28,7 +34,8 @@ scuttle <- function(column, split = "quantile", labels = c("Low", "Mid", "High")
     warning("\"",
             split,
             "\"",
-            " is not one of the split options, defaulting to \"quantile\" split instead. ",
+            " is not one of the split options, ",
+            "defaulting to \"quantile\" split instead. ",
             "The available split options are: ", 
             paste0(split_options, collapse = ", "),
             ".")
@@ -58,7 +65,8 @@ scuttle <- function(column, split = "quantile", labels = c("Low", "Mid", "High")
                    se2      = c(c_mean - (c_se * 2), c_mean + (c_se * 2)),
                    se3      = c(c_mean - (c_se * 3), c_mean + (c_se * 3)))
   
-  # cut the column using the breaks (if greedy-extremes == TRUE, break values are assigned to low/high
+  # cut the column using the breaks 
+  # (if greedy-extremes == TRUE, break values are assigned to low/high)
   if (greedy_extremes == TRUE) {
     out[column <= breaks[1]] <- labels[1]
     out[column > breaks[1] & column < breaks[2]] <- labels[2]

@@ -19,7 +19,11 @@
 #' column_alpha(pattern = "x", data = x, full = FALSE)
 #' 
 
-column_alpha <- function(pattern, data, full = FALSE, verbose = FALSE, na.rm = TRUE) {
+column_alpha <- function(pattern, 
+                         data, 
+                         full    = FALSE, 
+                         verbose = FALSE, 
+                         na.rm   = TRUE) {
   
   # check arguments
   argument_check(pattern, "pattern", "character", len_check = TRUE)

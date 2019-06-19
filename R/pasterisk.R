@@ -7,7 +7,9 @@
 #' @export
 
 
-pasterisk <- function(p_vals, thresholds = c(.05, .01, .001), sig_symbol = "*") {
+pasterisk <- function(p_vals, 
+                      thresholds = c(.05, .01, .001), 
+                      sig_symbol = "*") {
   # check arguments
   argument_check(p_vals, "p_vals", "numeric")
   argument_check(thresholds, "thresholds", "numeric")
@@ -19,7 +21,7 @@ pasterisk <- function(p_vals, thresholds = c(.05, .01, .001), sig_symbol = "*") 
   # create new vector for storing asterisks
   out <- rep("", length(p_vals))
   
-  # create a second sig_symbol for applying the asterisks on greater significance
+  # create a second sig_symbol to be applied
   sig_symbols <- sig_symbol
 
   # loop through p-values and create asterisks column

@@ -19,7 +19,11 @@
 #' column_combine(pattern = "_y", data = x)
 #' column_combine(pattern = "my_column", data = x)
 
-column_combine <- function(pattern, data, sum = FALSE, verbose = FALSE, na.rm = TRUE) {
+column_combine <- function(pattern, 
+                           data, 
+                           sum     = FALSE, 
+                           verbose = FALSE, 
+                           na.rm   = TRUE) {
   
   # check arguments
   argument_check(pattern, "pattern", "character", len_check = TRUE)

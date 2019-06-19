@@ -15,7 +15,10 @@ column_message <- function(data, function_operation, verbose = FALSE) {
   if (num_cols == 0) {
     stop("No columns matched the provided string.")
   } else if (num_cols > 4 & verbose == FALSE) {
-    col_names <- paste0(paste(names(data)[1:3], collapse = ", "), ", and ", num_cols - 3, " more")
+    col_names <- paste0(paste(names(data)[1:3], collapse = ", "), 
+                        ", and ", 
+                        num_cols - 3, 
+                        " more")
   } else {
     col_names <- paste(names(data), collapse = ", ")
   }

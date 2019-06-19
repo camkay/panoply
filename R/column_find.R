@@ -36,8 +36,11 @@ column_find <- function(pattern, data, return = "logical") {
   } else if (return == "data.frame") {
     out <- data[, grep(pattern, names(data))]
   } else {
-    warning(paste0(return, " is not a recognized return type. \"logical\" used instead. \n", 
-                   "Other return options: \"numeric\", \"character\", and \"data.frame\"."))
+    warning(paste0(return, 
+                   " is not a recognized return type. ",
+                   "\"logical\" used instead. \n", 
+                   "Other return options: ",
+                   "\"numeric\", \"character\", and \"data.frame\"."))
     out <- grepl(pattern, names(data))
   }
   
