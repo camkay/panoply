@@ -1,9 +1,9 @@
 #' pasterisk
 #'
-#' Returns a scalar or atomic vector of p-values and returns a scalar or atomic vector of asterisks corresponding to different significance levels.
-#' @param p_vals a numeric scalar or atomic vector of p-values or effect sizes.
+#' Takes a scalar or atomic vector of p-values and returns a scalar or atomic vector of asterisks corresponding to different significance levels.
+#' @param p_vals a numeric scalar or atomic vector of p-values or effect sizes (or any other numeric vector).
 #' @param thresholds a numeric scalar or atomic vector of number tresholds. Defaults to .05, .01, and .001.
-#' @param thresholds a character scalar to be used to indicate significance. Defaults to an asterisk (i.e., *).
+#' @param sig_symbol a character scalar to be used to indicate significance. Defaults to an asterisk (i.e., *).
 #' @export
 
 
@@ -12,6 +12,9 @@ pasterisk <- function(p_vals, thresholds = c(.05, .01, .001), sig_symbol = "*") 
   argument_check(p_vals, "p_vals", "numeric")
   argument_check(thresholds, "thresholds", "numeric")
   argument_check(sig_symbol, "sig_symbol", "character", len_check = TRUE)
+  
+  # ensure thresholds are sorted from largest to smallest
+  thresholds <- sort(thresholds, decreasing = TRUE)
   
   # create new vector for storing asterisks
   out <- rep("", length(p_vals))

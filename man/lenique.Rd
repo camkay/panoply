@@ -10,5 +10,5 @@ lenique(x)
 \item{x}{a scalar, atomic vector, or list.}
 }
 \description{
-A very simple wrapper that calculates the length of unique values in a vector in one step. In other words, it is identical to running `length(unique(x))`.`
+A very simple wrapper that calculates the length of unique values in a vector in one step. It is identical to running `length(unique(x))`.`
 }

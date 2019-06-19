@@ -7,12 +7,12 @@
 pasterisk(p_vals, thresholds = c(0.05, 0.01, 0.001), sig_symbol = "*")
 }
 \arguments{
-\item{p_vals}{a numeric scalar or atomic vector of p-values or effect sizes.}
+\item{p_vals}{a numeric scalar or atomic vector of p-values or effect sizes (or any other numeric vector).}
 
 \item{thresholds}{a numeric scalar or atomic vector of number tresholds. Defaults to .05, .01, and .001.}
 
-\item{thresholds}{a character scalar to be used to indicate significance. Defaults to an asterisk (i.e., *).}
+\item{sig_symbol}{a character scalar to be used to indicate significance. Defaults to an asterisk (i.e., *).}
 }
 \description{
-Returns a scalar or atomic vector of p-values and returns a scalar or atomic vector of asterisks corresponding to different significance levels.
+Takes a scalar or atomic vector of p-values and returns a scalar or atomic vector of asterisks corresponding to different significance levels.
 }
