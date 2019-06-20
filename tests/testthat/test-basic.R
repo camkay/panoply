@@ -11,6 +11,16 @@ data_example <- data.frame(scale1_item1 = c(6, 1, 3, 4, 5, 9, 9),
                            scale2_item1 = c(9, 9, 9, 8, 4, 2, 2),
                            scale2_item2 = c(7, 8, 7, 9, 5, 1, 2))
 
+# create example mats
+mat_a <- psych::corr.test(data_example)$p
+
+set.seed(1)
+
+mat_b <- psych::corr.test(matrix(rnorm(5 * 7), 
+                          nrow = 7, 
+                          dimnames = list(rownames(data_example), 
+                                          colnames(data_example))))$p
+
 # test lenique
 test_that("lenique results are equal to length(unique(x)) results", {
   expect_equal(lenique(char_example), length(unique(char_example)))
@@ -187,7 +197,61 @@ test_that("check paste_paren is combining the values correctly", {
                                           c("cat", "dog", "giraffe"))))
 })
 
-perble(char_example)
+# test get_paste
+test_that("check that get_paste is working properly", {
+  expect_equal(get0("me", "an")(c(10, 20, 30, 44)), 26)
+  expect_equal(get0("s", "d")(c(10, 20, 30, 44)), 14.5143607047182)
+})
+
+# test mat_merge
+test_that("check that mat_merge is working properly", {
+  expect_equal(mat_merge(mat_a, 
+                         mat_b, 
+                         x_from = "lower", 
+                         y_from = "lower", 
+                         x_to   = "lower", 
+                         y_to   = "upper"),
+               matrix(c(0, 0.000816982970622438, 0.00454442781824798, 
+                        0.0224521374608249, 0.0121453149631062, 
+                        0.524317457207586, 0, 0.00162131724305212, 
+                        0.115015191468429, 0.0646228152839355, 
+                        0.459483927231542, 0.947112709264432, 
+                        0, 0.203212111846573, 0.0747737723517703, 
+                        0.508791133749554, 0.059078101909081, 0.293710028165101, 
+                        0, 0.00288053250708112, 0.486228731120195, 
+                        0.352390494682801, 0.063056705312586, 0.668811955414348, 
+                        0), nrow = 5))
+  expect_equal(mat_merge(mat_a, 
+                       mat_b, 
+                       x_from = "lower", 
+                       y_from = "lower", 
+                       x_to   = "lower", 
+                       y_to   = "upper"),
+             matrix(c(0, 0.000816982970622438, 0.00454442781824798, 
+                      0.0224521374608249, 0.0121453149631062, 0.524317457207586, 
+                      0, 0.00162131724305212, 0.115015191468429, 
+                      0.0646228152839355, 0.459483927231542, 0.947112709264432, 
+                      0, 0.203212111846573, 0.0747737723517703, 
+                      0.508791133749554, 0.059078101909081, 0.293710028165101, 
+                      0, 0.00288053250708112, 0.486228731120195, 
+                      0.352390494682801, 0.063056705312586, 0.668811955414348, 
+                      0), nrow = 5))
+  expect_error(mat_merge(mat_a, 
+                         mat_b, 
+                         x_from = "lower", 
+                         y_from = "lower", 
+                         x_to   = "lower", 
+                         y_to   = "lower"),
+               "quadrant")
+  expect_error(mat_merge(mat_a, 
+                         mat_b, 
+                         x_from = "lower", 
+                         y_from = "lower", 
+                         x_to   = "upper", 
+                         y_to   = "upper"),
+               "quadrant")
+})
+
 # test column_message
 test_that("check column_message is producing correct messages", {
   expect_message(column_message(data_example, "test"),
@@ -206,7 +270,6 @@ test_that("check column_message is producing correct messages", {
                               "test"),
                "No columns matched the provided string.")
 })
-
 
 # test argument_check
 test_that("check errors is producing errors", {
