@@ -145,11 +145,10 @@ column_alpha(pattern = "scale1", full = FALSE, data = data_example)
 
 ### column\_combine
 
-`column_combine` calculates rowwise means or sums using only columns in
-a data frame that match a `pattern`. The argument `sum` specifies
-whether columns should be combined by averaging or summing. Averaging is
-the default. In both cases, a message is generated informing the users
-what columns were used to create the composite.
+`column_combine` creates a composite column using only columns in a data
+frame that have names that match a `pattern`. The argument `fun`
+specifies specifies what function should be used to create the composite
+column. Averaging is the default.
 
 ``` r
 # look at example data
@@ -164,13 +163,13 @@ data_example
 #> 7            9            9            8            2            2
 
 # return a vector of rowwise means for scale 1
-column_combine(pattern = "scale1", sum = FALSE, data = data_example)
-#> A composite column (using rowMeans) was calculated using 3 columns: scale1_item1, scale1_item2, scale1_item3.
+column_combine(pattern = "scale1", fun = mean, data = data_example)
+#> A composite column was calculated using 3 columns: scale1_item1, scale1_item2, scale1_item3.
 #> [1] 7.000000 1.333333 4.000000 4.333333 4.333333 8.666667 8.666667
 
 # return a vector of rowwise sums for scale 1
-column_combine(pattern = "scale1", sum = TRUE, data = data_example)
-#> A composite column (using rowSums) was calculated using 3 columns: scale1_item1, scale1_item2, scale1_item3.
+column_combine(pattern = "scale1", fun = sum, data = data_example)
+#> A composite column was calculated using 3 columns: scale1_item1, scale1_item2, scale1_item3.
 #> [1] 21  4 12 13 13 26 26
 ```
 
