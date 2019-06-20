@@ -1,9 +1,9 @@
 #' column_combine
 #'
-#' Calculates rowwise means or sums using only columns in a data frame that have names that match a pattern. 
+#' Creates a composite column using only columns in a data frame that have names that match a pattern. 
 #' @param pattern a character string that is used to find the columns of interest. It can be a regular expression.
 #' @param data a data frame. 
-#' @param sum column_combine produces rowwise means by default. However, if `sum` equal TRUE, rowwise sums are produced. 
+#' @param fun the function to use to create the composite column; defaults to `mean`. 
 #' @param verbose specifies whether all column names should be listed, regardless of length. 
 #' @param na.rm a logical value indicating whether `NA` values should be removed prior to computation.
 #' @export
@@ -21,14 +21,14 @@
 
 column_combine <- function(pattern, 
                            data, 
-                           sum     = FALSE, 
+                           fun     = mean, 
                            verbose = FALSE, 
                            na.rm   = TRUE) {
   
   # check arguments
   argument_check(pattern, "pattern", "character", len_check = TRUE)
   argument_check(data, "data", "data.frame")
-  argument_check(sum, "sum", "logical", len_check = TRUE)
+  argument_check(fun, "fun", "function", len_check = TRUE)
   argument_check(na.rm, "na.rm", "logical", len_check = TRUE)
   
   # find columns that match the pattern
@@ -36,16 +36,15 @@ column_combine <- function(pattern,
   
   # message user how the composites were created
   column_message(data_found, 
-                paste0("A composite column (using ",
-                       ifelse(sum == FALSE, "rowMeans", "rowSums"),
-                       ")"),
+                 "A composite column",
                   verbose = verbose)
-  
-  # calculate row means or row sums
-  if (sum == FALSE) {
-    rowMeans(data_found, na.rm = na.rm)
-  } else {
-    rowSums(data_found, na.rm = na.rm)  
-  }
+
+  # apply the function to each row
+  apply(data_found, MARGIN = 1, FUN = fun)
+
 }
+
+
+
+
 

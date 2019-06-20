@@ -4,7 +4,7 @@
 \alias{column_combine}
 \title{column_combine}
 \usage{
-column_combine(pattern, data, sum = FALSE, verbose = FALSE,
+column_combine(pattern, data, fun = mean, verbose = FALSE,
   na.rm = TRUE)
 }
 \arguments{
@@ -12,14 +12,14 @@ column_combine(pattern, data, sum = FALSE, verbose = FALSE,
 
 \item{data}{a data frame.}
 
-\item{sum}{column_combine produces rowwise means by default. However, if `sum` equal TRUE, rowwise sums are produced.}
+\item{fun}{the function to use to create the composite column; defaults to `mean`.}
 
 \item{verbose}{specifies whether all column names should be listed, regardless of length.}
 
 \item{na.rm}{a logical value indicating whether `NA` values should be removed prior to computation.}
 }
 \description{
-Calculates rowwise means or sums using only columns in a data frame that have names that match a pattern.
+Creates a composite column using only columns in a data frame that have names that match a pattern.
 }
 \examples{
 x <- data.frame(my_column_x  = 1:10,

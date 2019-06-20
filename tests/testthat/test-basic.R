@@ -68,8 +68,21 @@ test_that("column_combine returns correct values", {
                  8.66666666666667))
   expect_equal(column_combine(pattern = "scale1", 
                               data    = data_example,
-                              sum     = TRUE), 
+                              fun     = sum), 
              c(21, 4, 12, 13, 13, 26, 26))
+  expect_equal(column_combine(pattern = "scale1", 
+                              data    = data_example,
+                              fun     = sd), 
+             c(1, 
+               0.577350269189626, 
+               1, 0.577350269189626, 
+               0.577350269189626, 
+               0.577350269189626, 
+               0.577350269189626))
+  expect_message(column_combine(pattern = "scale1", 
+                              data    = data_example,
+                              fun     = sd), 
+                 "A composite column was calculated using 3 columns: scale1_")
 })
 
 
