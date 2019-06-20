@@ -96,17 +96,17 @@ column_alpha(pattern = "scale1", full = FALSE, data = data_example)
 
 ### column_combine
 
-`column_combine` calculates rowwise means or sums using only columns in a data frame that match a `pattern`. The argument `sum` specifies whether columns should be combined by averaging or summing. Averaging is the default. In both cases, a message is generated informing the users what columns were used to create the composite. 
+`column_combine` creates a composite column using only columns in a data frame that have names that match a `pattern`. The argument `fun` specifies specifies what function should be used to create the composite column. Averaging is the default. 
 
 ```{r column_combine_example}
 # look at example data
 data_example
 
 # return a vector of rowwise means for scale 1
-column_combine(pattern = "scale1", sum = FALSE, data = data_example)
+column_combine(pattern = "scale1", fun = mean, data = data_example)
 
 # return a vector of rowwise sums for scale 1
-column_combine(pattern = "scale1", sum = TRUE, data = data_example)
+column_combine(pattern = "scale1", fun = sum, data = data_example)
 
 ```
 
@@ -151,7 +151,7 @@ char_example
 # produce the counts, proportions, and percentages and present the results in tidy format
 perble(x = char_example, tidy = TRUE)
 
-# produce the counts, proportions, and percentages and present the results as a numeric vector
+# produce the counts, proportions, and percentages and present the results as a numeric matrix
 perble(x = char_example, tidy = FALSE)
 ```
 
