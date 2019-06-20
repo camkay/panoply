@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-A panoply of miscellaneous functions: `column_find`, `column_alpha`, `column_combine`, `scuttle`, `spround`, `perble`, `lenique`, `pasterisk`, and  `paste_paren`. `scuttle` was created in collaboration with [AshLynnMiller](https://github.com/AshLynnMiller).
+A panoply of miscellaneous functions: `column_find`, `column_alpha`, `column_combine`, `scuttle`, `spround`, `perble`, `lenique`, `pasterisk`, `paste_paren`, and `mat_merge`. `scuttle` was created in collaboration with [AshLynnMiller](https://github.com/AshLynnMiller).
 
 ## Installation
 
@@ -52,6 +52,15 @@ num_example  <- c(5, 1, 0, .5, .1, .05, .01, .005, .001, .0005)
 
 # create example character vector
 char_example  <- c("cat", "cat", "dog", "cat", "dog", "giraffe")
+
+# create example mats
+mat_a <- psych::corr.test(data_example)$p
+
+mat_b <- psych::corr.test(matrix(rnorm(5 * 7), 
+                          nrow = 7, 
+                          dimnames = list(rownames(data_example), 
+                                          colnames(data_example))))$p
+
 ```
 
 ### column_find
@@ -193,4 +202,42 @@ pasterisk(p_vals = num_example, thresholds = c(0.10, 0.5), sig_symbol = "*")
 ```{r paste_paren_example}
 # combine two numbers
 paste_paren(10.12, 2.22)
+```
+
+### mat_merge
+
+`mat_merge` combines two matrices by drawing values from either below or above the diagonal and placing them below and above the diagonal.
+
+```{r mat_merge_example}
+# look at matrix a
+mat_a
+
+# look at matrix b
+mat_b
+
+# merge by drawing values from below the diagonal of both matrices
+mat_merge(mat_a, 
+          mat_b, 
+          x_from = "lower", 
+          y_from = "lower", 
+          x_to   = "lower", 
+          y_to   = "upper")
+
+# merge by drawing values from below the diagonal of mat_a and above the 
+# diagonal of mat_b
+mat_merge(mat_a, 
+          mat_b, 
+          x_from = "lower", 
+          y_from = "upper", 
+          x_to   = "lower", 
+          y_to   = "upper")
+
+# identical to previous mat_merge but input the values into the opposite 
+# quadrant of the matrix
+mat_merge(mat_a, 
+          mat_b, 
+          x_from = "lower", 
+          y_from = "upper", 
+          x_to   = "upper", 
+          y_to   = "lower")
 ```

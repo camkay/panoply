@@ -14,8 +14,8 @@ coverage](https://codecov.io/gh/camkay/panoply/branch/master/graph/badge.svg)](h
 
 A panoply of miscellaneous functions: `column_find`, `column_alpha`,
 `column_combine`, `scuttle`, `spround`, `perble`, `lenique`,
-`pasterisk`, and `paste_paren`. `scuttle` was created in collaboration
-with [AshLynnMiller](https://github.com/AshLynnMiller).
+`pasterisk`, `paste_paren`, and `mat_merge`. `scuttle` was created in
+collaboration with [AshLynnMiller](https://github.com/AshLynnMiller).
 
 ## Installation
 
@@ -308,4 +308,85 @@ streamline the creation of tables that include cells as formatted
 # combine two numbers
 paste_paren(10.12, 2.22)
 #> [1] "10.12(2.22)"
+```
+
+### mat\_merge
+
+`mat_merge` combines two matrices by drawing values from either below or
+above the diagonal and placing them below and above the diagonal.
+
+``` r
+# look at matrix a
+mat_a
+#>              scale1_item1 scale1_item2 scale1_item3 scale2_item1
+#> scale1_item1  0.000000000  0.008169830   0.03181099  0.112260687
+#> scale1_item2  0.000816983  0.000000000   0.01459186  0.258491261
+#> scale1_item3  0.004544428  0.001621317   0.00000000  0.258491261
+#> scale2_item1  0.022452137  0.115015191   0.20321211  0.000000000
+#> scale2_item2  0.012145315  0.064622815   0.07477377  0.002880533
+#>              scale2_item2
+#> scale1_item1   0.07287189
+#> scale1_item2   0.25849126
+#> scale1_item3   0.25849126
+#> scale2_item1   0.02304426
+#> scale2_item2   0.00000000
+
+# look at matrix b
+mat_b
+#>              scale1_item1 scale1_item2 scale1_item3 scale2_item1
+#> scale1_item1    0.0000000    1.0000000    1.0000000    1.0000000
+#> scale1_item2    0.4455171    0.0000000    1.0000000    1.0000000
+#> scale1_item3    0.4267916    0.6240299    0.0000000    1.0000000
+#> scale2_item1    0.5290528    0.2474669    0.7228075    0.0000000
+#> scale2_item2    0.9989989    0.8474024    0.7253911    0.8421628
+#>              scale2_item2
+#> scale1_item1            1
+#> scale1_item2            1
+#> scale1_item3            1
+#> scale2_item1            1
+#> scale2_item2            0
+
+# merge by drawing values from below the diagonal of both matrices
+mat_merge(mat_a, 
+          mat_b, 
+          x_from = "lower", 
+          y_from = "lower", 
+          x_to   = "lower", 
+          y_to   = "upper")
+#>             [,1]        [,2]       [,3]        [,4]      [,5]
+#> [1,] 0.000000000 0.445517062 0.42679158 0.529052776 0.9989989
+#> [2,] 0.000816983 0.000000000 0.62402994 0.247466853 0.8474024
+#> [3,] 0.004544428 0.001621317 0.00000000 0.722807537 0.7253911
+#> [4,] 0.022452137 0.115015191 0.20321211 0.000000000 0.8421628
+#> [5,] 0.012145315 0.064622815 0.07477377 0.002880533 0.0000000
+
+# merge by drawing values from below the diagonal of mat_a and above the 
+# diagonal of mat_b
+mat_merge(mat_a, 
+          mat_b, 
+          x_from = "lower", 
+          y_from = "upper", 
+          x_to   = "lower", 
+          y_to   = "upper")
+#>             [,1]        [,2]       [,3]        [,4] [,5]
+#> [1,] 0.000000000 1.000000000 1.00000000 1.000000000    1
+#> [2,] 0.000816983 0.000000000 1.00000000 1.000000000    1
+#> [3,] 0.004544428 0.001621317 0.00000000 1.000000000    1
+#> [4,] 0.022452137 0.115015191 0.20321211 0.000000000    1
+#> [5,] 0.012145315 0.064622815 0.07477377 0.002880533    0
+
+# identical to previous mat_merge but input the values into the opposite 
+# quadrant of the matrix
+mat_merge(mat_a, 
+          mat_b, 
+          x_from = "lower", 
+          y_from = "upper", 
+          x_to   = "upper", 
+          y_to   = "lower")
+#>      [,1]        [,2]        [,3]       [,4]        [,5]
+#> [1,]    0 0.000816983 0.004544428 0.02245214 0.012145315
+#> [2,]    1 0.000000000 0.001621317 0.11501519 0.064622815
+#> [3,]    1 1.000000000 0.000000000 0.20321211 0.074773772
+#> [4,]    1 1.000000000 1.000000000 0.00000000 0.002880533
+#> [5,]    1 1.000000000 1.000000000 1.00000000 0.000000000
 ```
