@@ -18,6 +18,7 @@ mat_merge <- function(x_mat,
                       y_to   = "upper") {
   
   # check arguments for type
+  b
   argument_check(x_mat, "x_mat", "matrix")
   argument_check(y_mat, "y_mat", "matrix")
   argument_check(x_from, "x_from", "character", len_check = TRUE)
@@ -66,8 +67,3 @@ mat_merge <- function(x_mat,
   out_mat
   
 }
-
-
-
-
-       
