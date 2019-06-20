@@ -18,7 +18,6 @@ mat_merge <- function(x_mat,
                       y_to   = "upper") {
   
   # check arguments for type
-  b
   argument_check(x_mat, "x_mat", "matrix")
   argument_check(y_mat, "y_mat", "matrix")
   argument_check(x_from, "x_from", "character", len_check = TRUE)
@@ -60,8 +59,8 @@ mat_merge <- function(x_mat,
   }
 
   # place values frome existing matrices in the initialized matrix
-  out_mat[get(paste0(x_to, ".tri"))(x_mat)] <- x_mat[get(paste0(x_to, ".tri"))(x_mat)]
-  out_mat[get(paste0(y_to, ".tri"))(y_mat)] <- y_mat[get(paste0(y_to, ".tri"))(y_mat)]
+  out_mat[get0(x_to, ".tri")(x_mat)] <- x_mat[get0(x_to, ".tri")(x_mat)]
+  out_mat[get0(y_to, ".tri")(y_mat)] <- y_mat[get0(y_to, ".tri")(y_mat)]
   
   # return out_mat
   out_mat

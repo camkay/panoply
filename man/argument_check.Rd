@@ -2,7 +2,7 @@
 % Please edit documentation in R/argument_check.R
 \name{argument_check}
 \alias{argument_check}
-\title{argument Check}
+\title{argument_check}
 \usage{
 argument_check(x, name, type, len_check = FALSE, len_req = 1)
 }
