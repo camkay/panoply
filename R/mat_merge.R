@@ -33,7 +33,7 @@ mat_merge <- function(x_mat,
   } else if (y_from != "lower" & y_from != "upper") {
     stop("y_from must be either \"lower\" or \"upper\"")
   } else if (y_to != "lower" & y_to != "upper") {
-    stop("x_to must be either \"lower\" or \"upper\"")
+    stop("y_to must be either \"lower\" or \"upper\"")
   }
   
   # check arguments for duplicate tos
