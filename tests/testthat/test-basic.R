@@ -236,6 +236,21 @@ test_that("check that mat_merge is working properly", {
                       0, 0.00288053250708112, 0.486228731120195, 
                       0.352390494682801, 0.063056705312586, 0.668811955414348, 
                       0), nrow = 5))
+  expect_equal(mat_merge(mat_a, 
+                         mat_b, 
+                         x_from = "upper", 
+                         y_from = "lower", 
+                         x_to   = "lower", 
+                         y_to   = "upper"),
+             matrix(c(0, 0.00816982970622438, 0.0318109947277359, 
+                      0.112260687304124, 0.072871889778637, 0.524317457207586, 
+                      0, 0.014591855187469, 0.258491261135742, 
+                      0.258491261135742, 0.459483927231542, 0.947112709264432, 
+                      0, 0.258491261135742, 0.258491261135742, 
+                      0.508791133749554, 0.059078101909081, 0.293710028165101, 
+                      0, 0.023044260056649, 0.486228731120195, 
+                      0.352390494682801, 0.063056705312586, 0.668811955414348, 
+                      0), nrow = 5))
   expect_error(mat_merge(mat_a, 
                          mat_b, 
                          x_from = "lower", 
@@ -250,6 +265,34 @@ test_that("check that mat_merge is working properly", {
                          x_to   = "upper", 
                          y_to   = "upper"),
                "quadrant")
+  expect_error(mat_merge(mat_a, 
+                         mat_b, 
+                         x_from = "hello", 
+                         y_from = "lower", 
+                         x_to   = "upper", 
+                         y_to   = "upper"),
+               "x_from")
+  expect_error(mat_merge(mat_a, 
+                         mat_b, 
+                         x_from = "lower", 
+                         y_from = "hello", 
+                         x_to   = "upper", 
+                         y_to   = "upper"),
+               "y_from")
+  expect_error(mat_merge(mat_a, 
+                         mat_b, 
+                         x_from = "lower", 
+                         y_from = "lower", 
+                         x_to   = "hello", 
+                         y_to   = "upper"),
+               "x_to")
+  expect_error(mat_merge(mat_a, 
+                         mat_b, 
+                         x_from = "lower", 
+                         y_from = "lower", 
+                         x_to   = "upper", 
+                         y_to   = "hello"),
+               "y_to")
 })
 
 # test column_message
