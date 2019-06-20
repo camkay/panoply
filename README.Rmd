@@ -56,6 +56,7 @@ char_example  <- c("cat", "cat", "dog", "cat", "dog", "giraffe")
 # create example mats
 mat_a <- psych::corr.test(data_example)$p
 
+set.seed(1)
 mat_b <- psych::corr.test(matrix(rnorm(5 * 7), 
                           nrow = 7, 
                           dimnames = list(rownames(data_example), 
