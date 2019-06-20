@@ -182,7 +182,7 @@ test_that("check paste_paren is combining the values correctly", {
 })
 
 # test perble
-test_that("check paste_paren is combining the values correctly", {
+test_that("check perble is counting correctly", {
   expect_equal(perble(char_example),
                structure(list(group = c("cat", "dog", "giraffe"), 
                               count = c(2, 2, 1), 
@@ -192,6 +192,19 @@ test_that("check paste_paren is combining the values correctly", {
                          row.names = c(NA, -3L)))
   expect_equal(perble(char_example, tidy = FALSE),
                structure(c(2, 0.4, 40, 2, 0.4, 40, 1, 0.2, 20), 
+                         .Dim = c(3L, 3L), 
+                         .Dimnames = list(c("count", "proportion", "percent"), 
+                                          c("cat", "dog", "giraffe"))))
+  expect_equal(perble(char_example, spround = TRUE),
+               structure(list(group = c("cat", "dog", "giraffe"), 
+                              count = c("2", "2", "1"), 
+                              proportion = c(".40", ".40", ".20"), 
+                              percent = c("40.00", "40.00", "20.00")), 
+                         class     = "data.frame", 
+                         row.names = c(NA, -3L)))
+  expect_equal(perble(char_example, tidy = FALSE, spround = TRUE),
+               structure(c("2", ".40", "40.00", "2", ".40", 
+                           "40.00", "1", ".20", "20.00"), 
                          .Dim = c(3L, 3L), 
                          .Dimnames = list(c("count", "proportion", "percent"), 
                                           c("cat", "dog", "giraffe"))))

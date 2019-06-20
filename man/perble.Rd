@@ -4,12 +4,14 @@
 \alias{perble}
 \title{perble}
 \usage{
-perble(x, tidy = TRUE)
+perble(x, tidy = TRUE, spround = FALSE)
 }
 \arguments{
 \item{x}{a scalar, atomic vector, or list.}
 
 \item{tidy}{by default, results are tidied into long data frame. Each group has its own row and there are four rows: group, count, proportion, and percent. If `tidy = FALSE`, a matrix is returned with count, proportion, and percent saved as row names. The group names are saved as column names.}
+
+\item{spround}{if TRUE, proportion and percent are rounded to the second decimal place.}
 }
 \description{
 Extends `table` by including proportions and percentages.
