@@ -1,5 +1,5 @@
 #' @keywords internal
-#' @importFrom psych alpha
+#' @importFrom psych alpha corr.test
 #' @importFrom stats qnorm quantile sd
 "_PACKAGE"
 
