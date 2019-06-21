@@ -5,6 +5,7 @@
 #' @param data a data frame. 
 #' @param fun the function to use to create the composite column; defaults to `mean`. 
 #' @param verbose specifies whether all column names should be listed, regardless of length. 
+#' @param message if TRUE, messages are generated telling the user which columns were used to create the composite.
 #' @param na.rm a logical value indicating whether `NA` values should be removed prior to computation.
 #' @export
 #' @examples
@@ -23,21 +24,25 @@ column_combine <- function(pattern,
                            data, 
                            fun     = mean, 
                            verbose = FALSE, 
+                           message = TRUE,
                            na.rm   = TRUE) {
   
   # check arguments
   argument_check(pattern, "pattern", "character", len_check = TRUE)
   argument_check(data, "data", "data.frame")
   argument_check(fun, "fun", "function", len_check = TRUE)
+  argument_check(message, "message", "logical", len_check = TRUE)
   argument_check(na.rm, "na.rm", "logical", len_check = TRUE)
   
   # find columns that match the pattern
   data_found <- column_find(pattern, data, return = "data.frame")
   
-  # message user how the composites were created
-  column_message(data_found, 
-                 "A composite column",
-                  verbose = verbose)
+  # message user how the composites were created if message == TRUE
+  if (message == TRUE) {
+    column_message(data_found, 
+                   "A composite column",
+                    verbose = verbose)
+  }
 
   # apply the function to each row
   apply(data_found, MARGIN = 1, FUN = fun)

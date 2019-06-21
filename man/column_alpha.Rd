@@ -5,7 +5,7 @@
 \title{column_alpha}
 \usage{
 column_alpha(pattern, data, full = FALSE, verbose = FALSE,
-  na.rm = TRUE)
+  message = TRUE, na.rm = TRUE)
 }
 \arguments{
 \item{pattern}{a character string that is used to find the columns of interest. It can be a regular expression.}
@@ -15,6 +15,8 @@ column_alpha(pattern, data, full = FALSE, verbose = FALSE,
 \item{full}{if TRUE, the full results of the reliability analysis produced by the `psych` package is returned. If FALSE, only the raw alpha value is returned.}
 
 \item{verbose}{specifies whether all column names used should be listed in the message, regardless of length.}
+
+\item{message}{if TRUE, messages are generated telling the user which columns were used to calculate Cronbach's Alpha.}
 
 \item{na.rm}{a logical value indicating whether `NA` values should be removed prior to computation.}
 }

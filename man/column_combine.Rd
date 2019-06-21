@@ -5,7 +5,7 @@
 \title{column_combine}
 \usage{
 column_combine(pattern, data, fun = mean, verbose = FALSE,
-  na.rm = TRUE)
+  message = TRUE, na.rm = TRUE)
 }
 \arguments{
 \item{pattern}{a character string that is used to find the columns of interest. It can be a regular expression.}
@@ -15,6 +15,8 @@ column_combine(pattern, data, fun = mean, verbose = FALSE,
 \item{fun}{the function to use to create the composite column; defaults to `mean`.}
 
 \item{verbose}{specifies whether all column names should be listed, regardless of length.}
+
+\item{message}{if TRUE, messages are generated telling the user which columns were used to create the composite.}
 
 \item{na.rm}{a logical value indicating whether `NA` values should be removed prior to computation.}
 }
