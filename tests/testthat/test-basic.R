@@ -61,6 +61,11 @@ test_that("column_alpha returns correct values", {
                               data    = data_example,
                               full    = TRUE)[[1]],
                alpha(data_example[, 1:3], warnings = FALSE)[[1]])
+  expect_equal(column_alpha(pattern = "scale1", 
+                              data    = data_example,
+                              full    = TRUE,
+                              message = FALSE)[[1]],
+               alpha(data_example[, 1:3], warnings = FALSE)[[1]])
   expect_message(column_alpha(pattern = "scale1", 
                             data    = data_example), 
                  "scale1_item3")
@@ -87,6 +92,16 @@ test_that("column_combine returns correct values", {
   expect_equal(column_combine(pattern = "scale1", 
                               data    = data_example,
                               fun     = sd), 
+             c(1, 
+               0.577350269189626, 
+               1, 0.577350269189626, 
+               0.577350269189626, 
+               0.577350269189626, 
+               0.577350269189626))
+  expect_equal(column_combine(pattern = "scale1", 
+                              data    = data_example,
+                              fun     = sd,
+                              message = FALSE), 
              c(1, 
                0.577350269189626, 
                1, 0.577350269189626, 
