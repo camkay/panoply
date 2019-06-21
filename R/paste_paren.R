@@ -23,6 +23,6 @@ paste_paren <- function(x, y) {
   }
   
   # paste x and y together and surround with parentheses
-  paste0(x, "(", y, ")")
+  paste0(x, " (", y, ")")
 }
 
