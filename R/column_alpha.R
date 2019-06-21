@@ -5,6 +5,7 @@
 #' @param data a data frame. 
 #' @param full if TRUE, the full results of the reliability analysis produced by the `psych` package is returned. If FALSE, only the raw alpha value is returned.
 #' @param verbose specifies whether all column names used should be listed in the message, regardless of length. 
+#' @param message if TRUE, messages are generated telling the user which columns were used to calculate Cronbach's Alpha.
 #' @param na.rm a logical value indicating whether `NA` values should be removed prior to computation.
 #' @export
 #' @examples
@@ -22,21 +23,25 @@
 column_alpha <- function(pattern, 
                          data, 
                          full    = FALSE, 
-                         verbose = FALSE, 
+                         verbose = FALSE,
+                         message =  TRUE,
                          na.rm   = TRUE) {
   
   # check arguments
   argument_check(pattern, "pattern", "character", len_check = TRUE)
   argument_check(data, "data", "data.frame")
   argument_check(full, "full", "logical", len_check = TRUE)
+  argument_check(message, "message", "logical", len_check = TRUE)
   argument_check(na.rm, "na.rm", "logical", len_check = TRUE)
   
   # find columns that match the pattern
   data_found <- column_find(pattern, data, return = "data.frame")
   
-  # message user how the composites were created
-  column_message(data_found, "Cronbach's Alpha", verbose = verbose)
-  
+  # message user how the composites were created if message == TRUE
+  if (message == TRUE) {
+    column_message(data_found, "Cronbach's Alpha", verbose = verbose)
+  }
+
   # calculate and extract the alpha value
   alpha_out <- psych::alpha(x = data_found, na.rm = na.rm, warnings = FALSE)
   

@@ -64,6 +64,10 @@ test_that("column_alpha returns correct values", {
   expect_message(column_alpha(pattern = "scale1", 
                             data    = data_example), 
                  "scale1_item3")
+  expect_message(column_alpha(pattern = "scale1", 
+                              data    = data_example,
+                              message = FALSE), 
+                 NA)
 })
 
 # test column_combine
@@ -90,9 +94,14 @@ test_that("column_combine returns correct values", {
                0.577350269189626, 
                0.577350269189626))
   expect_message(column_combine(pattern = "scale1", 
-                              data    = data_example,
-                              fun     = sd), 
+                                data    = data_example,
+                                fun     = sd), 
                  "A composite column was calculated using 3 columns: scale1_")
+  expect_message(column_combine(pattern = "scale1", 
+                                data    = data_example,
+                                fun     = sd,
+                                message = FALSE), 
+                 NA)
 })
 
 
