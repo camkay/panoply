@@ -10,5 +10,5 @@ centre(x)
 \item{x}{a numeric vector or similar.}
 }
 \description{
-Centers a numeric vector. It is identical to running `scale(x, center = TRUE, scale = FALSE)`.
+Centres a numeric vector. It is identical to running `scale(x, center = TRUE, scale = FALSE)`.
 }
