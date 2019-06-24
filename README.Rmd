@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-A panoply of miscellaneous functions: `column_find`, `column_alpha`, `column_combine`, `scuttle`, `spround`, `perble`, `lenique`, `pasterisk`, `paste_paren`, and `mat_merge`. `scuttle` was created in collaboration with [AshLynnMiller](https://github.com/AshLynnMiller).
+A panoply of miscellaneous functions: `column_find`, `column_alpha`, `column_combine`, `scuttle`, `spround`, `perble`, `lenique`, `pasterisk`, `paste_paren`, `centre`, and `mat_merge`. `scuttle` was created in collaboration with [AshLynnMiller](https://github.com/AshLynnMiller).
 
 ## Installation
 
@@ -241,4 +241,16 @@ mat_merge(mat_a,
           y_from = "upper", 
           x_to   = "upper", 
           y_to   = "lower")
+```
+
+### centre (center)
+
+`centre` (or `center`) centres (or centers) a numeric vector. It is identical to running 'scale(x, center = TRUE, scale = FALSE)'.
+
+```{r centre_example}
+# look at num_example
+num_example
+
+# centre num_example
+centre(num_example)
 ```

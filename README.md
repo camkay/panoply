@@ -14,8 +14,9 @@ coverage](https://codecov.io/gh/camkay/panoply/branch/master/graph/badge.svg)](h
 
 A panoply of miscellaneous functions: `column_find`, `column_alpha`,
 `column_combine`, `scuttle`, `spround`, `perble`, `lenique`,
-`pasterisk`, `paste_paren`, and `mat_merge`. `scuttle` was created in
-collaboration with [AshLynnMiller](https://github.com/AshLynnMiller).
+`pasterisk`, `paste_paren`, `centre`, and `mat_merge`. `scuttle` was
+created in collaboration with
+[AshLynnMiller](https://github.com/AshLynnMiller).
 
 ## Installation
 
@@ -307,7 +308,7 @@ streamline the creation of tables that include cells as formatted
 ``` r
 # combine two numbers
 paste_paren(10.12, 2.22)
-#> [1] "10.12(2.22)"
+#> [1] "10.12 (2.22)"
 ```
 
 ### mat\_merge
@@ -389,4 +390,31 @@ mat_merge(mat_a,
 #> [3,]    1 1.000000000 0.000000000 0.20321211 0.074773772
 #> [4,]    1 0.590781019 1.000000000 0.00000000 0.002880533
 #> [5,]    1 1.000000000 0.590781019 1.00000000 0.000000000
+```
+
+### centre (center)
+
+`centre` (or `center`) centres (or centers) a numeric vector. It is
+identical to running ‘scale(x, center = TRUE, scale = FALSE)’.
+
+``` r
+# look at num_example
+num_example
+#>  [1] 5.0000 1.0000 0.0000 0.5000 0.1000 0.0500 0.0100 0.0050 0.0010 0.0005
+
+# centre num_example
+centre(num_example)
+#>           [,1]
+#>  [1,]  4.33335
+#>  [2,]  0.33335
+#>  [3,] -0.66665
+#>  [4,] -0.16665
+#>  [5,] -0.56665
+#>  [6,] -0.61665
+#>  [7,] -0.65665
+#>  [8,] -0.66165
+#>  [9,] -0.66565
+#> [10,] -0.66615
+#> attr(,"scaled:center")
+#> [1] 0.66665
 ```
