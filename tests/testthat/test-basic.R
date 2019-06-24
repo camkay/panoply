@@ -332,6 +332,21 @@ test_that("check that mat_merge is working properly", {
                "y_to")
 })
 
+# test center
+test_that("check that center is producing the correct results", {
+  expect_equal(scale(num_example, scale = FALSE, center = TRUE),
+               center(num_example))
+  expect_false(isTRUE(all.equal(scale(num_example, scale = TRUE, center = TRUE), 
+                                center(num_example))))
+  expect_false(isTRUE(all.equal(scale(num_example, scale = TRUE, center = TRUE), 
+                                centre(num_example))))
+  expect_equal(centre(num_example),
+               center(num_example))
+  
+})
+
+
+
 # test column_message
 test_that("check column_message is producing correct messages", {
   expect_message(column_message(data_example, "test"),
