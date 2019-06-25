@@ -19,7 +19,7 @@ created in collaboration with
 [AshLynnMiller](https://github.com/AshLynnMiller). A large debt of
 gratitude is also owed to [datalorax](https://github.com/datalorax) and
 his functional programming course. His instruction, course materials,
-and feedback were instrumental in the creating this package.
+and feedback were instrumental in creating this package.
 
 ## Installation
 
