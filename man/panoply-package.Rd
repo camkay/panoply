@@ -6,10 +6,10 @@
 \alias{panoply-package}
 \title{panoply: A Panoply of Miscellaneous Functions}
 \description{
-Contains a number of miscellaneous functions for making data analysis more efficient.
+Contains a number of miscellaneous functions for making data manipulation and analysis more convenient.
 }
 \author{
-\strong{Maintainer}: Cameron Kay \email{cameronstuartkay@gmail.com} (YOUR-ORCID-ID)
+\strong{Maintainer}: Cameron Kay \email{cameronstuartkay@gmail.com}
 
 }
 \keyword{internal}

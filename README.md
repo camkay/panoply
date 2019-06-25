@@ -14,9 +14,9 @@ coverage](https://codecov.io/gh/camkay/panoply/branch/master/graph/badge.svg)](h
 
 A panoply of miscellaneous functions: `column_find`, `column_alpha`,
 `column_combine`, `scuttle`, `spround`, `perble`, `lenique`,
-`pasterisk`, `paste_paren`, `centre`, and `mat_merge`. `scuttle` was
-created in collaboration with
-[AshLynnMiller](https://github.com/AshLynnMiller). A large debt of
+`pasterisk`, `paste_paren`, `centre`, `mat_merge`, `delta_rsq`,
+`delta_aic`, and `delta_bic`. `scuttle` was created in collaboration
+with [AshLynnMiller](https://github.com/AshLynnMiller). A large debt of
 gratitude is also owed to [datalorax](https://github.com/datalorax) and
 his functional programming course. His instruction, course materials,
 and feedback were instrumental in creating this package.
@@ -408,4 +408,32 @@ centre(num_example)
 #> [10,] -0.66615
 #> attr(,"scaled:center")
 #> [1] 0.66665
+```
+
+### delta\_rsq, delta\_aic, and delta\_bic
+
+`delta_rsq`, `delta_aic`, and `delta_bic` calculate the change to
+R-Squared, AIC, and BIC accross two or more models.
+
+``` r
+# calculate delta r-squared
+delta_rsq(models = list(mod_a_example, mod_b_example, mod_c_example))
+#>           model  delta_rsq
+#> 1 mod_a_example         NA
+#> 2 mod_b_example 0.07115238
+#> 3 mod_c_example 0.23864225
+
+# calculate delta AIC
+delta_aic(models = list(mod_a_example, mod_b_example, mod_c_example))
+#>           model   delta_aic
+#> 1 mod_a_example          NA
+#> 2 mod_b_example   0.2395225
+#> 3 mod_c_example -20.3696756
+
+# calculate delta BIC
+delta_bic(models = list(mod_a_example, mod_b_example, mod_c_example))
+#>           model   delta_bic
+#> 1 mod_a_example          NA
+#> 2 mod_b_example   0.1854326
+#> 3 mod_c_example -20.4237654
 ```

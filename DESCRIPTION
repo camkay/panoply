@@ -5,9 +5,8 @@ Authors@R:
     person(given = "Cameron",
            family = "Kay",
            role = c("aut", "cre"),
-           email = "cameronstuartkay@gmail.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: Contains a number of miscellaneous functions for making data analysis more efficient. 
+           email = "cameronstuartkay@gmail.com")
+Description: Contains a number of miscellaneous functions for making data manipulation and analysis more convenient. 
 Depends: R (>= 3.3.0)
 Imports: 
   psych,
