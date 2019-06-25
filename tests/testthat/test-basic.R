@@ -21,6 +21,13 @@ mat_b <- psych::corr.test(matrix(rnorm(5 * 7),
                           dimnames = list(rownames(data_example), 
                                           colnames(data_example))))$p
 
+# create example models
+mod_a_example <- lm(scale1_item1 ~ scale2_item1, data = data_example)
+
+mod_b_example <- lm(scale1_item1 ~ scale2_item1 + scale2_item2, data = data_example)
+
+mod_c_example <- lm(scale1_item1 ~ scale2_item1 + scale2_item2 + scale1_item3, data = data_example)
+
 # test lenique
 test_that("lenique results are equal to length(unique(x)) results", {
   expect_equal(lenique(char_example), length(unique(char_example)))
@@ -345,6 +352,66 @@ test_that("check that center is producing the correct results", {
   
 })
 
+# test delta_rsq, delta_aic, and delta_bic
+test_that("check that delta_rsq is working properly", {
+  expect_equal(delta_rsq(list(mod_a_example, 
+                              mod_b_example, 
+                              mod_c_example)),
+               structure(list(model = structure(1:3, 
+                                                .Label = c("mod_a_example", 
+                                                           "mod_b_example", 
+                                                           "mod_c_example"), 
+                                                class = "factor"), 
+                              delta_rsq = c(NA, 
+                                            0.0711523789754419, 
+                                            0.238642252570856)), 
+                         class = "data.frame", 
+                         row.names = c(NA, -3L)))
+  expect_error(delta_rsq(list(mod_a_example, "mod_b_example", mod_c_example)),
+               "All models must be of class lm")
+  expect_error(delta_rsq(list(mod_a_example)),
+               "More than one model must be provided.")
+})
+
+test_that("check that delta_aic is working properly", {
+  expect_equal(delta_aic(list(mod_a_example, 
+                              mod_b_example, 
+                              mod_c_example)),
+               structure(list(model = structure(1:3, 
+                                                .Label = c("mod_a_example", 
+                                                           "mod_b_example", 
+                                                           "mod_c_example"), 
+                                                class = "factor"), 
+                              delta_aic = c(NA, 
+                                            0.239522459992067, 
+                                            -20.3696755929175)), 
+                         class = "data.frame", 
+                         row.names = c(NA, -3L)))
+  expect_error(delta_aic(list(mod_a_example, "mod_b_example", mod_c_example)),
+               "All models must be of class lm")
+  expect_error(delta_aic(list(mod_a_example)),
+               "More than one model must be provided.")
+})
+
+test_that("check that delta_bic is working properly", {
+  expect_equal(delta_bic(list(mod_a_example, 
+                              mod_b_example, 
+                              mod_c_example)),
+               structure(list(model = structure(1:3, 
+                                                .Label = c("mod_a_example", 
+                                                           "mod_b_example", 
+                                                           "mod_c_example"), 
+                                                class = "factor"), 
+                              delta_bic = c(NA, 
+                                            0.185432609047382, 
+                                            -20.4237654438622)), 
+                         class = "data.frame", 
+                         row.names = c(NA, -3L)))
+  expect_error(delta_bic(list(mod_a_example, "mod_b_example", mod_c_example)),
+               "All models must be of class lm")
+  expect_error(delta_bic(list(mod_a_example)),
+               "More than one model must be provided.")
+})
 
 
 # test column_message

@@ -9,7 +9,9 @@ Authors@R:
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: Contains a number of miscellaneous functions for making data analysis more efficient. 
 Depends: R (>= 3.3.0)
-Imports: psych
+Imports: 
+  psych,
+  stats
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
