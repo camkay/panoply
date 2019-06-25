@@ -54,13 +54,11 @@ num_example  <- c(5, 1, 0, .5, .1, .05, .01, .005, .001, .0005)
 char_example  <- c("cat", "cat", "dog", "cat", "dog", "giraffe")
 
 # create example mats
-mat_a <- psych::corr.test(data_example)$p
+mat_a <- matrix(rep( "apple", 25), nrow = 5)
+mat_a[lower.tri(mat_a)] <- matrix(rep("orange", 25), nrow = 5)[lower.tri(mat_a)]
 
-set.seed(1)
-mat_b <- psych::corr.test(matrix(rnorm(5 * 7), 
-                          nrow = 7, 
-                          dimnames = list(rownames(data_example), 
-                                          colnames(data_example))))$p
+mat_b <- matrix(rep( "banana", 25), nrow = 5)
+mat_b[lower.tri(mat_b)] <- matrix(rep("kiwi", 25), nrow = 5)[lower.tri(mat_b)]
 
 ```
 
@@ -233,7 +231,7 @@ mat_merge(mat_a,
           x_to   = "lower", 
           y_to   = "upper")
 
-# identical to previous mat_merge but input the values into the opposite 
+# identical to previous mat_merge but put the values into the opposite 
 # quadrant of the matrix
 mat_merge(mat_a, 
           mat_b, 

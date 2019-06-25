@@ -319,33 +319,21 @@ above the diagonal and placing them below and above the diagonal.
 ``` r
 # look at matrix a
 mat_a
-#>              scale1_item1 scale1_item2 scale1_item3 scale2_item1
-#> scale1_item1  0.000000000  0.008169830   0.03181099  0.112260687
-#> scale1_item2  0.000816983  0.000000000   0.01459186  0.258491261
-#> scale1_item3  0.004544428  0.001621317   0.00000000  0.258491261
-#> scale2_item1  0.022452137  0.115015191   0.20321211  0.000000000
-#> scale2_item2  0.012145315  0.064622815   0.07477377  0.002880533
-#>              scale2_item2
-#> scale1_item1   0.07287189
-#> scale1_item2   0.25849126
-#> scale1_item3   0.25849126
-#> scale2_item1   0.02304426
-#> scale2_item2   0.00000000
+#>      [,1]     [,2]     [,3]     [,4]     [,5]   
+#> [1,] "apple"  "apple"  "apple"  "apple"  "apple"
+#> [2,] "orange" "apple"  "apple"  "apple"  "apple"
+#> [3,] "orange" "orange" "apple"  "apple"  "apple"
+#> [4,] "orange" "orange" "orange" "apple"  "apple"
+#> [5,] "orange" "orange" "orange" "orange" "apple"
 
 # look at matrix b
 mat_b
-#>              scale1_item1 scale1_item2 scale1_item3 scale2_item1
-#> scale1_item1    0.0000000    1.0000000   1.00000000     1.000000
-#> scale1_item2    0.5243175    0.0000000   1.00000000     0.590781
-#> scale1_item3    0.4594839    0.9471127   0.00000000     1.000000
-#> scale2_item1    0.5087911    0.0590781   0.29371003     0.000000
-#> scale2_item2    0.4862287    0.3523905   0.06305671     0.668812
-#>              scale2_item2
-#> scale1_item1     1.000000
-#> scale1_item2     1.000000
-#> scale1_item3     0.590781
-#> scale2_item1     1.000000
-#> scale2_item2     0.000000
+#>      [,1]     [,2]     [,3]     [,4]     [,5]    
+#> [1,] "banana" "banana" "banana" "banana" "banana"
+#> [2,] "kiwi"   "banana" "banana" "banana" "banana"
+#> [3,] "kiwi"   "kiwi"   "banana" "banana" "banana"
+#> [4,] "kiwi"   "kiwi"   "kiwi"   "banana" "banana"
+#> [5,] "kiwi"   "kiwi"   "kiwi"   "kiwi"   "banana"
 
 # merge by drawing values from below the diagonal of both matrices
 mat_merge(mat_a, 
@@ -354,12 +342,12 @@ mat_merge(mat_a,
           y_from = "lower", 
           x_to   = "lower", 
           y_to   = "upper")
-#>             [,1]        [,2]       [,3]        [,4]       [,5]
-#> [1,] 0.000000000 0.524317457 0.45948393 0.508791134 0.48622873
-#> [2,] 0.000816983 0.000000000 0.94711271 0.059078102 0.35239049
-#> [3,] 0.004544428 0.001621317 0.00000000 0.293710028 0.06305671
-#> [4,] 0.022452137 0.115015191 0.20321211 0.000000000 0.66881196
-#> [5,] 0.012145315 0.064622815 0.07477377 0.002880533 0.00000000
+#>      [,1]     [,2]     [,3]     [,4]     [,5]  
+#> [1,] "0"      "kiwi"   "kiwi"   "kiwi"   "kiwi"
+#> [2,] "orange" "0"      "kiwi"   "kiwi"   "kiwi"
+#> [3,] "orange" "orange" "0"      "kiwi"   "kiwi"
+#> [4,] "orange" "orange" "orange" "0"      "kiwi"
+#> [5,] "orange" "orange" "orange" "orange" "0"
 
 # merge by drawing values from below the diagonal of mat_a and above the 
 # diagonal of mat_b
@@ -369,14 +357,14 @@ mat_merge(mat_a,
           y_from = "upper", 
           x_to   = "lower", 
           y_to   = "upper")
-#>             [,1]        [,2]       [,3]        [,4]     [,5]
-#> [1,] 0.000000000 1.000000000 1.00000000 1.000000000 1.000000
-#> [2,] 0.000816983 0.000000000 1.00000000 0.590781019 1.000000
-#> [3,] 0.004544428 0.001621317 0.00000000 1.000000000 0.590781
-#> [4,] 0.022452137 0.115015191 0.20321211 0.000000000 1.000000
-#> [5,] 0.012145315 0.064622815 0.07477377 0.002880533 0.000000
+#>      [,1]     [,2]     [,3]     [,4]     [,5]    
+#> [1,] "0"      "banana" "banana" "banana" "banana"
+#> [2,] "orange" "0"      "banana" "banana" "banana"
+#> [3,] "orange" "orange" "0"      "banana" "banana"
+#> [4,] "orange" "orange" "orange" "0"      "banana"
+#> [5,] "orange" "orange" "orange" "orange" "0"
 
-# identical to previous mat_merge but input the values into the opposite 
+# identical to previous mat_merge but put the values into the opposite 
 # quadrant of the matrix
 mat_merge(mat_a, 
           mat_b, 
@@ -384,12 +372,12 @@ mat_merge(mat_a,
           y_from = "upper", 
           x_to   = "upper", 
           y_to   = "lower")
-#>      [,1]        [,2]        [,3]       [,4]        [,5]
-#> [1,]    0 0.000816983 0.004544428 0.02245214 0.012145315
-#> [2,]    1 0.000000000 0.001621317 0.11501519 0.064622815
-#> [3,]    1 1.000000000 0.000000000 0.20321211 0.074773772
-#> [4,]    1 0.590781019 1.000000000 0.00000000 0.002880533
-#> [5,]    1 1.000000000 0.590781019 1.00000000 0.000000000
+#>      [,1]     [,2]     [,3]     [,4]     [,5]    
+#> [1,] "0"      "orange" "orange" "orange" "orange"
+#> [2,] "banana" "0"      "orange" "orange" "orange"
+#> [3,] "banana" "banana" "0"      "orange" "orange"
+#> [4,] "banana" "banana" "banana" "0"      "orange"
+#> [5,] "banana" "banana" "banana" "banana" "0"
 ```
 
 ### centre (center)
