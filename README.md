@@ -307,7 +307,7 @@ pasterisk(p_vals = num_example, thresholds = c(0.10, 0.5), sig_symbol = "*")
 
 `paste_paren` combines two numbers (e.g., 10.12 and 2.22) by wrapping
 the latter in parentheses (e.g., 10.12(2.22)). This function was made to
-streamline the creation of tables that include cells as formatted
+streamline the creation of tables that include cells formatted as
 “mean(sd)”.
 
 ``` r
@@ -319,7 +319,7 @@ paste_paren(10.12, 2.22)
 ### mat\_merge
 
 `mat_merge` combines two matrices by drawing values from either below or
-above the diagonal and placing them below and above the diagonal.
+above the diagonal and placing them either below and above the diagonal.
 
 ``` r
 # look at matrix a
@@ -424,6 +424,14 @@ delta_rsq(models = list(mod_a_example, mod_b_example, mod_c_example))
 #> 1 mod_a_example         NA
 #> 2 mod_b_example 0.07115238
 #> 3 mod_c_example 0.23864225
+
+# calculate delta adjusted r-squared
+delta_rsq(models = list(mod_a_example, mod_b_example, mod_c_example),
+          adjusted = TRUE)
+#>           model  delta_rsq
+#> 1 mod_a_example         NA
+#> 2 mod_b_example 0.01073412
+#> 3 mod_c_example 0.35286995
 
 # calculate delta AIC
 delta_aic(models = list(mod_a_example, mod_b_example, mod_c_example))
