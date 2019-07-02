@@ -2,9 +2,10 @@
 #'
 #' Calculates change to R-Squared across two or more models. 
 #' @param models a list of linear models. Differences will be calculated in the order models are listed. 
+#' @param adjusted if FALSE (the default), non-adjusted R-Squared values are used. If TRUE, adjusted R-Squared values are used. 
 #' @export
 
-delta_rsq <- function(models) {
+delta_rsq <- function(models, adjusted = FALSE) {
   
   # check argument length
   if (length(models) == 1) {
@@ -19,9 +20,18 @@ delta_rsq <- function(models) {
          "must be listed (using `list()`).")
   }
   
+  argument_check(adjusted, "adjusted", "logical", TRUE)
+  
+  # choose value to extract given adjusted argument
+  if (adjusted == FALSE) {
+    extract_val <- "r.squared"
+  } else {
+    extract_val <- "adj.r.squared"
+  }
+  
   # calculate r-squareds
   out <- vapply(models, 
-                FUN       = function(x) {summary(x)[["r.squared"]]},
+                FUN       = function(x) {summary(x)[[extract_val]]},
                 FUN.VALUE = double(1L))
 
   # calculate delta-rsquareds
