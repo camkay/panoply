@@ -38,7 +38,8 @@ delta_rsq <- function(models, adjusted = FALSE) {
   out <- diff(out)
   
   # format for output
-  model_names <- deparse(substitute(models))
+  model_names <- deparse(substitute(models),
+                         width.cutoff = 500L)
   model_names <- sub("list\\(", "", model_names)
   model_names <- sub("\\)$", "", model_names)
   model_names <- strsplit(model_names, ", ")
