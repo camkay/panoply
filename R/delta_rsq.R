@@ -43,9 +43,15 @@ delta_rsq <- function(models, adjusted = FALSE) {
   model_names <- sub("list\\(", "", model_names)
   model_names <- sub("\\)$", "", model_names)
   model_names <- strsplit(model_names, ", ")
-
-  out <- data.frame(model     = model_names[[1]],
-                    delta_rsq = c(NA_real_, out))
+  
+  # specify column name given adjusted argument
+  if (adjusted == FALSE) {
+    out <- data.frame(model     = model_names[[1]],
+                      delta_rsq = c(NA_real_, out))
+  } else {
+    out <- data.frame(model         = model_names[[1]],
+                      delta_rsq_adj = c(NA_real_, out))
+  }
   
   # return out
   out

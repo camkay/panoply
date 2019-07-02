@@ -375,9 +375,9 @@ test_that("check that delta_rsq is working properly", {
                                                            "mod_b_example", 
                                                            "mod_c_example"), 
                                                 class = "factor"), 
-                              delta_rsq = c(NA, 
-                                            0.0107341217334221, 
-                                            0.352869950079865)), 
+                             delta_rsq_adj = c(NA, 
+                                               0.0107341217334221, 
+                                               0.352869950079865)), 
                          class = "data.frame", row.names = c(NA, -3L)))
   expect_error(delta_rsq(list(mod_a_example, "mod_b_example", mod_c_example)),
                "All models must be of class lm")
