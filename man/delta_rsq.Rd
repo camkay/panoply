@@ -4,10 +4,12 @@
 \alias{delta_rsq}
 \title{delta_rsq}
 \usage{
-delta_rsq(models)
+delta_rsq(models, adjusted = FALSE)
 }
 \arguments{
 \item{models}{a list of linear models. Differences will be calculated in the order models are listed.}
+
+\item{adjusted}{if FALSE (the default), non-adjusted R-Squared values are used. If TRUE, adjusted R-Squared values are used.}
 }
 \description{
 Calculates change to R-Squared across two or more models.
