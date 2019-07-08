@@ -11,6 +11,13 @@ data_example <- data.frame(scale1_item1 = c(6, 1, 3, 4, 5, 9, 9),
                            scale2_item1 = c(9, 9, 9, 8, 4, 2, 2),
                            scale2_item2 = c(7, 8, 7, 9, 5, 1, 2))
 
+data_example_2 <- data.frame(group  = rep(c("A", "A", "B", "B", "A"), 2),
+                             mach   = rep(c(NA, 2, 300, 200, 3), 2),
+                             narc   = rep(c(2, 4, 500, 700, 10), 2),
+                             psyc   = rep(c(3, 4, 1800, 2000, 5), 2),
+                             des    = rep(c(100, 100, 2, 10, 1000), 2),
+                             mor    = rep(c(10, 10, 500, 1000, 20), 2))
+
 # create example mats
 mat_a <- psych::corr.test(data_example)$p
 
@@ -146,6 +153,153 @@ test_that("column_combine returns correct values", {
                                 message = FALSE), 
                  NA)
 })
+
+# test group_compare
+test_that("group_compare returns correct values", {
+  expect_equal(group_compare(data_example_2, 
+                             cols  = c("mach", "narc"), 
+                             split = "group"),
+               structure(list(overall_m = c(126.25, 243.2), 
+                              overall_sd = c(137.588153559818, 
+                                             314.250006629541), 
+                              overall_n = c(8, 10), 
+                              group1_m = c(2.5, 5.33333333333333), 
+                              group1_sd = c(0.577350269189626, 
+                                            3.72379734500505), 
+                              group1_n = c(4, 6), 
+                              group2_m = c(250, 600), 
+                              group2_sd = c(57.7350269189626, 
+                                            115.470053837925), 
+                              group2_n = c(4, 4), 
+                              t = c(-8.57322284703958, -10.2963600160198), 
+                              df = c(3.000599999994, 3.00416057565331), 
+                              p = c(0.00333298849657998, 
+                                    0.00194201346275585), 
+                              d = c(-6.06218401176513, -6.64627181143344)), 
+                         class = "data.frame", 
+                         row.names = c("mach", "narc")))
+  expect_equal(group_compare(data_example_2, 
+                             cols  = c("mach", "narc"), 
+                             split = "group",
+                             spround = TRUE),
+               structure(list(overall_m = c("126.25", "243.20"), 
+                              overall_sd = c("137.59", "314.25"), 
+                              overall_n = c("8.00", "10.00"), 
+                              group1_m = c("2.50", "5.33"), 
+                              group1_sd = c("0.58", "3.72"), 
+                              group1_n = c("4.00", "6.00"), 
+                              group2_m = c("250.00", "600.00"), 
+                              group2_sd = c("57.74", "115.47"), 
+                              group2_n = c("4.00", "4.00"), 
+                              t = c("-8.57", "-10.30"), 
+                              df = c("3", "3"), 
+                              p = c(".003", ".002"), 
+                              d = c("-6.06", "-6.65")),
+                         class = "data.frame", 
+                         row.names = c("mach", "narc")))
+  expect_equal(group_compare(data_example_2, 
+                             cols  = c("mach", "narc"), 
+                             split = "group",
+                             spround = TRUE,
+                             collapse = TRUE),
+               structure(list(overall_msd = c("126.25 (137.59)", 
+                                              "243.20 (314.25)"),
+                              overall_n = c("8.00", "10.00"),
+                              group1_msd = c("2.50 (0.58)", "5.33 (3.72)"), 
+                              group1_n = c("4.00", "6.00"), 
+                              group2_msd = c("250.00 (57.74)", 
+                                             "600.00 (115.47)"), 
+                              group2_n = c("4.00", "4.00"), 
+                              t = c("-8.57", "-10.30"), 
+                              df = c("3", "3"), 
+                              p = c(".003", ".002"), 
+                              d = c("-6.06", "-6.65")),
+                         class = "data.frame", 
+                         row.names = c("mach", "narc")))
+  expect_equal(group_compare(data_example_2, 
+                             cols = c("mach", "narc"), 
+                             split = "group")["mach", "df"],
+               unname(t.test(subset(data_example_2, 
+                                    group == "A")$mach,
+                             subset(data_example_2, 
+                                    group == "B")$mach)$parameter))
+  expect_equal(group_compare(data_example_2, 
+                             cols = c("mach", "narc"), 
+                             split = "group")["mach", "p"],
+               unname(t.test(subset(data_example_2, 
+                                    group == "A")$mach,
+                             subset(data_example_2, 
+                                    group == "B")$mach)$p.value))
+  expect_equal(group_compare(data_example_2, 
+                             cols = c("mach", "narc"), 
+                             split = "group")["mach", "t"],
+               unname(t.test(subset(data_example_2, 
+                                    group == "A")$mach,
+                             subset(data_example_2, 
+                                    group == "B")$mach)$statistic))
+  expect_equal(group_compare(data_example_2, 
+                             cols = c("mach", "narc"), 
+                             split = "group")["mach", "group1_m"],
+               unname(t.test(subset(data_example_2, 
+                                    group == "A")$mach,
+                             subset(data_example_2, 
+                                    group == "B")$mach)$estimate[1]))
+  expect_equal(group_compare(data_example_2, 
+                             cols = c("mach", "narc"), 
+                             split = "group")["mach", "group2_m"],
+               unname(t.test(subset(data_example_2, 
+                                    group == "A")$mach,
+                             subset(data_example_2, 
+                                    group == "B")$mach)$estimate[2]))
+  expect_equal(group_compare(data_example_2, 
+                             cols = c("mach", "narc", "psyc"), 
+                             split = "group",
+                             adjust = "holm")[, "p"],
+               p.adjust(group_compare(data_example_2, 
+                             cols = c("mach", "narc", "psyc"), 
+                             split = "group")[, "p"],
+                        method = "holm",
+                        n      = 3))
+  expect_equal(group_compare(data_example_2, 
+                             cols = c("mach", "narc", "psyc"), 
+                             split = "group",
+              adjust = "bonferroni")["mach", "p"],
+              p.adjust(unname(t.test(subset(data_example_2, 
+                          group == "A")$mach,
+                             subset(data_example_2, 
+                                    group == "B")$mach)$p.value), 
+         method = "bonferroni", n = 3))
+  expect_equal(group_compare(data_example_2, 
+                             cols = c("mach", "narc"), 
+                             split = "group",
+                             var.equal = TRUE)["mach", "df"],
+               unname(t.test(subset(data_example_2, 
+                                    group == "A")$mach,
+                             subset(data_example_2, 
+                                    group == "B")$mach,
+                             var.equal = TRUE)$parameter))
+  expect_equal(group_compare(data_example_2, 
+                             cols = c("mach", "narc"), 
+                             split = "group",
+                             var.equal = TRUE)["mach", "p"],
+               unname(t.test(subset(data_example_2, 
+                                    group == "A")$mach,
+                             subset(data_example_2, 
+                                    group == "B")$mach,
+                             var.equal = TRUE)$p.value))
+  expect_equal(group_compare(data_example_2, 
+                             cols = c("mach", "narc"), 
+                             split = "group",
+                             var.equal = TRUE)["mach", "t"],
+               unname(t.test(subset(data_example_2, 
+                                    group == "A")$mach,
+                             subset(data_example_2, 
+                                    group == "B")$mach,
+                             var.equal = TRUE)$statistic))
+})
+
+
+
 
 
 # test spround
