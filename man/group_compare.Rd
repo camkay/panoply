@@ -16,6 +16,8 @@ group_compare(data, cols, split, var.equal = FALSE, adjust = "none",
 
 \item{var.equal}{a logical value indicating whether equal variances should be assumed.}
 
+\item{adjust}{a string indicating what type of correction for multiple comparisons should be used. Defaults to "none."}
+
 \item{spround}{a logical value indicating whether values should be rounded for printing.}
 
 \item{collapse}{a logical value indicating whether means and SDs should be combined using paste_paren.}

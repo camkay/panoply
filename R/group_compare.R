@@ -6,6 +6,7 @@
 #' @param cols a vector of strings specifying what columns to compare.
 #' @param split a string indicating the column that includes the grouping variable.
 #' @param var.equal a logical value indicating whether equal variances should be assumed.
+#' @param adjust a string indicating what type of correction for multiple comparisons should be used. Defaults to "none."
 #' @param spround a logical value indicating whether values should be rounded for printing. 
 #' @param collapse a logical value indicating whether means and SDs should be combined using paste_paren. 
 #' @param na.rm a logical value indicating whether `NA` values should be removed prior to computation.
