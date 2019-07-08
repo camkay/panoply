@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-A panoply of miscellaneous functions: `column_find`, `column_alpha`, `column_combine`, `scuttle`, `spround`, `perble`, `lenique`, `pasterisk`, `paste_paren`, `centre`, `mat_merge`, `delta_rsq`, `delta_aic`, and `delta_bic`. `scuttle` was created in collaboration with [AshLynnMiller](https://github.com/AshLynnMiller). A large debt of gratitude is also owed to [datalorax](https://github.com/datalorax) and his functional programming course. His instruction, course materials, and feedback were instrumental in creating this package. 
+A panoply of miscellaneous functions: `column_find`, `column_alpha`, `column_combine`, `scuttle`, `spround`, `perble`, `lenique`, `pasterisk`, `paste_paren`, `centre`, `mat_merge`, `delta_rsq`, `delta_aic`, `delta_bic`, and `group_compare`. `scuttle` was created in collaboration with [AshLynnMiller](https://github.com/AshLynnMiller). A large debt of gratitude is also owed to [datalorax](https://github.com/datalorax) and his functional programming course. His instruction, course materials, and feedback were instrumental in creating this package. 
 
 ## Installation
 
@@ -47,6 +47,11 @@ data_example <- data.frame(scale1_item1 = c(6, 1, 3, 4, 5, 9, 9),
                            scale1_item3 = c(8, 1, 5, 4, 4, 9, 8),
                            scale2_item1 = c(9, 9, 9, 8, 4, 2, 2),
                            scale2_item2 = c(7, 8, 7, 9, 5, 1, 2))
+
+data_example_2 <- data.frame(group  = rep(c("A", "A", "B", "B", "A"), 2),
+                             mach   = rep(c(NA, 2, 300, 200, 3), 2),
+                             narc   = rep(c(2, 4, 500, 700, 10), 2),
+                             psyc   = rep(c(3, 4, 1800, 2000, 5), 2))
 
 # create example numeric vector
 num_example  <- c(5, 1, 0, .5, .1, .05, .01, .005, .001, .0005)
@@ -284,4 +289,24 @@ delta_aic(models = list(mod_a_example, mod_b_example, mod_c_example))
 
 # calculate delta BIC
 delta_bic(models = list(mod_a_example, mod_b_example, mod_c_example))
+```
+
+### group_compare
+
+`group_compare` creates a group comparison table. It (1) calculates an overall mean and sd, as well as a mean and sd for each group, (2) runs a two-samples t-test comparing both groups, and (3) calculates Cohen's d.
+
+```{r group_compare_example}
+# look at example data
+data_example_2
+
+# create group comparison table from example data
+group_compare(data_example_2, cols = c("mach", "narc"), split = "group")
+
+# create group comparison table, rounding and collapse
+group_compare(data_example_2, 
+              cols = c("mach", "narc"), 
+              split = "group",
+              spround = TRUE,
+              collapse = TRUE)
+
 ```

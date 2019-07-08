@@ -90,6 +90,11 @@ test_that("column_find returns the correct parts of the data frame", {
                              return  = "abcdefghijklmnopqrstuvwxyz", 
                              data    = data_example), 
                regexp = "abcdefghijklmnopqrstuvwxyz is not a recognized return")
+expect_warning(column_find(pattern = "scale1", 
+                             return  = "abcdefghijklmnopqrstuvwxyz", 
+                             data    = data_example,
+                           invert = TRUE), 
+               regexp = "abcdefghijklmnopqrstuvwxyz is not a recognized return")
 })
 
 # test column_alpha

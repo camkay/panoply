@@ -17,11 +17,12 @@ coverage](https://codecov.io/gh/camkay/panoply/branch/master/graph/badge.svg)](h
 A panoply of miscellaneous functions: `column_find`, `column_alpha`,
 `column_combine`, `scuttle`, `spround`, `perble`, `lenique`,
 `pasterisk`, `paste_paren`, `centre`, `mat_merge`, `delta_rsq`,
-`delta_aic`, and `delta_bic`. `scuttle` was created in collaboration
-with [AshLynnMiller](https://github.com/AshLynnMiller). A large debt of
-gratitude is also owed to [datalorax](https://github.com/datalorax) and
-his functional programming course. His instruction, course materials,
-and feedback were instrumental in creating this package.
+`delta_aic`, `delta_bic`, and `group_compare`. `scuttle` was created in
+collaboration with [AshLynnMiller](https://github.com/AshLynnMiller). A
+large debt of gratitude is also owed to
+[datalorax](https://github.com/datalorax) and his functional programming
+course. His instruction, course materials, and feedback were
+instrumental in creating this package.
 
 ## Installation
 
@@ -462,4 +463,48 @@ delta_bic(models = list(mod_a_example, mod_b_example, mod_c_example))
 #> 1 mod_a_example          NA
 #> 2 mod_b_example   0.1854326
 #> 3 mod_c_example -20.4237654
+```
+
+### group\_compare
+
+`group_compare` creates a group comparison table. It (1) calculates an
+overall mean and sd, as well as a mean and sd for each group, (2) runs a
+two-samples t-test comparing both groups, and (3) calculates Cohen’s d.
+
+``` r
+# look at example data
+data_example_2
+#>    group mach narc psyc
+#> 1      A   NA    2    3
+#> 2      A    2    4    4
+#> 3      B  300  500 1800
+#> 4      B  200  700 2000
+#> 5      A    3   10    5
+#> 6      A   NA    2    3
+#> 7      A    2    4    4
+#> 8      B  300  500 1800
+#> 9      B  200  700 2000
+#> 10     A    3   10    5
+
+# create group comparison table from example data
+group_compare(data_example_2, cols = c("mach", "narc"), split = "group")
+#>      overall_m overall_sd overall_n group1_m group1_sd group1_n group2_m
+#> mach    126.25   137.5882         8 2.500000 0.5773503        4      250
+#> narc    243.20   314.2500        10 5.333333 3.7237973        6      600
+#>      group2_sd group2_n          t       df           p         d
+#> mach  57.73503        4  -8.573223 3.000600 0.003332988 -6.062184
+#> narc 115.47005        4 -10.296360 3.004161 0.001942013 -6.646272
+
+# create group comparison table, rounding and collapse
+group_compare(data_example_2, 
+              cols = c("mach", "narc"), 
+              split = "group",
+              spround = TRUE,
+              collapse = TRUE)
+#>          overall_msd overall_n  group1_msd group1_n      group2_msd
+#> mach 126.25 (137.59)      8.00 2.50 (0.58)     4.00  250.00 (57.74)
+#> narc 243.20 (314.25)     10.00 5.33 (3.72)     6.00 600.00 (115.47)
+#>      group2_n      t df    p     d
+#> mach     4.00  -8.57  3 .003 -6.06
+#> narc     4.00 -10.30  3 .002 -6.65
 ```
