@@ -18,6 +18,11 @@ data_example_2 <- data.frame(group  = rep(c("A", "A", "B", "B", "A"), 2),
                              des    = rep(c(100, 100, 2, 10, 1000), 2),
                              mor    = rep(c(10, 10, 500, 1000, 20), 2))
 
+data_example_3 <- data.frame(group  = rep(c("A", "B", "C", "A", "B", "C"), 2),
+                             mach   = rep(c(3, 2, 300, 200, 3, 400), 2),
+                             narc   = rep(c(2, 4, 500, 700, 10, 100), 2),
+                             psyc   = rep(c(3, 4, 1800, 2000, 5, 200), 2))
+
 # create example mats
 mat_a <- psych::corr.test(data_example)$p
 
@@ -296,6 +301,10 @@ test_that("group_compare returns correct values", {
                              subset(data_example_2, 
                                     group == "B")$mach,
                              var.equal = TRUE)$statistic))
+  expect_error(group_compare(data_example_3, 
+                             cols = c("mach", "narc"), 
+                             split = "group"),
+               "group_compare is only able to compare two groups.")
 })
 
 

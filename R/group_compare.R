@@ -28,6 +28,11 @@ group_compare <- function(data,
   argument_check(collapse, "collapse", "logical", len_check = TRUE)
   argument_check(na.rm, "na.rm", "logical", len_check = TRUE)
   
+  # check length of unique values
+  if (lenique(data[, split]) != 2) {
+    stop("group_compare is only able to compare two groups.")
+  }
+  
   # split data using split string
   data_split <- split(data, data[, split])
 
