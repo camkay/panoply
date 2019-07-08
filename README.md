@@ -42,8 +42,10 @@ frame that match a `pattern` specified through a string. The default
 behaviour is to return a logical vector, indicating the columns that
 match the `pattern`. Using the `return` argument, users can request that
 a vector of column numbers (“numeric”) or column names (“character”) be
-returned. Users can also request that a data frame with only those
-columns be returned (“data.frame”). `column_find` can interpret [regular
+returned. `invert` works for all return types, identifying or extracting
+the columns of interest. Users can also request that a data frame with
+only those columns be returned (“data.frame”). `column_find` can
+interpret [regular
 expressions](https://en.wikipedia.org/wiki/Regular_expression).
 
 ``` r
@@ -72,6 +74,20 @@ column_find(pattern = "scale1", return = "character", data = data_example)
 
 # return a data frame of the columns that match the pattern
 column_find(pattern = "scale1", return = "data.frame", data = data_example)
+#>   scale1_item1 scale1_item2 scale1_item3
+#> 1            6            7            8
+#> 2            1            2            1
+#> 3            3            4            5
+#> 4            4            5            4
+#> 5            5            4            4
+#> 6            9            8            9
+#> 7            9            9            8
+
+# return a data frame of the columns that DO NOT match the pattern
+column_find(pattern = "scale1", 
+            return  = "data.frame", 
+            data    = data_example,
+            invert  = FALSE)
 #>   scale1_item1 scale1_item2 scale1_item3
 #> 1            6            7            8
 #> 2            1            2            1
@@ -428,10 +444,10 @@ delta_rsq(models = list(mod_a_example, mod_b_example, mod_c_example))
 # calculate delta adjusted r-squared
 delta_rsq(models = list(mod_a_example, mod_b_example, mod_c_example),
           adjusted = TRUE)
-#>           model  delta_rsq
-#> 1 mod_a_example         NA
-#> 2 mod_b_example 0.01073412
-#> 3 mod_c_example 0.35286995
+#>           model delta_rsq_adj
+#> 1 mod_a_example            NA
+#> 2 mod_b_example    0.01073412
+#> 3 mod_c_example    0.35286995
 
 # calculate delta AIC
 delta_aic(models = list(mod_a_example, mod_b_example, mod_c_example))
