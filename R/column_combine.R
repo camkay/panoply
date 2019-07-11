@@ -7,6 +7,7 @@
 #' @param verbose specifies whether all column names should be listed, regardless of length. 
 #' @param message if TRUE, messages are generated telling the user which columns were used to create the composite.
 #' @param na.rm a logical value indicating whether `NA` values should be removed prior to computation.
+#' @param invert if TRUE, combines columns that DO NOT match the pattern.
 #' @export
 #' @examples
 #' x <- data.frame(my_column_x  = 1:10,
@@ -25,7 +26,8 @@ column_combine <- function(pattern,
                            fun     = mean, 
                            verbose = FALSE, 
                            message = TRUE,
-                           na.rm   = TRUE) {
+                           na.rm   = TRUE,
+                           invert  = FALSE) {
   
   # check arguments
   argument_check(pattern, "pattern", "character", len_check = TRUE)
@@ -35,7 +37,7 @@ column_combine <- function(pattern,
   argument_check(na.rm, "na.rm", "logical", len_check = TRUE)
   
   # find columns that match the pattern
-  data_found <- column_find(pattern, data, return = "data.frame")
+  data_found <- column_find(pattern, data, return = "data.frame", invert = invert)
   
   # message user how the composites were created if message == TRUE
   if (message == TRUE) {

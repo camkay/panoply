@@ -5,7 +5,7 @@
 \title{column_combine}
 \usage{
 column_combine(pattern, data, fun = mean, verbose = FALSE,
-  message = TRUE, na.rm = TRUE)
+  message = TRUE, na.rm = TRUE, invert = FALSE)
 }
 \arguments{
 \item{pattern}{a character string that is used to find the columns of interest. It can be a regular expression.}
@@ -19,6 +19,8 @@ column_combine(pattern, data, fun = mean, verbose = FALSE,
 \item{message}{if TRUE, messages are generated telling the user which columns were used to create the composite.}
 
 \item{na.rm}{a logical value indicating whether `NA` values should be removed prior to computation.}
+
+\item{invert}{if TRUE, combines columns that DO NOT match the pattern.}
 }
 \description{
 Creates a composite column using only columns in a data frame that have names that match a pattern.
