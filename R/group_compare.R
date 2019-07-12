@@ -98,20 +98,20 @@ group_compare <- function(data,
   }
 
   # assign rownames to the data.frame
-  rownames(out) <- cols
+  out <- cbind(term = cols, out)
 
   # round the values if spround == TRUE
   if (spround == TRUE) {
     
     # round all values except the p-values
-    temp <- apply(column_find(pattern = "^p$|^df$",
+    temp <- apply(column_find(pattern = "^p$|^df$|^term$",
                               data    = out,
                               return  = "data.frame",
                               invert  = TRUE),
                   MARGIN = c(1, 2),
                   spround)
 
-    out[, column_find("^p$|^df$", out,"logical", TRUE)] <- temp
+    out[, column_find("^p$|^df$|^term$", out, "logical", TRUE)] <- temp
     
     # round the p_values and d_values and replace .000 with <.001
     out$p  <- spround(out$p, 3, FALSE)
@@ -127,7 +127,8 @@ group_compare <- function(data,
     out$group2_msd  <- paste_paren(out$group2_m,  out$group2_sd)
     
     # rearrange output
-    out <- out[ , c("overall_msd",
+    out <- out[ , c("term",
+                    "overall_msd",
                     "overall_n",
                     "group1_msd",
                     "group1_n",
