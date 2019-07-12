@@ -4,8 +4,9 @@
 \alias{group_compare}
 \title{group_compare}
 \usage{
-group_compare(data, cols, split, var.equal = FALSE, adjust = "none",
-  spround = FALSE, collapse = FALSE, na.rm = TRUE)
+group_compare(data, cols, split, var.equal = FALSE, adjust.p = "none",
+  adjust.d = FALSE, spround = FALSE, collapse = FALSE,
+  na.rm = TRUE)
 }
 \arguments{
 \item{data}{a data frame.}
@@ -16,7 +17,9 @@ group_compare(data, cols, split, var.equal = FALSE, adjust = "none",
 
 \item{var.equal}{a logical value indicating whether equal variances should be assumed.}
 
-\item{adjust}{a string indicating what type of correction for multiple comparisons should be used. Defaults to "none."}
+\item{adjust.p}{a string indicating what type of correction for multiple comparisons should be used. Defaults to "none."}
+
+\item{adjust.d}{if TRUE, adjusts for a small sample and returns Hedges' g intead of Cohen's D.}
 
 \item{spround}{a logical value indicating whether values should be rounded for printing.}
 

@@ -6,7 +6,8 @@
 #' @param cols a vector of strings specifying what columns to compare.
 #' @param split a string indicating the column that includes the grouping variable.
 #' @param var.equal a logical value indicating whether equal variances should be assumed.
-#' @param adjust a string indicating what type of correction for multiple comparisons should be used. Defaults to "none."
+#' @param adjust.p a string indicating what type of correction for multiple comparisons should be used. Defaults to "none."
+#' @param adjust.d if TRUE, adjusts for a small sample and returns Hedges' g intead of Cohen's D. 
 #' @param spround a logical value indicating whether values should be rounded for printing. 
 #' @param collapse a logical value indicating whether means and SDs should be combined using paste_paren. 
 #' @param na.rm a logical value indicating whether `NA` values should be removed prior to computation.
@@ -17,7 +18,8 @@ group_compare <- function(data,
                           cols,
                           split, 
                           var.equal = FALSE,
-                          adjust    = "none",
+                          adjust.p  = "none",
+                          adjust.d  = FALSE, 
                           spround   = FALSE,
                           collapse  = FALSE,
                           na.rm     = TRUE) {
@@ -69,7 +71,10 @@ group_compare <- function(data,
     }
     p_val     <- 2 * pt(q = abs(t_val), df = df, lower = FALSE)
     d_val     <- t_val * sqrt((1 / group1_n) + (1 / group2_n))
-  
+    if (adjust.d == TRUE) {
+      d_val <- d_val * (1 - (3 / (4 * (overall_n) - 9)))
+    }
+    
     # create data.frame to return
     list(overall_m  = overall_mean, 
          overall_sd = overall_sd, 
@@ -93,8 +98,8 @@ group_compare <- function(data,
   out <- data.frame(out)
   
   # adjust the p values
-  if  (adjust != "none") {
-    out$p <- p.adjust(out$p, method = adjust)
+  if  (adjust.p != "none") {
+    out$p <- p.adjust(out$p, method = adjust.p)
   }
 
   # assign rownames to the data.frame
@@ -140,7 +145,7 @@ group_compare <- function(data,
                     "d")]
     
   }
-
+  
   # return output
   out
 }
