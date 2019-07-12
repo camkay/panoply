@@ -345,6 +345,8 @@ test_that("spround returns correct values", {
 test_that("pasterisk returns correct values", {
   expect_equal(pasterisk(num_example), 
                c("", "***", "", "", "", "*", "**", "**", "***"))
+ expect_equal(pasterisk(num_example, pad = TRUE), 
+               c("   ", "***", "   ", "   ", "   ", "*  ", "** ", "** ", "***"))
   expect_equal(pasterisk(num_example, sig_symbol = "+"), 
                c("", "+++", "", "", "", "+", "++", "++", "+++"))
   expect_equal(pasterisk(num_example, 
