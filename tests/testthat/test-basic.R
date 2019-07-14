@@ -355,6 +355,29 @@ test_that("pasterisk returns correct values", {
                c("", "++", "+", "+", "+", "++", "++", "++", "++"))
 })
 
+# test text_format
+test_that("text_format returns correct values", {
+  expect_equal(text_format("hello", format = "italic", latex = TRUE),
+               "\\textit{hello}")
+  expect_equal(text_format("hello", format = "bold", latex = TRUE),
+               "\\textbf{hello}")
+  expect_equal(italic_tex("hello"),
+               "\\textit{hello}")
+  expect_equal(bold_tex("hello"),
+               "\\textbf{hello}")
+  expect_equal(text_format("hello", format = "italic"),
+               "*hello*")
+  expect_equal(text_format("hello", format = "bold"),
+               "**hello**")
+  expect_equal(italic("hello"),
+               "*hello*")
+  expect_equal(bold("hello"),
+               "**hello**")
+  expect_warning(text_format("hello", format = "akfeknfajkn", latex = TRUE),
+                 "format must be \"italic\" or \"bold\". \"akfeknfajkn\" was")
+
+})
+
 # test scuttle
 test_that("scuttle returns correct values", {
   expect_equal(scuttle(num_example, split = "quantile"),
