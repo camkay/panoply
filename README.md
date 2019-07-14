@@ -17,12 +17,12 @@ coverage](https://codecov.io/gh/camkay/panoply/branch/master/graph/badge.svg)](h
 A panoply of miscellaneous functions: `column_find`, `column_alpha`,
 `column_combine`, `scuttle`, `spround`, `perble`, `lenique`,
 `pasterisk`, `paste_paren`, `centre`, `mat_merge`, `delta_rsq`,
-`delta_aic`, `delta_bic`, and `group_compare`. `scuttle` was created in
-collaboration with [AshLynnMiller](https://github.com/AshLynnMiller). A
-large debt of gratitude is also owed to
-[datalorax](https://github.com/datalorax) and his functional programming
-course. His instruction, course materials, and feedback were
-instrumental in creating this package.
+`delta_aic`, `delta_bic`, `group_compare`, and `text_format`. `scuttle`
+was created in collaboration with
+[AshLynnMiller](https://github.com/AshLynnMiller). A large debt of
+gratitude is also owed to [datalorax](https://github.com/datalorax) and
+his functional programming course. His instruction, course materials,
+and feedback were instrumental in creating this package.
 
 ## Installation
 
@@ -488,23 +488,69 @@ data_example_2
 
 # create group comparison table from example data
 group_compare(data_example_2, cols = c("mach", "narc"), split = "group")
-#>      overall_m overall_sd overall_n group1_m group1_sd group1_n group2_m
-#> mach    126.25   137.5882         8 2.500000 0.5773503        4      250
-#> narc    243.20   314.2500        10 5.333333 3.7237973        6      600
-#>      group2_sd group2_n          t       df           p         d
-#> mach  57.73503        4  -8.573223 3.000600 0.003332988 -6.062184
-#> narc 115.47005        4 -10.296360 3.004161 0.001942013 -6.646272
+#>   term overall_m overall_sd overall_n group1_m group1_sd group1_n group2_m
+#> 1 mach    126.25   137.5882         8 2.500000 0.5773503        4      250
+#> 2 narc    243.20   314.2500        10 5.333333 3.7237973        6      600
+#>   group2_sd group2_n          t       df           p         d
+#> 1  57.73503        4  -8.573223 3.000600 0.003332988 -6.062184
+#> 2 115.47005        4 -10.296360 3.004161 0.001942013 -6.646272
 
-# create group comparison table, rounding and collapse
+# create group comparison table, rounding and collapsing
 group_compare(data_example_2, 
               cols = c("mach", "narc"), 
               split = "group",
               spround = TRUE,
               collapse = TRUE)
-#>          overall_msd overall_n  group1_msd group1_n      group2_msd
-#> mach 126.25 (137.59)      8.00 2.50 (0.58)     4.00  250.00 (57.74)
-#> narc 243.20 (314.25)     10.00 5.33 (3.72)     6.00 600.00 (115.47)
-#>      group2_n      t df    p     d
-#> mach     4.00  -8.57  3 .003 -6.06
-#> narc     4.00 -10.30  3 .002 -6.65
+#>   term     overall_msd overall_n  group1_msd group1_n      group2_msd
+#> 1 mach 126.25 (137.59)      8.00 2.50 (0.58)     4.00  250.00 (57.74)
+#> 2 narc 243.20 (314.25)     10.00 5.33 (3.72)     6.00 600.00 (115.47)
+#>   group2_n      t df    p     d
+#> 1     4.00  -8.57  3 .003 -6.06
+#> 2     4.00 -10.30  3 .002 -6.65
+```
+
+### text\_format
+
+`text_format` formats strings as bold or italicized using markdown or
+LaTeX syntax. `bold(x)` is a shortcut for `text_format(x, format =
+"bold", latex = FALSE)` and `italic(x)` is a shortcut for
+`text_format(x, format = "italic", latex = FALSE)`. `bold_tex(x)` is a
+shortcut for `text_format(x, format = "bold", latex = TRUE)` and
+`italic_tex(x)` is a shortcut for `text_format(x, format = "italic",
+latex = TRUE)`.
+
+``` r
+# look at example strings
+char_example
+#> [1] "cat"     "cat"     "dog"     "cat"     "dog"     "giraffe"
+
+# italicize strings using markdown formatting
+text_format(char_example, format = "italic", latex = FALSE) #or 
+#> [1] "*cat*"     "*cat*"     "*dog*"     "*cat*"     "*dog*"     "*giraffe*"
+italic(char_example)
+#> [1] "*cat*"     "*cat*"     "*dog*"     "*cat*"     "*dog*"     "*giraffe*"
+
+# italicize strings using latex formatting
+text_format(char_example, format = "italic", latex = TRUE) #or 
+#> [1] "\\textit{cat}"     "\\textit{cat}"     "\\textit{dog}"    
+#> [4] "\\textit{cat}"     "\\textit{dog}"     "\\textit{giraffe}"
+italic_tex(char_example)
+#> [1] "\\textit{cat}"     "\\textit{cat}"     "\\textit{dog}"    
+#> [4] "\\textit{cat}"     "\\textit{dog}"     "\\textit{giraffe}"
+
+# bold strings using markdown formatting
+text_format(char_example, format = "bold", latex = FALSE) #or 
+#> [1] "**cat**"     "**cat**"     "**dog**"     "**cat**"     "**dog**"    
+#> [6] "**giraffe**"
+bold(char_example)
+#> [1] "**cat**"     "**cat**"     "**dog**"     "**cat**"     "**dog**"    
+#> [6] "**giraffe**"
+
+# bold strings using latex formatting
+text_format(char_example, format = "bold", latex = TRUE) #or 
+#> [1] "\\textbf{cat}"     "\\textbf{cat}"     "\\textbf{dog}"    
+#> [4] "\\textbf{cat}"     "\\textbf{dog}"     "\\textbf{giraffe}"
+bold_tex(char_example)
+#> [1] "\\textbf{cat}"     "\\textbf{cat}"     "\\textbf{dog}"    
+#> [4] "\\textbf{cat}"     "\\textbf{dog}"     "\\textbf{giraffe}"
 ```

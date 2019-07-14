@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-A panoply of miscellaneous functions: `column_find`, `column_alpha`, `column_combine`, `scuttle`, `spround`, `perble`, `lenique`, `pasterisk`, `paste_paren`, `centre`, `mat_merge`, `delta_rsq`, `delta_aic`, `delta_bic`, and `group_compare`. `scuttle` was created in collaboration with [AshLynnMiller](https://github.com/AshLynnMiller). A large debt of gratitude is also owed to [datalorax](https://github.com/datalorax) and his functional programming course. His instruction, course materials, and feedback were instrumental in creating this package. 
+A panoply of miscellaneous functions: `column_find`, `column_alpha`, `column_combine`, `scuttle`, `spround`, `perble`, `lenique`, `pasterisk`, `paste_paren`, `centre`, `mat_merge`, `delta_rsq`, `delta_aic`, `delta_bic`, `group_compare`, and `text_format`. `scuttle` was created in collaboration with [AshLynnMiller](https://github.com/AshLynnMiller). A large debt of gratitude is also owed to [datalorax](https://github.com/datalorax) and his functional programming course. His instruction, course materials, and feedback were instrumental in creating this package. 
 
 ## Installation
 
@@ -302,11 +302,35 @@ data_example_2
 # create group comparison table from example data
 group_compare(data_example_2, cols = c("mach", "narc"), split = "group")
 
-# create group comparison table, rounding and collapse
+# create group comparison table, rounding and collapsing
 group_compare(data_example_2, 
               cols = c("mach", "narc"), 
               split = "group",
               spround = TRUE,
               collapse = TRUE)
+```
 
+### text_format
+
+`text_format` formats strings as bold or italicized using markdown or LaTeX syntax. `bold(x)` is a shortcut for `text_format(x, format = "bold", latex = FALSE)` and `italic(x)` is a shortcut for `text_format(x, format = "italic", latex = FALSE)`. `bold_tex(x)` is a shortcut for `text_format(x, format = "bold", latex = TRUE)` and `italic_tex(x)` is a shortcut for `text_format(x, format = "italic", latex = TRUE)`. 
+
+```{r text_format_example}
+# look at example strings
+char_example
+
+# italicize strings using markdown formatting
+text_format(char_example, format = "italic", latex = FALSE) #or 
+italic(char_example)
+
+# italicize strings using latex formatting
+text_format(char_example, format = "italic", latex = TRUE) #or 
+italic_tex(char_example)
+
+# bold strings using markdown formatting
+text_format(char_example, format = "bold", latex = FALSE) #or 
+bold(char_example)
+
+# bold strings using latex formatting
+text_format(char_example, format = "bold", latex = TRUE) #or 
+bold_tex(char_example)
 ```
