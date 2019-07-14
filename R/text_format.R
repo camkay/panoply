@@ -31,19 +31,3 @@ text_format <- function(x, format = "italic", latex = FALSE) {
            "bold"   = paste0("**", x, "**"))
   }
 }
-
-italic <- function(x) {
-  text_format(x, format = "italic", latex = FALSE)
-}
-
-bold <- function(x) {
-  text_format(x, format = "bold", latex = FALSE)
-}
-
-italic_tex <- function(x) {
-  text_format(x, format = "italic", latex = TRUE)
-}
-
-bold_tex <- function(x) {
-  text_format(x, format = "bold", latex = TRUE)
-}
