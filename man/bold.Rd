@@ -8,10 +8,6 @@ bold(x)
 }
 \arguments{
 \item{x}{a character scalar or vector to be formatted.}
-
-\item{format}{a string specifying whether the text should be boled or italicized.}
-
-\item{latex}{if TRUE, text is formatted using LaTeX formatting.}
 }
 \description{
 A function for easily formatting strings as bold or italicized using markdown or LaTeX syntax. `bold(x)` is a shortcut for `text_format(x, format = "bold", latex = FALSE)` and `italic(x)` is a shortcut for `text_format(x, format = "italic", latex = FALSE)`. `bold_tex(x)` is a shortcut for `text_format(x, format = "bold", latex = TRUE)` and `italic_tex(x)` is a shortcut for `text_format(x, format = "italic", latex = TRUE)`.
