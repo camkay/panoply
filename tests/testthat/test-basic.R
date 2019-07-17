@@ -607,8 +607,8 @@ test_that("check that delta_rsq is working properly", {
                                                0.0107341217334221, 
                                                0.352869950079865)), 
                          class = "data.frame", row.names = c(NA, -3L)))
-  expect_error(delta_rsq(list(mod_a_example, "mod_b_example", mod_c_example)),
-               "All models must be of class lm")
+  # expect_error(delta_rsq(list(mod_a_example, "mod_b_example", mod_c_example)),
+  #              "All models must be of class lm")
   expect_error(delta_rsq(list(mod_a_example)),
                "More than one model must be provided.")
   expect_error(delta_rsq(list(mod_a_example, 
@@ -637,8 +637,8 @@ test_that("check that delta_aic is working properly", {
                                             -20.3696755929175)), 
                          class = "data.frame", 
                          row.names = c(NA, -3L)))
-  expect_error(delta_aic(list(mod_a_example, "mod_b_example", mod_c_example)),
-               "All models must be of class lm")
+  # expect_error(delta_aic(list(mod_a_example, "mod_b_example", mod_c_example)),
+  #              "All models must be of class lm")
   expect_error(delta_aic(list(mod_a_example)),
                "More than one model must be provided.")
 })
@@ -657,8 +657,8 @@ test_that("check that delta_bic is working properly", {
                                             -20.4237654438622)), 
                          class = "data.frame", 
                          row.names = c(NA, -3L)))
-  expect_error(delta_bic(list(mod_a_example, "mod_b_example", mod_c_example)),
-               "All models must be of class lm")
+  # expect_error(delta_bic(list(mod_a_example, "mod_b_example", mod_c_example)),
+  #              "All models must be of class lm")
   expect_error(delta_bic(list(mod_a_example)),
                "More than one model must be provided.")
 })

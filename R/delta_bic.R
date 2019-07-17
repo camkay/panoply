@@ -12,12 +12,12 @@ delta_bic <- function(models) {
   }
   
   # check arguments
-  if (any(!vapply(models,
-                  FUN       = is.list,
-                  FUN.VALUE = logical(1L)))) {
-    stop("All models must be of class lm and ",
-         "must be listed (using `list()`).")
-  }
+  # if (any(!vapply(models,
+  #                 FUN       = is.list,
+  #                 FUN.VALUE = logical(1L)))) {
+  #   stop("All models must be of class lm and ",
+  #        "must be listed (using `list()`).")
+  # }
   
   # calculate r-squareds
   out <- vapply(models, 

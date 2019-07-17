@@ -12,13 +12,13 @@ delta_rsq <- function(models, adjusted = FALSE) {
     stop("More than one model must be provided.")
   }
   
-  # check arguments
-  if (any(!vapply(models,
-                  FUN       = is.list,
-                  FUN.VALUE = logical(1L)))) {
-    stop("All models must be of class lm and ",
-         "must be listed (using `list()`).")
-  }
+  # # check arguments
+  # if (any(!vapply(models,
+  #                 FUN       = is.list,
+  #                 FUN.VALUE = logical(1L)))) {
+  #   stop("All models must be of class lm and ",
+  #        "must be listed (using `list()`).")
+  # }
   
   argument_check(adjusted, "adjusted", "logical", TRUE)
   
