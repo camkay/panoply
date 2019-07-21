@@ -1,25 +1,14 @@
 #' delta_rsq
 #'
 #' Calculates change to R-Squared across two or more models. 
-#' @param models a list of linear models. Differences will be calculated in the order models are listed. 
+#' @param models a list of two or more linear models. Differences will be calculated in the order models are listed. 
 #' @param adjusted if FALSE (the default), non-adjusted R-Squared values are used. If TRUE, adjusted R-Squared values are used. 
 #' @export
 
 delta_rsq <- function(models, adjusted = FALSE) {
   
   # check argument length
-  if (length(models) == 1) {
-    stop("More than one model must be provided.")
-  }
-  
-  # # check arguments
-  # if (any(!vapply(models,
-  #                 FUN       = is.list,
-  #                 FUN.VALUE = logical(1L)))) {
-  #   stop("All models must be of class lm and ",
-  #        "must be listed (using `list()`).")
-  # }
-  
+  argument_check(models, "models", "list", TRUE, c(2, Inf))
   argument_check(adjusted, "adjusted", "logical", TRUE)
   
   # choose value to extract given adjusted argument

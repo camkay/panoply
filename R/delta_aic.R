@@ -1,25 +1,15 @@
 #' delta_aic
 #'
 #' Calculates changes to AIC across two or more models. 
-#' @param models a list of linear models. Differences will be calculated in the order models are listed. 
+#' @param models a list of two or more linear models. Differences will be calculated in the order models are listed. 
 #' @export
 
 delta_aic <- function(models) {
   
   # check argument length
-  if (length(models) == 1) {
-    stop("More than one model must be provided.")
-  }
+  argument_check(models, "models", "list", TRUE, c(2, Inf))
   
-  # # check arguments
-  # if (any(!vapply(models,
-  #                 FUN       = is.list,
-  #                 FUN.VALUE = logical(1L)))) {
-  #   stop("All models must be of class lm and ",
-  #        "must be listed (using `list()`).")
-  # }
-  
-  # calculate r-squareds
+  # calculate aics
   out <- vapply(models, 
                 FUN       = function(model) {AIC(model)},
                 FUN.VALUE = double(1L))

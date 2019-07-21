@@ -7,7 +7,7 @@
 delta_bic(models)
 }
 \arguments{
-\item{models}{a list of linear models. Differences will be calculated in the order models are listed.}
+\item{models}{a list of two or more linear models. Differences will be calculated in the order models are listed.}
 }
 \description{
 Calculates changes to BIC across two or more models.
