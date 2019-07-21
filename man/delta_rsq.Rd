@@ -7,7 +7,7 @@
 delta_rsq(models, adjusted = FALSE)
 }
 \arguments{
-\item{models}{a list of linear models. Differences will be calculated in the order models are listed.}
+\item{models}{a list of two or more linear models. Differences will be calculated in the order models are listed.}
 
 \item{adjusted}{if FALSE (the default), non-adjusted R-Squared values are used. If TRUE, adjusted R-Squared values are used.}
 }

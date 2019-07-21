@@ -580,6 +580,21 @@ test_that("check that center is producing the correct results", {
   
 })
 
+# test build_models
+test_that("check that build_models is producing the correct results", {
+  expect_equal(build_models("mpg", list("1", "hp", c("vs", "am"))),
+               c("mpg ~ 1", "mpg ~ 1 + hp", "mpg ~ 1 + hp + vs + am"))
+  expect_equal(build_models("mpg", list("1", "hp", "am")),
+               c("mpg ~ 1", "mpg ~ 1 + hp", "mpg ~ 1 + hp + am"))
+  expect_equal(build_models("mpg", list("1", "hp", 
+                                        c("vs", "am"), 
+                                        c("hp * vs", "hp * am"))),
+               c("mpg ~ 1", 
+                 "mpg ~ 1 + hp", 
+                 "mpg ~ 1 + hp + vs + am", 
+                 "mpg ~ 1 + hp + vs + am + hp * vs + hp * am"))
+})
+
 # test delta_rsq, delta_aic, and delta_bic
 test_that("check that delta_rsq is working properly", {
   expect_equal(delta_rsq(list(mod_a_example, 

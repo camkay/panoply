@@ -2,6 +2,7 @@
 
 export(bold)
 export(bold_tex)
+export(build_models)
 export(center)
 export(centre)
 export(column_alpha)
