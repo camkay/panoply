@@ -7,15 +7,17 @@
 #' @param y_from if "lower" values are drawn from below the diagonal of y_mat. If "upper" values are drawn from above the diagonal of y_mat.
 #' @param x_to if "lower" values from x_mat are placed below the diagonal. If "upper" values from x_mat are placed above the diagonal.
 #' @param y_to if "lower" values from y_mat are placed below the diagonal. If "upper" values from y_mat are placed above the diagonal.
+#' @param diagonal the value used to fill the diagonal. Defaults to 0.
 #' @export
 
 
 mat_merge <- function(x_mat, 
                       y_mat, 
-                      x_from = "lower",
-                      y_from = "lower",
-                      x_to   = "lower",
-                      y_to   = "upper") {
+                      x_from   = "lower",
+                      y_from   = "lower",
+                      x_to     = "lower",
+                      y_to     = "upper",
+                      diagonal = 0) {
   
   # check arguments for type
   argument_check(x_mat, "x_mat", "matrix")
@@ -44,7 +46,8 @@ mat_merge <- function(x_mat,
   }
   
   # initialize new matrix
-  out_mat <- matrix(rep(0, nrow(x_mat) * ncol(x_mat)), nrow = nrow(x_mat))
+  out_mat <- matrix(rep(diagonal, nrow(x_mat) * ncol(x_mat)), 
+                    nrow = nrow(x_mat))
   
   # duplicate matrices
   x_mat_2 <- x_mat

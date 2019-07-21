@@ -17,8 +17,9 @@ coverage](https://codecov.io/gh/camkay/panoply/branch/master/graph/badge.svg)](h
 A panoply of miscellaneous functions: `column_find`, `column_alpha`,
 `column_combine`, `scuttle`, `spround`, `perble`, `lenique`,
 `pasterisk`, `paste_paren`, `centre`, `mat_merge`, `delta_rsq`,
-`delta_aic`, `delta_bic`, `group_compare`, and `text_format`. `scuttle`
-was created in collaboration with
+`delta_aic`, `delta_bic`, `group_compare`, `text_format` (including
+`bold`, `bold_tex`, `italic`, and `italic_tex`), and `build_models`.
+`scuttle` was created in collaboration with
 [AshLynnMiller](https://github.com/AshLynnMiller). A large debt of
 gratitude is also owed to [datalorax](https://github.com/datalorax) and
 his functional programming course. His instruction, course materials,
@@ -553,4 +554,36 @@ text_format(char_example, format = "bold", latex = TRUE) #or
 bold_tex(char_example)
 #> [1] "\\textbf{cat}"     "\\textbf{cat}"     "\\textbf{dog}"    
 #> [4] "\\textbf{cat}"     "\\textbf{dog}"     "\\textbf{giraffe}"
+```
+
+### build\_models
+
+`build_models` takes an outcome string (i.e., `outcome`) and a list of
+predictor strings (i.e., `predictors`) and builds a set of models.
+
+``` r
+# create a set of linear models
+build_models(outcome = "y", predictors = list("1", "x1", "x2"))
+#> [1] "y ~ 1"           "y ~ 1 + x1"      "y ~ 1 + x1 + x2"
+
+# create a set of linear models with predictors added simultaneously
+build_models(outcome = "y", predictors = list("1", "x1", c("z1", "z2")))
+#> [1] "y ~ 1"                "y ~ 1 + x1"           "y ~ 1 + x1 + z1 + z2"
+
+# create a set of linear models with interactions
+build_models(outcome = "y", predictors = list("1", 
+                                              "x1", 
+                                              c("z1", "z2"),
+                                              c("x1 * z1", "x1 * z2")))
+#> [1] "y ~ 1"                                   
+#> [2] "y ~ 1 + x1"                              
+#> [3] "y ~ 1 + x1 + z1 + z2"                    
+#> [4] "y ~ 1 + x1 + z1 + z2 + x1 * z1 + x1 * z2"
+
+# create a set of linear mixed-effects models
+build_models(outcome = "y", predictors = list("1 + (1 |id)", 
+                                              "x1", 
+                                              "x2"))
+#> [1] "y ~ 1 + (1 |id)"           "y ~ 1 + (1 |id) + x1"     
+#> [3] "y ~ 1 + (1 |id) + x1 + x2"
 ```

@@ -5,7 +5,7 @@
 \title{mat_merge}
 \usage{
 mat_merge(x_mat, y_mat, x_from = "lower", y_from = "lower",
-  x_to = "lower", y_to = "upper")
+  x_to = "lower", y_to = "upper", diagonal = 0)
 }
 \arguments{
 \item{x_mat}{a matrix.}
@@ -19,6 +19,8 @@ mat_merge(x_mat, y_mat, x_from = "lower", y_from = "lower",
 \item{x_to}{if "lower" values from x_mat are placed below the diagonal. If "upper" values from x_mat are placed above the diagonal.}
 
 \item{y_to}{if "lower" values from y_mat are placed below the diagonal. If "upper" values from y_mat are placed above the diagonal.}
+
+\item{diagonal}{the value used to fill the diagonal. Defaults to 0.}
 }
 \description{
 Combines two matrices by drawing values from either below or above the diagonal and placing them below and above the diagonal.
