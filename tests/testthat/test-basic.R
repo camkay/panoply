@@ -691,4 +691,22 @@ test_that("check errors is producing errors", {
   expect_error(argument_check(12, "x", "data.frame"))
   expect_error(argument_check(12, "x", "character", len_check = TRUE))
   expect_error(argument_check(c(12, 10), "x", "numeric", len_check = TRUE))
+  expect_error(argument_check(c(12, 10), "x", "numeric", 
+                              len_check = TRUE, 
+                              len_req = c(1)),
+               "x must be of length 1. x is of length 2.")
+  expect_error(argument_check(c(12, 10), "x", "numeric", 
+                              len_check = TRUE, 
+                              len_req = c(1, 2)),
+               NA)
+  expect_error(argument_check(c(12, 10, 20), "x", "numeric", 
+                              len_check = TRUE, 
+                              len_req = c(1, 2)),
+               paste0("The length of x must be between 1 and 2 \\(inclusive\\)",
+                      "\\. x is of length 3\\."))
+  expect_error(argument_check(c(12), "x", "numeric", 
+                              len_check = TRUE, 
+                              len_req = c(2, 9)),
+               paste0("The length of x must be between 2 and 9 \\(inclusive\\)",
+                      "\\. x is of length 1\\."))
 })

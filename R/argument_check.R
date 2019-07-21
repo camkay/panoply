@@ -24,11 +24,17 @@ argument_check <- function(x,
   
   # check if x is of the correct length (if len_check is TRUE)
   if (len_check) {
-    if (length(x) != len_req) {
-      stop(name, " must be of length ", len_req, ". ",
-           name,      " is of length ",  length(x), ".")
+    if (length(len_req) == 1) {
+      if (length(x) != len_req) {
+        stop(name, " must be of length ", len_req, ". ",
+             name,      " is of length ",  length(x), ".")
+      }
+    } else if (length(len_req) == 2) {
+      if (length(x) < len_req[1] | length(x) > len_req[2]) {
+        stop("The length of ", name, " must be between ", 
+             len_req[1], " and ", len_req[2], " (inclusive). ",
+             name, " is of length ",  length(x), ".")
+      }
     }
-  }
+  }  
 }
-
-
