@@ -333,6 +333,14 @@ bold(char_example)
 # bold strings using latex formatting
 text_format(char_example, format = "bold", latex = TRUE) #or 
 bold_tex(char_example)
+
+# super- and subscript strings using markdown formatting
+text_format(char_example, format = "super", latex = FALSE)
+text_format(char_example, format = "sub", latex = FALSE)
+
+# super- and subscript strings using latex formatting
+text_format(char_example, format = "super", latex = TRUE)
+text_format(char_example, format = "sub", latex = TRUE)
 ```
 
 ### build_models

@@ -554,6 +554,22 @@ text_format(char_example, format = "bold", latex = TRUE) #or
 bold_tex(char_example)
 #> [1] "\\textbf{cat}"     "\\textbf{cat}"     "\\textbf{dog}"    
 #> [4] "\\textbf{cat}"     "\\textbf{dog}"     "\\textbf{giraffe}"
+
+# super- and subscript strings using markdown formatting
+text_format(char_example, format = "super", latex = FALSE)
+#> [1] "^cat^"     "^cat^"     "^dog^"     "^cat^"     "^dog^"     "^giraffe^"
+text_format(char_example, format = "sub", latex = FALSE)
+#> [1] "~cat~"     "~cat~"     "~dog~"     "~cat~"     "~dog~"     "~giraffe~"
+
+# super- and subscript strings using latex formatting
+text_format(char_example, format = "super", latex = TRUE)
+#> [1] "\\textsuperscript{cat}"     "\\textsuperscript{cat}"    
+#> [3] "\\textsuperscript{dog}"     "\\textsuperscript{cat}"    
+#> [5] "\\textsuperscript{dog}"     "\\textsuperscript{giraffe}"
+text_format(char_example, format = "sub", latex = TRUE)
+#> [1] "\\textsubscript{cat}"     "\\textsubscript{cat}"    
+#> [3] "\\textsubscript{dog}"     "\\textsubscript{cat}"    
+#> [5] "\\textsubscript{dog}"     "\\textsubscript{giraffe}"
 ```
 
 ### build\_models
