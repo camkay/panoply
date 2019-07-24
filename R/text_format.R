@@ -13,8 +13,11 @@ text_format <- function(x, format = "italic", latex = FALSE) {
   argument_check(format, "format", "character", len_check = TRUE)
   argument_check(latex, "latex", "logical", len_check = TRUE)
   
-  if (format != "italic" & format != "bold") {
-    warning("format must be \"italic\" or \"bold\". \"",
+  if (format != "italic" & 
+      format != "bold" & 
+      format != "super" & 
+      format != "sub"  ) {
+    warning("format must be \"italic\", \"bold\", \"super\", or \"sub\". \"",
             format,
             "\" was provided. \"italic\" used instead.")
     format <- "italic"
@@ -24,10 +27,14 @@ text_format <- function(x, format = "italic", latex = FALSE) {
   if (latex == TRUE) {
     switch(format,
            "italic" = paste0("\\textit{", x, "}"),
-           "bold"   = paste0("\\textbf{", x, "}"))
+           "bold"   = paste0("\\textbf{", x, "}"),
+           "super"  = paste0("\\textsuperscript{", x, "}"),
+           "sub"    = paste0("\\textsubscript{", x, "}"))
   } else {
         switch(format,
            "italic" = paste0("*", x, "*"),
-           "bold"   = paste0("**", x, "**"))
+           "bold"   = paste0("**", x, "**"),
+           "super"  = paste0("^", x, "^"),
+           "sub"    = paste0("~", x, "~"))
   }
 }

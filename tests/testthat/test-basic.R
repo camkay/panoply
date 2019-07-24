@@ -373,8 +373,16 @@ test_that("text_format returns correct values", {
                "*hello*")
   expect_equal(bold("hello"),
                "**hello**")
+  expect_equal(text_format("hello", format = "super", latex = TRUE),
+               "\\textsuperscript{hello}")
+  expect_equal(text_format("hello", format = "sub", latex = TRUE),
+               "\\textsubscript{hello}")
+  expect_equal(text_format("hello", format = "super", latex = FALSE),
+               "^hello^")
+  expect_equal(text_format("hello", format = "sub", latex = FALSE),
+               "~hello~")
   expect_warning(text_format("hello", format = "akfeknfajkn", latex = TRUE),
-                 "format must be \"italic\" or \"bold\". \"akfeknfajkn\" was")
+                 "format must be \"italic\", \"bold\"")
 
 })
 
