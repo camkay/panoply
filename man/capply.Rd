@@ -12,5 +12,5 @@ capply(.data, .f)
 \item{.f}{a function to be applied to every cell of the data frame.}
 }
 \description{
-A wrapper of apply for quickly applying a function to every cell of a data frame.
+A wrapper of apply that allows the user to quickly apply a function to every cell of a data frame.
 }

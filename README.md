@@ -15,7 +15,7 @@ coverage](https://codecov.io/gh/camkay/panoply/branch/master/graph/badge.svg)](h
 <!-- badges: end -->
 
 A panoply of miscellaneous functions: `column_find`, `column_alpha`,
-`column_combine`, `scuttle`, `spround`, `perble`, `lenique`,
+`column_combine`, `capply`, `scuttle`, `spround`, `perble`, `lenique`,
 `pasterisk`, `paste_paren`, `centre`, `mat_merge`, `delta_rsq`,
 `delta_aic`, `delta_bic`, `group_compare`, `text_format` (including
 `bold`, `bold_tex`, `italic`, and `italic_tex`), and `build_models`.
@@ -195,6 +195,35 @@ column_combine(pattern = "scale1", fun = mean, data = data_example)
 column_combine(pattern = "scale1", fun = sum, data = data_example)
 #> A composite column was calculated using 3 columns: scale1_item1, scale1_item2, scale1_item3.
 #> [1] 21  4 12 13 13 26 26
+```
+
+### capply
+
+`capply` is a wrapper of `apply` that allows the user to quickly apply a
+function to every cell of a data frame.
+
+``` r
+# look at example data
+data_example
+#>   scale1_item1 scale1_item2 scale1_item3 scale2_item1 scale2_item2
+#> 1            6            7            8            9            7
+#> 2            1            2            1            9            8
+#> 3            3            4            5            9            7
+#> 4            4            5            4            8            9
+#> 5            5            4            4            4            5
+#> 6            9            8            9            2            1
+#> 7            9            9            8            2            2
+
+# add 100 to every cell of data_example
+capply(data_example, function(x) x + 100)
+#>      scale1_item1 scale1_item2 scale1_item3 scale2_item1 scale2_item2
+#> [1,]          106          107          108          109          107
+#> [2,]          101          102          101          109          108
+#> [3,]          103          104          105          109          107
+#> [4,]          104          105          104          108          109
+#> [5,]          105          104          104          104          105
+#> [6,]          109          108          109          102          101
+#> [7,]          109          109          108          102          102
 ```
 
 ### scuttle

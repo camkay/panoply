@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-A panoply of miscellaneous functions: `column_find`, `column_alpha`, `column_combine`, `scuttle`, `spround`, `perble`, `lenique`, `pasterisk`, `paste_paren`, `centre`, `mat_merge`, `delta_rsq`, `delta_aic`, `delta_bic`, `group_compare`, `text_format` (including `bold`, `bold_tex`, `italic`, and `italic_tex`), and `build_models`. `scuttle` was created in collaboration with [AshLynnMiller](https://github.com/AshLynnMiller). A large debt of gratitude is also owed to [datalorax](https://github.com/datalorax) and his functional programming course. His instruction, course materials, and feedback were instrumental in creating this package. 
+A panoply of miscellaneous functions: `column_find`, `column_alpha`, `column_combine`, `capply`, `scuttle`, `spround`, `perble`, `lenique`, `pasterisk`, `paste_paren`, `centre`, `mat_merge`, `delta_rsq`, `delta_aic`, `delta_bic`, `group_compare`, `text_format` (including `bold`, `bold_tex`, `italic`, and `italic_tex`), and `build_models`. `scuttle` was created in collaboration with [AshLynnMiller](https://github.com/AshLynnMiller). A large debt of gratitude is also owed to [datalorax](https://github.com/datalorax) and his functional programming course. His instruction, course materials, and feedback were instrumental in creating this package. 
 
 ## Installation
 
@@ -134,6 +134,19 @@ column_combine(pattern = "scale1", fun = mean, data = data_example)
 
 # return a vector of rowwise sums for scale 1
 column_combine(pattern = "scale1", fun = sum, data = data_example)
+
+```
+
+### capply
+
+`capply` is a wrapper of `apply` that allows the user to quickly apply a function to every cell of a data frame.
+
+```{r capply_example}
+# look at example data
+data_example
+
+# add 100 to every cell of data_example
+capply(data_example, function(x) x + 100)
 
 ```
 
