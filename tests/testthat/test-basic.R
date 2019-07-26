@@ -124,6 +124,16 @@ test_that("column_alpha returns correct values", {
                  NA)
 })
 
+# test capply
+test_that("capply returns correct values", {
+  expect_equal(capply(data_example, 
+                      function(x) x + 2), 
+               apply(data_example, c(1, 2), function(x) x + 2))
+  expect_equal(capply(data_example, 
+                      sqrt), 
+               apply(data_example, c(1, 2), sqrt))
+})
+
 # test column_combine
 test_that("column_combine returns correct values", {
   expect_equal(column_combine(pattern = "scale1", 
