@@ -89,12 +89,16 @@ test_that("column_find returns the correct parts of the data frame", {
   expect_warning(column_find(pattern = "scale1", 
                              return  = "abcdefghijklmnopqrstuvwxyz", 
                              data    = data_example), 
-               regexp = "abcdefghijklmnopqrstuvwxyz is not a recognized return")
-expect_warning(column_find(pattern = "scale1", 
+               regexp = "\"abcdefghijklmnopqrstuvwxyz\" is not a recognized")
+  expect_warning(column_find(pattern = "scale1", 
+                               return  = "abcdefghijklmnopqrstuvwxyz", 
+                               data    = data_example,
+                             invert = TRUE), 
+                 regexp = "\"abcdefghijklmnopqrstuvwxyz\" is not a recognized")
+  expect_equal(suppressWarnings(column_find(pattern = "scale1", 
                              return  = "abcdefghijklmnopqrstuvwxyz", 
-                             data    = data_example,
-                           invert = TRUE), 
-               regexp = "abcdefghijklmnopqrstuvwxyz is not a recognized return")
+                             data    = data_example)), 
+               c(TRUE, TRUE, TRUE, FALSE, FALSE))
 })
 
 # test column_alpha
@@ -730,3 +734,18 @@ test_that("check errors is producing errors", {
                paste0("The length of x must be between 2 and 9 \\(inclusive\\)",
                       "\\. x is of length 1\\."))
 })
+
+# choice_check
+test_that("check column_choice is producing correct messages", {
+  expect_warning(choice_check("shark", "animal", char_example),
+                 "\"shark\" is not a recognized animal")
+  expect_warning(choice_check("shark", "animal", char_example),
+                 "\"cat\" used instead.")
+  expect_warning(choice_check("shark", "animal", char_example),
+                 "Other options: dog, cat, dog, giraffe.")
+  expect_equal(suppressWarnings(choice_check("shark", 
+                                             "animal", 
+                                             char_example)),
+                 "cat")
+})
+

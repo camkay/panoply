@@ -5,13 +5,15 @@
 #' @param thresholds a numeric scalar or atomic vector of number tresholds. Defaults to .05, .01, and .001.
 #' @param sig_symbol a character scalar to be used to indicate significance. Defaults to an asterisk (i.e., *).
 #' @param pad if TRUE, adds spaces to create fixed width output
+#' @param pad_symbol a character scalar to be used to pad. Defaults to a space (i.e., " ").
 #' @export
 
 
 pasterisk <- function(p_vals, 
                       thresholds = c(.05, .01, .001), 
                       sig_symbol = "*",
-                      pad      = FALSE) {
+                      pad        = FALSE,
+                      pad_symbol = " ") {
   # check arguments
   argument_check(p_vals, "p_vals", "numeric")
   argument_check(thresholds, "thresholds", "numeric")
@@ -28,8 +30,8 @@ pasterisk <- function(p_vals,
   sig_symbols <- sig_symbol
   
   # create space and padding symbol
-  space   <- " "
-  padding <- " "
+  space   <- pad_symbol
+  padding <- pad_symbol
 
   # loop through p-values and create asterisks column
   for (i in seq_along(thresholds)) {
@@ -46,6 +48,6 @@ pasterisk <- function(p_vals,
   # return out
   out
 }
-
+pasterisk(c(0.01, 0.002, 0.04, 0.06), pad = TRUE, pad_symbol = "\\\\enspace")
 
 

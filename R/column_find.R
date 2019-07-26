@@ -27,10 +27,14 @@ column_find <- function(pattern, data, return = "logical", invert = FALSE) {
   argument_check(data, "data", "data.frame")
   argument_check(return, "return", "character", len_check = TRUE)
   argument_check(invert, "invert", "logical", len_check = TRUE)
+  return <- choice_check(return, "return type", c("logical", 
+                                                  "numeric",
+                                                  "character",
+                                                  "data.frame"))
   
   # format x for output
   if (return == "logical") {
-    if(invert == FALSE) {
+    if (invert == FALSE) {
       out <- grepl(pattern, names(data))
     } else {
       out <- !grepl(pattern, names(data))
@@ -41,18 +45,7 @@ column_find <- function(pattern, data, return = "logical", invert = FALSE) {
     out <- grep(pattern, names(data), value = TRUE, invert = invert)
   } else if (return == "data.frame") {
     out <- data[, grep(pattern, names(data), invert = invert)]
-  } else {
-    warning(paste0(return, 
-                   " is not a recognized return type. ",
-                   "\"logical\" used instead. \n", 
-                   "Other return options: ",
-                   "\"numeric\", \"character\", and \"data.frame\"."))
-    if(invert == FALSE) {
-      out <- grepl(pattern, names(data))
-    } else {
-      out <- !grepl(pattern, names(data))
-    }
-  }
+  } 
   
   # return out
   out

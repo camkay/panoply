@@ -5,7 +5,7 @@
 \title{pasterisk}
 \usage{
 pasterisk(p_vals, thresholds = c(0.05, 0.01, 0.001), sig_symbol = "*",
-  pad = FALSE)
+  pad = FALSE, pad_symbol = " ")
 }
 \arguments{
 \item{p_vals}{a numeric scalar or atomic vector of p-values or effect sizes (or any other numeric vector).}
@@ -15,6 +15,8 @@ pasterisk(p_vals, thresholds = c(0.05, 0.01, 0.001), sig_symbol = "*",
 \item{sig_symbol}{a character scalar to be used to indicate significance. Defaults to an asterisk (i.e., *).}
 
 \item{pad}{if TRUE, adds spaces to create fixed width output}
+
+\item{pad_symbol}{a character scalar to be used to pad. Defaults to a space (i.e., " ").}
 }
 \description{
 Takes a scalar or atomic vector of p-values and returns a scalar or atomic vector of asterisks corresponding to different significance levels.
