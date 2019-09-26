@@ -397,6 +397,16 @@ test_that("text_format returns correct values", {
                "~hello~")
   expect_warning(text_format("hello", format = "akfeknfajkn", latex = TRUE),
                  "format must be \"italic\", \"bold\"")
+  expect_equal(text_format("hello", format = "super", latex = TRUE),
+               "\\textsuperscript{hello}")
+  expect_equal(subs_tex("hello"),
+               "\\textsubscript{hello}")
+  expect_equal(subs("hello"),
+               "~hello~")
+  expect_equal(supers_tex("hello"),
+               "\\textsuperscript{hello}")
+  expect_equal(supers("hello"),
+               "^hello^")
 
 })
 
