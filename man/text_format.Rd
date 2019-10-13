@@ -3,11 +3,32 @@
 \name{text_format}
 \alias{text_format}
 \alias{bold}
+\alias{bold_tex}
+\alias{italic}
+\alias{italic_tex}
+\alias{supers}
+\alias{supers_tex}
+\alias{subs}
+\alias{subs_tex}
 \title{text_format}
 \usage{
 text_format(x, format = "italic", latex = FALSE)
 
 bold(x)
+
+bold_tex(x)
+
+italic(x)
+
+italic_tex(x)
+
+supers(x)
+
+supers_tex(x)
+
+subs(x)
+
+subs_tex(x)
 }
 \arguments{
 \item{x}{a character scalar or vector to be formatted.}
