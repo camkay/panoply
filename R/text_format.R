@@ -38,3 +38,10 @@ text_format <- function(x, format = "italic", latex = FALSE) {
            "sub"    = paste0("~", x, "~"))
   }
 }
+
+#' @rdname bold if TRUE, text is formatted using LaTeX formatting. 
+#' @export
+
+bold <- function(x) {
+  text_format(x, format = "bold", latex = FALSE)
+}
