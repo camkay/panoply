@@ -39,7 +39,7 @@ text_format <- function(x, format = "italic", latex = FALSE) {
   }
 }
 
-#' @rdname bold if TRUE, text is formatted using LaTeX formatting. 
+#' @rdname text_format
 #' @export
 
 bold <- function(x) {

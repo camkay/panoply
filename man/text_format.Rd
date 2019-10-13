@@ -2,9 +2,12 @@
 % Please edit documentation in R/text_format.R
 \name{text_format}
 \alias{text_format}
+\alias{bold}
 \title{text_format}
 \usage{
 text_format(x, format = "italic", latex = FALSE)
+
+bold(x)
 }
 \arguments{
 \item{x}{a character scalar or vector to be formatted.}
