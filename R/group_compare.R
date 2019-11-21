@@ -9,6 +9,7 @@
 #' @param adjust.p a string indicating what type of correction for multiple comparisons should be used. Defaults to "none."
 #' @param adjust.d if TRUE, adjusts for a small sample and returns Hedges' g intead of Cohen's D. 
 #' @param spround a logical value indicating whether values should be rounded for printing. 
+#' @param spround.p a logical value indicating whether, if spround = TRUE, p-values should also be sprounded. Defaults to TRUE.
 #' @param collapse a logical value indicating whether means and SDs should be combined using paste_paren. 
 #' @param na.rm a logical value indicating whether `NA` values should be removed prior to computation.
 #' @export
@@ -21,6 +22,7 @@ group_compare <- function(data,
                           adjust.p  = "none",
                           adjust.d  = FALSE, 
                           spround   = FALSE,
+                          spround.p = TRUE,
                           collapse  = FALSE,
                           na.rm     = TRUE) {
   
@@ -119,9 +121,12 @@ group_compare <- function(data,
     out[, column_find("^p$|^df$|^term$", out, "logical", TRUE)] <- temp
     
     # round the p_values and d_values and replace .000 with <.001
-    out$p  <- spround(out$p, 3, FALSE)
     out$df <- spround(out$df, 0)
-    out[out$p == ".000", "p"] <- "<.001"
+    
+    if (spround.p == TRUE) {
+      out$p  <- spround(out$p, 3, FALSE)
+      out[out$p == ".000", "p"] <- "<.001"
+    }
   }
   
   # create msd columns if collapse == TRUE

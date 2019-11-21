@@ -5,8 +5,8 @@
 \title{group_compare}
 \usage{
 group_compare(data, cols, split, var.equal = FALSE, adjust.p = "none",
-  adjust.d = FALSE, spround = FALSE, collapse = FALSE,
-  na.rm = TRUE)
+  adjust.d = FALSE, spround = FALSE, spround.p = TRUE,
+  collapse = FALSE, na.rm = TRUE)
 }
 \arguments{
 \item{data}{a data frame.}
@@ -22,6 +22,8 @@ group_compare(data, cols, split, var.equal = FALSE, adjust.p = "none",
 \item{adjust.d}{if TRUE, adjusts for a small sample and returns Hedges' g intead of Cohen's D.}
 
 \item{spround}{a logical value indicating whether values should be rounded for printing.}
+
+\item{spround.p}{a logical value indicating whether, if spround = TRUE, p-values should also be sprounded. Defaults to TRUE.}
 
 \item{collapse}{a logical value indicating whether means and SDs should be combined using paste_paren.}
 
