@@ -4,8 +4,14 @@
 \alias{scuttle}
 \title{scuttle}
 \usage{
-scuttle(column, split = "quantile", labels = c("Low", "Mid", "High"),
-  greedy_extremes = TRUE, as.factor = TRUE, na.rm = TRUE)
+scuttle(
+  column,
+  split = "quantile",
+  labels = c("Low", "Mid", "High"),
+  greedy_extremes = TRUE,
+  as.factor = TRUE,
+  na.rm = TRUE
+)
 }
 \arguments{
 \item{column}{a continuous numeric vector.}

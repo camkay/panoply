@@ -4,8 +4,14 @@
 \alias{column_alpha}
 \title{column_alpha}
 \usage{
-column_alpha(pattern, data, full = FALSE, verbose = FALSE,
-  message = TRUE, na.rm = TRUE)
+column_alpha(
+  pattern,
+  data,
+  full = FALSE,
+  verbose = FALSE,
+  message = TRUE,
+  na.rm = TRUE
+)
 }
 \arguments{
 \item{pattern}{a character string that is used to find the columns of interest. It can be a regular expression.}

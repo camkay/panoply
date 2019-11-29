@@ -4,8 +4,15 @@
 \alias{column_combine}
 \title{column_combine}
 \usage{
-column_combine(pattern, data, fun = mean, verbose = FALSE,
-  message = TRUE, na.rm = TRUE, invert = FALSE)
+column_combine(
+  pattern,
+  data,
+  fun = mean,
+  verbose = FALSE,
+  message = TRUE,
+  na.rm = TRUE,
+  invert = FALSE
+)
 }
 \arguments{
 \item{pattern}{a character string that is used to find the columns of interest. It can be a regular expression.}

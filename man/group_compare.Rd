@@ -4,9 +4,18 @@
 \alias{group_compare}
 \title{group_compare}
 \usage{
-group_compare(data, cols, split, var.equal = FALSE, adjust.p = "none",
-  adjust.d = FALSE, spround = FALSE, spround.p = TRUE,
-  collapse = FALSE, na.rm = TRUE)
+group_compare(
+  data,
+  cols,
+  split,
+  var.equal = FALSE,
+  adjust.p = "none",
+  adjust.d = FALSE,
+  spround = FALSE,
+  spround.p = TRUE,
+  collapse = FALSE,
+  na.rm = TRUE
+)
 }
 \arguments{
 \item{data}{a data frame.}

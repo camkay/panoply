@@ -4,8 +4,13 @@
 \alias{pasterisk}
 \title{pasterisk}
 \usage{
-pasterisk(p_vals, thresholds = c(0.05, 0.01, 0.001), sig_symbol = "*",
-  pad = FALSE, pad_symbol = " ")
+pasterisk(
+  p_vals,
+  thresholds = c(0.05, 0.01, 0.001),
+  sig_symbol = "*",
+  pad = FALSE,
+  pad_symbol = " "
+)
 }
 \arguments{
 \item{p_vals}{a numeric scalar or atomic vector of p-values or effect sizes (or any other numeric vector).}

@@ -373,6 +373,15 @@ test_that("spround returns correct values", {
   expect_equal(spround(x = 0.001, digits = 2, leading0 = TRUE), "0.00")
   expect_equal(spround(x = 0.001, digits = 3, leading0 = TRUE), "0.001")
   expect_equal(spround(x = 0.001, digits = 3, leading0 = FALSE), ".001")
+  expect_equal(spround(x =  0.06, digits = 1, leading0 = FALSE), ".1")
+  expect_equal(spround(x = 0.001, digits = 2, leading0 = TRUE, less_than = TRUE), 
+               "< 0.01")
+  expect_equal(spround(x = 0.001, digits = 2, leading0 = FALSE, less_than = TRUE), 
+               "< .01")
+  expect_equal(spround(x = 0.001, digits = 0, less_than = FALSE), 
+               "0")
+  expect_equal(spround(x = 0.001, digits = 0, less_than = TRUE), 
+               "< 1")
   expect_equal(spround(x = 10, digits = 2, leading0 = FALSE), "10.00")
   expect_equal(spround(x = num_example, digits = 2, leading0 = FALSE),
                c("5.00", ".00", ".50", ".10", ".05", 

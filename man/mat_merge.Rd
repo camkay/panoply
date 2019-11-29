@@ -4,8 +4,15 @@
 \alias{mat_merge}
 \title{mat_merge}
 \usage{
-mat_merge(x_mat, y_mat, x_from = "lower", y_from = "lower",
-  x_to = "lower", y_to = "upper", diagonal = 0)
+mat_merge(
+  x_mat,
+  y_mat,
+  x_from = "lower",
+  y_from = "lower",
+  x_to = "lower",
+  y_to = "upper",
+  diagonal = 0
+)
 }
 \arguments{
 \item{x_mat}{a matrix.}

@@ -4,7 +4,7 @@
 \alias{spround}
 \title{spround}
 \usage{
-spround(x, digits = 2, leading0 = TRUE)
+spround(x, digits = 2, leading0 = TRUE, less_than = FALSE)
 }
 \arguments{
 \item{x}{a numeric/character scalar or vector.}
@@ -12,6 +12,8 @@ spround(x, digits = 2, leading0 = TRUE)
 \item{digits}{a numeric scalar indicating the number of decimal places to round to.}
 
 \item{leading0}{a logical scalar indicating whether leading zeros should be included.}
+
+\item{less_than}{a logical scalar indicating whether rounded values equal to zero should be represented as less than a certain value (e.g., 0.000 becomes < .001).}
 }
 \description{
 Round and specify knitted decimal places all in one step.
