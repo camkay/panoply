@@ -400,6 +400,27 @@ test_that("pasterisk returns correct values", {
                          sig_symbol = "+",
                          thresholds = c(.03, 3)), 
                c("", "++", "+", "+", "+", "++", "++", "++", "++"))
+  expect_equal(pasterisk(num_example, 
+                         sig_symbol = "+",
+                         thresholds = c(.03, 3),
+                         pad = TRUE), 
+               c("  ", "++", "+ ", "+ ", "+ ", "++", "++", "++", "++"))
+  expect_equal(pasterisk(num_example, 
+                         sig_symbol = "+",
+                         thresholds = c(.03, 3),
+                         pad        = TRUE,
+                         pad_symbol = "f"), 
+               c("ff", "++", "+f", "+f", "+f", "++", "++", "++", "++"))
+  expect_equal(pasterisk(c(5.00, 1.00, .05, .01), 
+                         sig_symbol = "+",
+                         thresholds = c(.03, 3),
+                         pad        = TRUE,
+                         pad_symbol = "f",
+                         super_script = TRUE), 
+               c("\\textsuperscript{ff}",
+                 "\\textsuperscript{+f}",
+                 "\\textsuperscript{+f}",
+                 "\\textsuperscript{++}"))
 })
 
 # test text_format

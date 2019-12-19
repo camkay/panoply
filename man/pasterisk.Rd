@@ -9,7 +9,8 @@ pasterisk(
   thresholds = c(0.05, 0.01, 0.001),
   sig_symbol = "*",
   pad = FALSE,
-  pad_symbol = " "
+  pad_symbol = " ",
+  super_script = FALSE
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ pasterisk(
 \item{pad}{if TRUE, adds spaces to create fixed width output}
 
 \item{pad_symbol}{a character scalar to be used to pad. Defaults to a space (i.e., " ").}
+
+\item{super_script}{if TRUE, formats output as superscript text.}
 }
 \description{
 Takes a scalar or atomic vector of p-values and returns a scalar or atomic vector of asterisks corresponding to different significance levels.

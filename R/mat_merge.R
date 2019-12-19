@@ -62,8 +62,17 @@ mat_merge <- function(x_mat,
   }
 
   # place values frome existing matrices in the initialized matrix
-  out_mat[get0(x_to, ".tri")(x_mat)] <- x_mat[get0(x_to, ".tri")(x_mat)]
-  out_mat[get0(y_to, ".tri")(y_mat)] <- y_mat[get0(y_to, ".tri")(y_mat)]
+  if (x_to == "upper") {
+    out_mat[upper.tri(x_mat)] <- x_mat[upper.tri(x_mat)]
+  } else {
+    out_mat[lower.tri(x_mat)] <- x_mat[lower.tri(x_mat)]
+  }
+  
+  if (y_to == "upper") {
+    out_mat[upper.tri(y_mat)] <- y_mat[upper.tri(y_mat)]
+  } else {
+    out_mat[lower.tri(y_mat)] <- y_mat[lower.tri(y_mat)]
+  }
   
   # return out_mat
   out_mat
