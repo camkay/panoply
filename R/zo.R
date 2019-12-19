@@ -56,8 +56,8 @@ zo <- function(data,
   if (!missing(split)) {
     cor_1  <- psych::corr.test(data[[1]][, cols], adjust = adjust.p)
     cor_2  <- psych::corr.test(data[[2]][, cols], adjust = adjust.p)
-    cor_r <- mat_merge(cor_1$r, cor_2$r, "upper", "upper")
-    cor_p <- mat_merge(cor_1$p, cor_2$p, "upper", "upper")
+    cor_r <- mat_merge(cor_1$r, cor_2$r, "upper", "upper", diagonal = 1)
+    cor_p <- mat_merge(cor_1$p, cor_2$p, "upper", "upper", diagonal = 0)
     out   <- data.frame(cbind(cor_r, cor_p))
   } else {
     cor_r <- mat_merge(psych::corr.test(data[, cols], adjust = adjust.p)$r,

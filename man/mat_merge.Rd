@@ -11,7 +11,7 @@ mat_merge(
   y_from = "lower",
   x_to = "lower",
   y_to = "upper",
-  diagonal = 1
+  diagonal = 0
 )
 }
 \arguments{
@@ -27,7 +27,7 @@ mat_merge(
 
 \item{y_to}{if "lower" values from y_mat are placed below the diagonal. If "upper" values from y_mat are placed above the diagonal.}
 
-\item{diagonal}{the value used to fill the diagonal. Defaults to 1.}
+\item{diagonal}{the value used to fill the diagonal. Defaults to 0.}
 }
 \description{
 Combines two matrices by drawing values from either below or above the diagonal and placing them below and above the diagonal.
