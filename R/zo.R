@@ -2,7 +2,7 @@
 #'
 #' Creates a zero-order correlation matrix.
 #' @param data a data frame. 
-#' @param cols the names of the columns to be included in the correlation matrix.
+#' @param cols the names of the columns to be included in the correlation matrix. Defaults to every column except the split column (if a split column is provided).
 #' @param split an optional string indicating the column that includes the grouping variable for producing different matrices above and below the diagonal.
 #' @param adjust.p a string indicating what type of correction for multiple comparisons should be used. Defaults to "none."
 #' @param spround a logical value indicating whether values should be rounded for printing. Defaults to TRUE.
@@ -28,6 +28,9 @@ zo <- function(data,
   # if cols is missing, use all columns
   if (missing(cols)) {
     cols <- colnames(data)
+    if (!missing(split)) {
+      cols <- cols[cols != split]
+    }
   # if cols is provided, ensure it is correct
   } else {
     argument_check(cols, "cols", "character", TRUE, c(2, Inf))
@@ -94,9 +97,8 @@ zo <- function(data,
   }
   
   # replace diagonal
-  diag(out[, seq_along(cols)]) <- "-"
-  if (!pasterisk) {
-    diag(out[, seq_along(cols) + length(cols)]) <- "-"
+  if (pasterisk) {
+    diag(out) <- "-"
   }
 
   
@@ -105,9 +107,8 @@ zo <- function(data,
     message(names(data)[1], " is below the diagonal. ",
             names(data)[2], " is above the diagonal.")
   } else {
-    out[, seq_along(cols)][upper.tri(out[, seq_along(cols)])] <- " "
-    if (!pasterisk) {
-      out[, seq_along(cols) + length(cols)][upper.tri(out[, seq_along(cols) + length(cols)])] <- " "
+    if (pasterisk) {
+      out[upper.tri(out)] <- " "
     }
   }
   

@@ -140,14 +140,10 @@ column_alpha(pattern = "scale1", full = TRUE, data = data_example)
 #> 0.94 0.97 1.01 
 #> 
 #>  Reliability if an item is dropped:
-#>              raw_alpha std.alpha G6(smc) average_r S/N alpha se var.r
-#> scale1_item1      0.96      0.97    0.94      0.94  31    0.025    NA
-#> scale1_item2      0.95      0.95    0.91      0.91  20    0.036    NA
-#> scale1_item3      0.97      0.98    0.95      0.95  42    0.020    NA
-#>              med.r
-#> scale1_item1  0.94
-#> scale1_item2  0.91
-#> scale1_item3  0.95
+#>              raw_alpha std.alpha G6(smc) average_r S/N alpha se var.r med.r
+#> scale1_item1      0.96      0.97    0.94      0.94  31    0.025    NA  0.94
+#> scale1_item2      0.95      0.95    0.91      0.91  20    0.036    NA  0.91
+#> scale1_item3      0.97      0.98    0.95      0.95  42    0.020    NA  0.95
 #> 
 #>  Item statistics 
 #>              n raw.r std.r r.cor r.drop mean  sd
@@ -271,13 +267,13 @@ num_example
 
 # round num_example to three decimal places and retain leading zeroes
 spround(x = num_example, digits = 3, leading0 = TRUE)
-#>  [1] "5.000" "1.000" "0.000" "0.500" "0.100" "0.050" "0.010" "0.005"
-#>  [9] "0.001" "0.000"
+#>  [1] "5.000" "1.000" "0.000" "0.500" "0.100" "0.050" "0.010" "0.005" "0.001"
+#> [10] "0.000"
 
 # round num_example to three decimal places and drop leading zeroes
 spround(x = num_example, digits = 3, leading0 = FALSE)
-#>  [1] "5.000" "1.000" ".000"  ".500"  ".100"  ".050"  ".010"  ".005" 
-#>  [9] ".001"  ".000"
+#>  [1] "5.000" "1.000" ".000"  ".500"  ".100"  ".050"  ".010"  ".005"  ".001" 
+#> [10] ".000"
 ```
 
 ### perble
@@ -531,12 +527,50 @@ group_compare(data_example_2,
               split = "group",
               spround = TRUE,
               collapse = TRUE)
-#>   term     overall_msd overall_n  group1_msd group1_n      group2_msd
-#> 1 mach 126.25 (137.59)      8.00 2.50 (0.58)     4.00  250.00 (57.74)
-#> 2 narc 243.20 (314.25)     10.00 5.33 (3.72)     6.00 600.00 (115.47)
-#>   group2_n      t df    p     d
-#> 1     4.00  -8.57  3 .003 -6.06
-#> 2     4.00 -10.30  3 .002 -6.65
+#>   term     overall_msd overall_n  group1_msd group1_n      group2_msd group2_n
+#> 1 mach 126.25 (137.59)      8.00 2.50 (0.58)     4.00  250.00 (57.74)     4.00
+#> 2 narc 243.20 (314.25)     10.00 5.33 (3.72)     6.00 600.00 (115.47)     4.00
+#>        t df    p     d
+#> 1  -8.57  3 .003 -6.06
+#> 2 -10.30  3 .002 -6.65
+```
+
+### zo
+
+`zo` creates a zero-order correlation table. It allows you to specify a
+grouping variable (`split`) and calculates a different correlation
+matrix above and below the diagonal.
+
+``` r
+# look at example data
+data_example_3
+#>    group mach narc psyc
+#> 1      A    1   10   -1
+#> 2      B    2   20   -7
+#> 3      A    3   35   -1
+#> 4      A    4   50   -1
+#> 5      B    5   65   -3
+#> 6      B    6   71   -4
+#> 7      A    7   80    1
+#> 8      B    8   96   -9
+#> 9      B    9   99   -9
+#> 10     A   10   90   -1
+
+# create a zero-order correlation table
+zo(data_example_3, cols = c("mach", "narc", "psyc"), split = "group")
+#> A is below the diagonal. B is above the diagonal.
+#>            1.    2.   3.
+#> 1. mach     - .99** -.46
+#> 2. narc .97**     - -.36
+#> 3. psyc   .32   .46    -
+
+# create a zero-order correlation table for manipulation
+zo(data_example_3, cols = c("mach", "narc", "psyc"), split = "group", pasterisk = FALSE)
+#> A is below the diagonal. B is above the diagonal.
+#>         mach_r narc_r psyc_r mach_p narc_p psyc_p
+#> 1. mach      -    .99   -.46      -   .002   .438
+#> 2. narc    .97      -   -.36   .005      -   .553
+#> 3. psyc    .32    .46      -   .604   .434      -
 ```
 
 ### text\_format
