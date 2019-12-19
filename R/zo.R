@@ -45,7 +45,7 @@ zo <- function(data,
     argument_check(split, "split", "character")
     # ensure the length of split is equal to two
     if (lenique(data[, split]) != 2) {
-      stop(paste0("zo is only able to distinguish between groups. ",
+      stop(paste0("zo is only able to distinguish between 2 groups. ",
                  "The length of split is ", lenique(data[, split][[1]]), "."))
     }
 

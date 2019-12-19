@@ -762,16 +762,107 @@ test_that("check that delta_bic is working properly", {
 })
 
 test_that("check that zo is working properly", {
+  expect_equal(zo(data_example),
+               structure(list(`1.` = c("-", ".95***", ".91**", 
+                                       "-.82*", "-.86*"), 
+                              `2.` = c(" ", "-", ".94**", 
+                                       "-.65", "-.73"), 
+                              `3.` = c(" ", " ", "-", "-.55", "-.71"), 
+                              `4.` = c(" ", " ", " ", "-", ".92**"), 
+                              `5.` = c(" ", " ", " ", " ", "-")), 
+                         row.names = c("1. scale1_item1", "2. scale1_item2", 
+                                       "3. scale1_item3", "4. scale2_item1", 
+                                       "5. scale2_item2"), 
+                         class = "data.frame"))
+  expect_equal(zo(data_example_2, split = "group"),
+               structure(list(`1.` = c("-", "1.00***", "1.00***", "1.00***",
+                                       "1.00***"),
+                              `2.` = c("-1.00***", "-", ".96**", ".97**",
+                                       ".97**"),
+                              `3.` = c("-1.00***", "1.00***", "-",
+                                       ".87*", ".87*"),
+                              `4.` = c("-1.00***", "1.00***", "1.00***", "-",
+                                       "1.00***"),
+                              `5.` = c("-1.00***", "1.00***", "1.00***",
+                                       "1.00***", "-")),
+                         row.names = c("1. mach", "2. narc", "3. psyc",
+                                       "4. des", "5. mor"),
+                         class = "data.frame"))
+  expect_equal(zo(data_example_2, split = "group", cols = c("psyc", 
+                                                            "mor", 
+                                                            "des")),
+               structure(list(`1.` = c("-", ".87*", ".87*"), 
+                              `2.` = c("1.00***", "-", "1.00***"), 
+                              `3.` = c("1.00***", "1.00***", "-")), 
+                         row.names = c("1. psyc", "2. mor", "3. des"), 
+                         class = "data.frame"))
+  expect_equal(zo(data_example_2, split = "group", 
+                  cols = c("psyc", "mor", "des"),
+                  adjust.p = "holm"),
+               structure(list(`1.` = c("-", ".87", ".87"), 
+                              `2.` = c("1.00***", "-", "1.00***"), 
+                              `3.` = c("1.00***", "1.00***", "-")), 
+                         row.names = c("1. psyc", "2. mor", "3. des"), 
+                         class = "data.frame"))
+  expect_equal(zo(data_example_2, split = "group", 
+                  cols = c("psyc", "mor", "des"),
+                  adjust.p = "holm",
+                  spround = FALSE),
+               structure(list(`1.` = c("-", "0.866025403784439", 
+                                       "0.866025403784439"), 
+                              `2.` = c("1***", "-", "1***"), 
+                              `3.` = c("1***", "1***", "-")), 
+                         row.names = c("1. psyc", "2. mor", "3. des"), 
+                         class = "data.frame"))
+  expect_equal(zo(data_example_2, split = "group", 
+                  cols = c("psyc", "mor", "des"),
+                  adjust.p = "holm",
+                  spround = FALSE,
+                  pasterisk = FALSE),
+               structure(list(psyc_r = c(1, 0.866025403784439, 
+                                         0.866025403784439), 
+                              mor_r = c(1, 1, 1), 
+                              des_r = c(1, 1, 1), 
+                              psyc_p = c(1, 0.0514428414850131, 
+                                         0.0514428414850131), 
+                              mor_p = c(0, 1, 0), 
+                              des_p = c(0, 0, 1)), 
+                         class = "data.frame", 
+                         row.names = c("1. psyc", "2. mor", "3. des")))
+  expect_equal(zo(data_example_2, split = "group", 
+                  cols = c("psyc", "mor", "des"),
+                  adjust.p = "holm",
+                  spround = TRUE,
+                  pasterisk = FALSE),
+               structure(list(psyc_r = c("1.00", ".87", 
+                                         ".87"), 
+                              mor_r = c("1.00", "1.00", "1.00"), 
+                              des_r = c("1.00", "1.00", "1.00"), 
+                              psyc_p = c("1.000", ".051", 
+                                         ".051"), 
+                              mor_p = c(".000", "1.000", ".000"), 
+                              des_p = c(".000", ".000", "1.000")), 
+                         class = "data.frame", 
+                         row.names = c("1. psyc", "2. mor", "3. des")))
+  expect_equal(zo(data_example_2, split = "group", 
+                  cols = c("psyc", "mor"), pad = TRUE, pad_symbol = "f"),
+               structure(list(`1.` = c("-", ".87*ff"), 
+                              `2.` = c("1.00***", "-")), 
+                         row.names = c("1. psyc", "2. mor"), 
+                         class = "data.frame"))
+  expect_message(zo(data_example_2, split = "group"),
+                 "A is below the diagonal")
+  
+  expect_error(zo(data_example_2, split = "group", cols = c("mch", "nrc")),
+                 "cols not found in data: mch, nrc")
 
-  # 
-  # 
-  # expect_equal(zo(data_example)
-  #              
-  #              
-  # expect_message(column_message(data_example, "test"),
-  #              "test was calculated")
+  expect_error(zo(data_example_2, split = "group", cols = c("mach")),
+               "The length of cols must be between 2 and Inf \\(inclusive\\).")
+  expect_error(zo(data_example_3, split = "group", cols = c("mach", "narc")),
+               "zo is only able to distinguish between 2 groups")
 
 })
+
 
 
 # test column_message
