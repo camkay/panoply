@@ -761,6 +761,18 @@ test_that("check that delta_bic is working properly", {
                       "\\(inclusive\\)\\. models is of length 1\\."))
 })
 
+test_that("check that zo is working properly", {
+
+  # 
+  # 
+  # expect_equal(zo(data_example)
+  #              
+  #              
+  # expect_message(column_message(data_example, "test"),
+  #              "test was calculated")
+
+})
+
 
 # test column_message
 test_that("check column_message is producing correct messages", {

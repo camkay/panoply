@@ -9,7 +9,7 @@ zo(data, cols, split, adjust.p = "none", spround = TRUE, pasterisk = TRUE, ...)
 \arguments{
 \item{data}{a data frame.}
 
-\item{cols}{the names of the columns to be included in the correlation matrix.}
+\item{cols}{the names of the columns to be included in the correlation matrix. Defaults to every column except the split column (if a split column is provided).}
 
 \item{split}{an optional string indicating the column that includes the grouping variable for producing different matrices above and below the diagonal.}
 
