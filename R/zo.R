@@ -77,22 +77,22 @@ zo <- function(data,
   
   # spround if TRUE
   if (spround) {
-    out[, column_find("_r", out)] <- sapply(out[, column_find("_r", out)], 
+    out[, column_find("_r$", out)] <- sapply(out[, column_find("_r$", out)], 
                                         spround, 2, FALSE)
     if (!pasterisk) {
-      out[, column_find("_p", out)] <- sapply(out[, column_find("_p", out)], 
+      out[, column_find("_p$", out)] <- sapply(out[, column_find("_p$", out)], 
                                         spround, 3, FALSE)
     }
   }
   
   # pasterisk if TRUE
   if (pasterisk) {
-    out[, column_find("_p", out)] <- sapply(out[, column_find("_p", out)],
+    out[, column_find("_p$", out)] <- sapply(out[, column_find("_p$", out)],
                                             pasterisk, ...)
     for (i in seq_along(cols)) {
       out[, i] <- paste0(out[, i], out[, i + length(cols)])
     }
-    out <- column_find("_r", out, "data.frame")
+    out <- column_find("_r$", out, "data.frame")
     colnames(out) <- paste0(seq_along(cols), ".")
   }
   
