@@ -23,6 +23,9 @@ data_example_3 <- data.frame(group  = rep(c("A", "B", "C", "A", "B", "C"), 2),
                              narc   = rep(c(2, 4, 500, 700, 10, 100), 2),
                              psyc   = rep(c(3, 4, 1800, 2000, 5, 200), 2))
 
+data_example_profile <- data.frame(profile_1 = c(50, 55, 60, 65, 70),
+                                   profile_2 = c(25, 30, 35, 40, 45))
+
 # create example mats
 mat_a <- psych::corr.test(data_example)$p
 
@@ -679,6 +682,22 @@ test_that("check that build_models is producing the correct results", {
                  "mpg ~ 1 + hp", 
                  "mpg ~ 1 + hp + vs + am", 
                  "mpg ~ 1 + hp + vs + am + hp * vs + hp * am"))
+})
+
+# test profile
+test_that("check that profile is working properly", {
+  expect_equal(round(profile(data_example_profile), 7), 
+               -0.5151515)
+  expect_equal(round(profile(data_example_profile, "r"), 7), 
+               1.0000000)
+  expect_error(profile(data_example),
+             "data must be of length 2. data is of length 5.")
+  expect_error(profile("hello"),
+             "data is of type character. data must be of type data.frame.")
+  expect_error(profile(data_example_profile, 8),
+             "method is of type double. method must be of type character.")
+  expect_warning(profile(data_example_profile, "hello"),
+             "is not a recognized method")
 })
 
 # test delta_rsq, delta_aic, and delta_bic
