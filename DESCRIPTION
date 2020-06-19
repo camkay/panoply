@@ -10,7 +10,8 @@ Description: Contains a number of miscellaneous functions for making data manipu
 Depends: R (>= 3.3.0)
 Imports: 
   psych,
-  stats
+  stats,
+  effectsize
 License: MIT + file LICENSE
 Date: 2019-06-18
 Encoding: UTF-8
