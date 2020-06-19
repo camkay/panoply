@@ -780,6 +780,43 @@ test_that("check that delta_bic is working properly", {
                       "\\(inclusive\\)\\. models is of length 1\\."))
 })
 
+test_that("check that tidy_std is working properly", {
+  expect_equal(tidy_std(mod_b_example),
+               structure(list(term = c("(Intercept)", "scale2_item1", 
+                                       "scale2_item2"
+), df = c(4L, 4L, 4L), estimate = c(10.0792602377807, -0.158520475561429, 
+-0.685601056803169), se = c(1.55311554460448, 0.58520326463724, 
+0.641058057534963), conf.low = c(5.76712018615702, -1.78330521520926, 
+-2.46546356279372), conf.high = c(14.3914002894044, 1.4662642640864, 
+1.09426144918738), estimate_std = c(1.32942805997807e-16, -0.177326030348158, 
+-0.700112740243083), se_std = c(2.04851877685017e-17, 0.654626927514426, 
+0.654626927514439), conf.low_std = c(9.27925757550034e-17, -1.46037123158655, 
+-1.9831579414815), conf.high_std = c(1.73093036240611e-16, 1.10571917089023, 
+0.58293246099533), statistic = c(6.48970404861124, -0.270881051321021, 
+-1.06948356509157), p.value = c(0.00290705502443555, 0.799886219422805, 
+0.345096043318143)), class = "data.frame", row.names = c(NA, 
+-3L)))
+    expect_equal(tidy_std(mod_b_example, conf.level = .80),
+structure(list(term = c("(Intercept)", "scale2_item1", "scale2_item2"
+), df = c(4L, 4L, 4L), estimate = c(10.0792602377807, -0.158520475561429, 
+-0.685601056803169), se = c(1.55311554460448, 0.58520326463724, 
+0.641058057534963), conf.low = c(7.69801374045466, -1.05575779250302, 
+-1.66847529265181), conf.high = c(12.4605067351068, 0.738716841380163, 
+0.297273179045475), estimate_std = c(1.32942805997807e-16, -0.177326030348158, 
+-0.700112740243083), se_std = c(2.04851877685017e-17, 0.654626927514426, 
+0.654626927514439), conf.low_std = c(1.06689981542609e-16, -1.01626419415192, 
+-1.53905090404686), conf.high_std = c(1.59195630453006e-16, 0.661612133455607, 
+0.138825423560699), statistic = c(6.48970404861124, -0.270881051321021, 
+-1.06948356509157), p.value = c(0.00290705502443555, 0.799886219422805, 
+0.345096043318143)), class = "data.frame", row.names = c(NA, 
+-3L)))
+    expect_error(tidy_std(mod_b_example, conf.level = "hello"),
+                   "conf.level is of type character. conf.level must be of")
+    expect_error(tidy_std(42),
+                   "model is of type double")
+})
+
+
 test_that("check that zo is working properly", {
   expect_equal(zo(data_example),
                structure(list(`1.` = c("-", ".95***", ".91**", 
