@@ -97,7 +97,7 @@ zo <- function(data,
       function(x) {
         x2 <- x
         x  <- as.numeric(x) 
-        x2[abs(x) > bold_val] <- bold_tex(x2[abs(x) > bold_val])
+        x2[abs(x) >= bold_val] <- bold_tex(x2[abs(x) >= bold_val])
         x2
       }
     )
