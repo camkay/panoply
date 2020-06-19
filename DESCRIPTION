@@ -11,7 +11,8 @@ Depends: R (>= 3.3.0)
 Imports: 
   psych,
   stats,
-  effectsize
+  effectsize,
+  broom
 License: MIT + file LICENSE
 Date: 2019-06-18
 Encoding: UTF-8
