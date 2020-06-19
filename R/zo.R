@@ -96,7 +96,7 @@ zo <- function(data,
     out[, column_find("_r$", out)] <- sapply(out[, column_find("_r$", out)], 
       function(x) {
         x <- as.numeric(x)
-        x[abs(x) > bold_val] <- bold_tex(x[abs(x) > bold_val])
+        x[abs(x) > bold_val] <- bold_tex(spround(x[abs(x) > bold_val]))
         x
       }
     )
