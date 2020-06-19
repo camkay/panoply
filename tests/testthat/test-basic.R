@@ -909,14 +909,14 @@ test_that("check that zo is working properly", {
   expect_equal(zo(data_example_2, split = "group", 
                   cols = c("psyc", "mor"), pad = TRUE, pad_symbol = "f",
                   bold_script = TRUE),
-               structure(list(`1.` = c("-", "\\textbf{0.87}*ff"), 
+               structure(list(`1.` = c("-", "\\textbf{.87}*ff"), 
                               `2.` = c("\\textbf{1.00}***", "-")), 
                          row.names = c("1. psyc", "2. mor"), 
                          class = "data.frame"))
   expect_equal(zo(data_example_2, split = "group", 
                   cols = c("psyc", "mor"), pad = TRUE, pad_symbol = "f",
                   bold_script = TRUE, bold_val = .9),
-               structure(list(`1.` = c("-", "0.87*ff"), 
+               structure(list(`1.` = c("-", ".87*ff"), 
                               `2.` = c("\\textbf{1.00}***", "-")), 
                          row.names = c("1. psyc", "2. mor"), 
                          class = "data.frame"))
