@@ -6,6 +6,8 @@
 #' @param split an optional string indicating the column that includes the grouping variable for producing different matrices above and below the diagonal.
 #' @param adjust.p a string indicating what type of correction for multiple comparisons should be used. Defaults to "none."
 #' @param spround a logical value indicating whether values should be rounded for printing. Defaults to TRUE.
+#' @param bold_script if TRUE, bolds correlations over a certain size.  Defaults to FALSE.
+#' @param bold_val a numeric scalar that indicates the value or greater that should be bolded. Defaults to .3. 
 #' @param pasterisk a logical value indicating whether p-values should be replaced with asterisks and combined with the regression coefficients. Defaults to TRUE.
 #' @param ... optional arguments to be passed to pasterisk. 
 #' @export
@@ -14,9 +16,11 @@
 zo <- function(data, 
                cols, 
                split, 
-               adjust.p  = "none", 
-               spround   = TRUE,
-               pasterisk = TRUE,
+               adjust.p    = "none", 
+               spround     = TRUE,
+               pasterisk   = TRUE,
+               bold_script = FALSE,
+               bold_val    = .30,
                ...) {
   
   # check arguments
@@ -24,6 +28,8 @@ zo <- function(data,
   argument_check(adjust.p,   "adjust.p", "character", TRUE, 1)
   argument_check(spround,     "spround",   "logical", TRUE, 1)
   argument_check(pasterisk, "pasterisk",   "logical", TRUE, 1)
+  argument_check(bold_script, "bold_script", "logical", len_check = TRUE)
+  argument_check(bold_val, "bold_val", "numeric", len_check = TRUE)
 
   # if cols is missing, use all columns
   if (missing(cols)) {
@@ -85,6 +91,17 @@ zo <- function(data,
     }
   }
   
+  # bold if TRUE
+  if (bold_script) {
+    out[, column_find("_r$", out)] <- sapply(out[, column_find("_r$", out)], 
+      function(x) {
+        x <- as.numeric(x)
+        x[abs(x) > bold_val] <- bold_tex(x[abs(x) > bold_val])
+        x
+      }
+    )
+  }
+  
   # pasterisk if TRUE
   if (pasterisk) {
     out[, column_find("_p$", out)] <- sapply(out[, column_find("_p$", out)],
@@ -117,3 +134,5 @@ zo <- function(data,
   out
 
 }
+
+

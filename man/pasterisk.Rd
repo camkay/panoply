@@ -24,7 +24,7 @@ pasterisk(
 
 \item{pad_symbol}{a character scalar to be used to pad. Defaults to a space (i.e., " ").}
 
-\item{super_script}{if TRUE, formats output as superscript text.}
+\item{super_script}{if TRUE, formats output as superscript text. Defaults to FALSE.}
 }
 \description{
 Takes a scalar or atomic vector of p-values and returns a scalar or atomic vector of asterisks corresponding to different significance levels.

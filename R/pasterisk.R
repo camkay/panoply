@@ -6,7 +6,7 @@
 #' @param sig_symbol a character scalar to be used to indicate significance. Defaults to an asterisk (i.e., *).
 #' @param pad if TRUE, adds spaces to create fixed width output
 #' @param pad_symbol a character scalar to be used to pad. Defaults to a space (i.e., " ").
-#' @param super_script if TRUE, formats output as superscript text.
+#' @param super_script if TRUE, formats output as superscript text. Defaults to FALSE.
 #' @export
 
 

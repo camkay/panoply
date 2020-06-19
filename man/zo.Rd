@@ -4,7 +4,17 @@
 \alias{zo}
 \title{zo}
 \usage{
-zo(data, cols, split, adjust.p = "none", spround = TRUE, pasterisk = TRUE, ...)
+zo(
+  data,
+  cols,
+  split,
+  adjust.p = "none",
+  spround = TRUE,
+  pasterisk = TRUE,
+  bold_script = FALSE,
+  bold_val = 0.3,
+  ...
+)
 }
 \arguments{
 \item{data}{a data frame.}
@@ -18,6 +28,10 @@ zo(data, cols, split, adjust.p = "none", spround = TRUE, pasterisk = TRUE, ...)
 \item{spround}{a logical value indicating whether values should be rounded for printing. Defaults to TRUE.}
 
 \item{pasterisk}{a logical value indicating whether p-values should be replaced with asterisks and combined with the regression coefficients. Defaults to TRUE.}
+
+\item{bold_script}{if TRUE, bolds correlations over a certain size.  Defaults to FALSE.}
+
+\item{bold_val}{a numeric scalar that indicates the value or greater that should be bolded. Defaults to .3.}
 
 \item{...}{optional arguments to be passed to pasterisk.}
 }
