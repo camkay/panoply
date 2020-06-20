@@ -812,8 +812,6 @@ structure(list(term = c("(Intercept)", "scale2_item1", "scale2_item2"
 -3L)))
     expect_error(tidy_std(mod_b_example, conf.level = "hello"),
                    "conf.level is of type character. conf.level must be of")
-    expect_error(tidy_std(42),
-                   "model is of type double")
 })
 
 

@@ -8,8 +8,8 @@
 tidy_std <- function(model, conf.level = .95) {
   
   # check arguments
-  argument_check(model, "model", "list", len_check = FALSE)
   argument_check(conf.level, "conf.level", "numeric", len_check = TRUE)
+  
   # tidy model
   out <- broom::tidy(model, conf.int = TRUE, conf.level = conf.level)
   
