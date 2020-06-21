@@ -6,9 +6,10 @@
 #' @param split an optional string indicating the column that includes the grouping variable for producing different matrices above and below the diagonal.
 #' @param adjust.p a string indicating what type of correction for multiple comparisons should be used. Defaults to "none."
 #' @param spround a logical value indicating whether values should be rounded for printing. Defaults to TRUE.
+#' @param pasterisk a logical value indicating whether p-values should be replaced with asterisks and combined with the regression coefficients. Defaults to TRUE.
 #' @param bold_script if TRUE, bolds correlations over a certain size.  Defaults to FALSE.
 #' @param bold_val a numeric scalar that indicates the value or greater that should be bolded. Defaults to .3. 
-#' @param pasterisk a logical value indicating whether p-values should be replaced with asterisks and combined with the regression coefficients. Defaults to TRUE.
+#' @param message if TRUE, messages are generated telling the user which group is above and below the diagonal. Defaults to TRUE.
 #' @param ... optional arguments to be passed to pasterisk. 
 #' @export
 
@@ -21,6 +22,7 @@ zo <- function(data,
                pasterisk   = TRUE,
                bold_script = FALSE,
                bold_val    = .30,
+               message     = TRUE,
                ...) {
   
   # check arguments
@@ -30,6 +32,7 @@ zo <- function(data,
   argument_check(pasterisk, "pasterisk",   "logical", TRUE, 1)
   argument_check(bold_script, "bold_script", "logical", len_check = TRUE)
   argument_check(bold_val, "bold_val", "numeric", len_check = TRUE)
+  argument_check(message, "message", "logical", len_check = TRUE)
 
   # if cols is missing, use all columns
   if (missing(cols)) {
@@ -122,8 +125,10 @@ zo <- function(data,
   
   # message if data split and drop upper.tri if not
   if (!missing(split)) {
-    message(names(data)[1], " is below the diagonal. ",
-            names(data)[2], " is above the diagonal.")
+    if (message == TRUE) {
+        message(names(data)[1], " is below the diagonal. ",
+          names(data)[2], " is above the diagonal.")
+    }
   } else {
     if (pasterisk) {
       out[upper.tri(out)] <- " "

@@ -13,6 +13,7 @@ zo(
   pasterisk = TRUE,
   bold_script = FALSE,
   bold_val = 0.3,
+  message = TRUE,
   ...
 )
 }
@@ -32,6 +33,8 @@ zo(
 \item{bold_script}{if TRUE, bolds correlations over a certain size.  Defaults to FALSE.}
 
 \item{bold_val}{a numeric scalar that indicates the value or greater that should be bolded. Defaults to .3.}
+
+\item{message}{if TRUE, messages are generated telling the user which group is above and below the diagonal. Defaults to TRUE.}
 
 \item{...}{optional arguments to be passed to pasterisk.}
 }

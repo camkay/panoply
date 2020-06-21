@@ -928,6 +928,8 @@ test_that("check that zo is working properly", {
                "The length of cols must be between 2 and Inf \\(inclusive\\).")
   expect_error(zo(data_example_3, split = "group", cols = c("mach", "narc")),
                "zo is only able to distinguish between 2 groups")
+  expect_error(zo(data_example_2, split = "group"),
+               NA)
 
 })
 
