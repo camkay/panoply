@@ -418,6 +418,23 @@ test_that("pasterisk returns correct values", {
                  "\\textsuperscript{++}"))
 })
 
+# test bolder
+test_that("bolder returns correct values", {
+  expect_equal(bolder(num_example), 
+               c("\\textbf{5}", "0", "\\textbf{0.5}", "0.1", "0.05", "0.01", 
+                 "0.005", "0.001", "5e-04"))
+ expect_equal(bolder(num_example, .01),
+               c("\\textbf{5}", "0", "\\textbf{0.5}", "\\textbf{0.1}", 
+                 "\\textbf{0.05}", "\\textbf{0.01}", "0.005", "0.001", "5e-04"))
+ expect_error(bolder(num_example, "hello"),
+              "threshold is of type")
+ expect_error(bolder(num_example, c(.10, 1)),
+              "threshold must be of")
+ expect_error(bolder(char_example, .10),
+              "ef is of type character")
+
+})
+
 # test text_format
 test_that("text_format returns correct values", {
   expect_equal(text_format("hello", format = "italic", latex = TRUE),
@@ -518,6 +535,18 @@ test_that("check paste_paren is combining the values correctly", {
   expect_warning(paste_paren("20.19", c("2.20", "10.10")),
                  "The x value")
   expect_warning(paste_paren(c("2.20", "10.10"), "20.19"),
+                 regexp = "The y value")
+})
+
+# test paren_ci
+test_that("check paste_ci is combining the values correctly", {
+  expect_equal(paste_ci(5, 10),
+               "[5, 10]")
+  expect_equal(paste_ci(20.19, 2.20),
+               "[20.19, 2.2]")
+  expect_warning(paste_ci("20.19", c("2.20", "10.10")),
+                 "The x value")
+  expect_warning(paste_ci(c("2.20", "10.10"), "20.19"),
                  regexp = "The y value")
 })
 
