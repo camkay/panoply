@@ -16,10 +16,10 @@ coverage](https://codecov.io/gh/camkay/panoply/branch/master/graph/badge.svg)](h
 
 A panoply of miscellaneous functions: `column_find`, `column_alpha`,
 `column_combine`, `capply`, `scuttle`, `spround`, `perble`, `lenique`,
-`pasterisk`, `paste_paren`, `centre`, `mat_merge`, `delta_rsq`,
-`delta_aic`, `delta_bic`, `group_compare`, `text_format` (including
-`bold`, `bold_tex`, `italic`, and `italic_tex`), and `build_models`.
-`scuttle` was created in collaboration with
+`pasterisk`, `bolder`, `paste_paren`, `paste_ci`, `centre`, `mat_merge`,
+`delta_rsq`, `delta_aic`, `delta_bic`, `group_compare`, `text_format`
+(including `bold`, `bold_tex`, `italic`, and `italic_tex`), and
+`build_models`. `scuttle` was created in collaboration with
 [AshLynnMiller](https://github.com/AshLynnMiller). A large debt of
 gratitude is also owed to [datalorax](https://github.com/datalorax) and
 his functional programming course. His instruction, course materials,
@@ -346,6 +346,28 @@ pasterisk(p_vals = num_example, thresholds = c(0.10, 0.5), sig_symbol = "*")
 #>  [1] ""   ""   "**" ""   "*"  "**" "**" "**" "**" "**"
 ```
 
+### bolder
+
+`bolder` takes a scalar or atomic vector of effect sizes and bolds
+values that are equal to or larger than a specified size.
+
+``` r
+# look at the example numeric vector
+num_example
+#>  [1] 5.0000 1.0000 0.0000 0.5000 0.1000 0.0500 0.0100 0.0050 0.0010 0.0005
+
+# bold values that are larger than .30
+bolder(ef = num_example, threshold = .30)
+#>  [1] "\\textbf{5}"   "\\textbf{1}"   "0"             "\\textbf{0.5}"
+#>  [5] "0.1"           "0.05"          "0.01"          "0.005"        
+#>  [9] "0.001"         "0.0005"
+
+# bold values that are larger than 1.00
+bolder(ef = num_example, threshold = 1.00)
+#>  [1] "\\textbf{5}" "\\textbf{1}" "0"           "0.5"         "0.1"        
+#>  [6] "0.05"        "0.01"        "0.005"       "0.001"       "0.0005"
+```
+
 ### paste\_paren
 
 `paste_paren` combines two numbers (e.g., 10.12 and 2.22) by wrapping
@@ -357,6 +379,18 @@ to streamline the creation of tables that include cells formatted as
 # combine two numbers
 paste_paren(10.12, 2.22)
 #> [1] "10.12 (2.22)"
+```
+
+### paste\_ci
+
+`paste_ci` combines two numbers (e.g., .20 and .33) by wrapping them in
+square brackets (e.g., \[.20, .33\]). This function was made to
+streamline the creation of confidence interval values for outputting.
+
+``` r
+# combine two numbers
+paste_ci(.20, .33)
+#> [1] "[0.2, 0.33]"
 ```
 
 ### mat\_merge
@@ -568,9 +602,9 @@ zo(data_example_3, cols = c("mach", "narc", "psyc"), split = "group")
 zo(data_example_3, cols = c("mach", "narc", "psyc"), split = "group", pasterisk = FALSE)
 #> A is below the diagonal. B is above the diagonal.
 #>         mach_r narc_r psyc_r mach_p narc_p psyc_p
-#> 1. mach      -    .99   -.46      -   .002   .438
-#> 2. narc    .97      -   -.36   .005      -   .553
-#> 3. psyc    .32    .46      -   .604   .434      -
+#> 1. mach   1.00    .99   -.46   .000   .002   .438
+#> 2. narc    .97   1.00   -.36   .005   .000   .553
+#> 3. psyc    .32    .46   1.00   .604   .434   .000
 ```
 
 ### text\_format

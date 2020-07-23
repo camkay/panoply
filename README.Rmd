@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-A panoply of miscellaneous functions: `column_find`, `column_alpha`, `column_combine`, `capply`, `scuttle`, `spround`, `perble`, `lenique`, `pasterisk`, `paste_paren`, `centre`, `mat_merge`, `delta_rsq`, `delta_aic`, `delta_bic`, `group_compare`, `text_format` (including `bold`, `bold_tex`, `italic`, and `italic_tex`), and `build_models`. `scuttle` was created in collaboration with [AshLynnMiller](https://github.com/AshLynnMiller). A large debt of gratitude is also owed to [datalorax](https://github.com/datalorax) and his functional programming course. His instruction, course materials, and feedback were instrumental in creating this package. 
+A panoply of miscellaneous functions: `column_find`, `column_alpha`, `column_combine`, `capply`, `scuttle`, `spround`, `perble`, `lenique`, `pasterisk`, `bolder`, `paste_paren`, `paste_ci`, `centre`, `mat_merge`, `delta_rsq`, `delta_aic`, `delta_bic`, `group_compare`, `text_format` (including `bold`, `bold_tex`, `italic`, and `italic_tex`), and `build_models`. `scuttle` was created in collaboration with [AshLynnMiller](https://github.com/AshLynnMiller). A large debt of gratitude is also owed to [datalorax](https://github.com/datalorax) and his functional programming course. His instruction, course materials, and feedback were instrumental in creating this package. 
 
 ## Installation
 
@@ -232,6 +232,21 @@ pasterisk(p_vals = num_example, thresholds = c(0.10, 0.5), sig_symbol = "*")
 
 ```
 
+### bolder
+
+`bolder` takes a scalar or atomic vector of effect sizes and bolds values that are equal to or larger than a specified size.
+
+```{r bolder_example}
+# look at the example numeric vector
+num_example
+
+# bold values that are larger than .30
+bolder(ef = num_example, threshold = .30)
+
+# bold values that are larger than 1.00
+bolder(ef = num_example, threshold = 1.00)
+```
+
 ### paste_paren
 
 `paste_paren` combines two numbers (e.g., 10.12 and 2.22) by wrapping the latter in parentheses (e.g., 10.12 (2.22)). This function was made to streamline the creation of tables that include cells formatted as "mean(sd)".
@@ -239,6 +254,15 @@ pasterisk(p_vals = num_example, thresholds = c(0.10, 0.5), sig_symbol = "*")
 ```{r paste_paren_example}
 # combine two numbers
 paste_paren(10.12, 2.22)
+```
+
+### paste_ci
+
+`paste_ci` combines two numbers (e.g., .20 and .33) by wrapping them in square brackets (e.g., [.20, .33]). This function was made to streamline the creation of confidence interval values for outputting.
+
+```{r paste_ci_example}
+# combine two numbers
+paste_ci(.20, .33)
 ```
 
 ### mat_merge
