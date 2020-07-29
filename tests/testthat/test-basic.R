@@ -432,6 +432,8 @@ test_that("bolder returns correct values", {
                c("0.00", "\\textbf{0.05}"))
  expect_equal(bolder(c(.001, .05), .01, spround = TRUE, leading0 = FALSE),
                c(".00", "\\textbf{.05}"))
+ expect_equal(bolder(c(-.001, -.05), .01, spround = TRUE, leading0 = FALSE),
+               c("-.00", "\\textbf{-.05}"))
  expect_equal(suppressWarnings(bolder(c(".001", ".05"), .01)),
                c(".001", "\\textbf{.05}"))
  expect_equal(suppressWarnings(bolder(c(".001", ".05"), .01, spround = TRUE)),

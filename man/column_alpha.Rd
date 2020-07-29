@@ -29,15 +29,3 @@ column_alpha(
 \description{
 Estimates Cronbach's Alpha--an indicator of internal consistency--using only columns that have names that match a pattern. The analysis relies on `psych::alpha`.
 }
-\examples{
-x <- data.frame(my_column_x  = 1:10,
-                my_column_x2 = 1:10 * rnorm(10, mean = 1),
-                my_column_x3 = 1:10 * rnorm(10, mean = 1),
-                my_column_y  = 11:20,
-                my_column_y2 = 11:20 * rnorm(10, mean = 1),
-                my_column_y3 = 11:20 * rnorm(10, mean = 1))
-
-column_alpha(pattern = "x", data = x, full = TRUE)
-column_alpha(pattern = "x", data = x, full = FALSE)
-
-}

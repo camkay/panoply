@@ -33,7 +33,7 @@ bolder <- function(ef,
   }
   
   # wrap the effect sizes in a bold value if greater or equal the threshold
-  out <- ifelse(ef_num >= threshold, text_format(ef, "bold", TRUE), ef)
+  out <- ifelse(abs(ef_num) >= threshold, text_format(ef, "bold", TRUE), ef)
 
   # return out
   out
