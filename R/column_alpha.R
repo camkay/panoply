@@ -8,16 +8,6 @@
 #' @param message if TRUE, messages are generated telling the user which columns were used to calculate Cronbach's Alpha.
 #' @param na.rm a logical value indicating whether `NA` values should be removed prior to computation.
 #' @export
-#' @examples
-#' x <- data.frame(my_column_x  = 1:10,
-#'                 my_column_x2 = 1:10 * rnorm(10, mean = 1),
-#'                 my_column_x3 = 1:10 * rnorm(10, mean = 1),
-#'                 my_column_y  = 11:20,
-#'                 my_column_y2 = 11:20 * rnorm(10, mean = 1),
-#'                 my_column_y3 = 11:20 * rnorm(10, mean = 1))
-#' 
-#' column_alpha(pattern = "x", data = x, full = TRUE)
-#' column_alpha(pattern = "x", data = x, full = FALSE)
 #' 
 
 column_alpha <- function(pattern, 
