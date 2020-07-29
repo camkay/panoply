@@ -420,18 +420,30 @@ test_that("pasterisk returns correct values", {
 
 # test bolder
 test_that("bolder returns correct values", {
-  expect_equal(bolder(num_example), 
+ expect_equal(bolder(num_example), 
                c("\\textbf{5}", "0", "\\textbf{0.5}", "0.1", "0.05", "0.01", 
                  "0.005", "0.001", "5e-04"))
  expect_equal(bolder(num_example, .01),
                c("\\textbf{5}", "0", "\\textbf{0.5}", "\\textbf{0.1}", 
                  "\\textbf{0.05}", "\\textbf{0.01}", "0.005", "0.001", "5e-04"))
+ expect_equal(bolder(c(.001, .05), .01),
+               c("0.001", "\\textbf{0.05}"))
+ expect_equal(bolder(c(.001, .05), .01, spround = TRUE),
+               c("0.00", "\\textbf{0.05}"))
+ expect_equal(bolder(c(.001, .05), .01, spround = TRUE, leading0 = FALSE),
+               c(".00", "\\textbf{.05}"))
+ expect_equal(suppressWarnings(bolder(c(".001", ".05"), .01)),
+               c(".001", "\\textbf{.05}"))
+ expect_equal(suppressWarnings(bolder(c(".001", ".05"), .01, spround = TRUE)),
+               c("0.00", "\\textbf{0.05}"))
  expect_error(bolder(num_example, "hello"),
               "threshold is of type")
  expect_error(bolder(num_example, c(.10, 1)),
               "threshold must be of")
  expect_error(bolder(char_example, .10),
-              "ef is of type character")
+              "could not be coerced to type numeric")
+ expect_warning(bolder(c(".001", ".05"), .01),
+               "ef was coerced to type numeric")
 
 })
 

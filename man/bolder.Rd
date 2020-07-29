@@ -4,12 +4,16 @@
 \alias{bolder}
 \title{bolder}
 \usage{
-bolder(ef, threshold = 0.3)
+bolder(ef, threshold = 0.3, spround = FALSE, ...)
 }
 \arguments{
 \item{ef}{a numeric scalar or atomic vector of effect sizes (or any other numeric vector).}
 
 \item{threshold}{a numeric scalar specifiying the size of effect size of greater to bold. Defaults to .30.}
+
+\item{spround}{a logical value indicating whether values should be rounded for printing. Defaults to FALSE.}
+
+\item{...}{optional arguments passed to spround.}
 }
 \description{
 Takes a scalar or atomic vector of effect sizes and bolds values that are equal to or larger than a specified size.
