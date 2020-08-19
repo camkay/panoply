@@ -490,6 +490,50 @@ test_that("text_format returns correct values", {
 
 })
 
+# test text_format
+test_that("dark returns correct values", {
+  expect_equal(dark(constellation = "triad"),
+               c("Machiavellianism", "Narcissism", "Psychopathy"))
+  expect_equal(dark(constellation = "triad", 
+                    shorten       = TRUE),
+               c("Mach", "Narc", "Psyc"))
+  expect_equal(dark(constellation  = "triad", 
+                    shorten        = TRUE,
+                    shorten_length = 5),
+               c("Machi", "Narci", "Psych"))
+  expect_equal(dark(constellation  = "triad", 
+                    shorten        = TRUE,
+                    shorten_length = 5,
+                    format         = "none"),
+               c("Machi", "Narci", "Psych"))
+  expect_equal(dark(constellation  = "triad", 
+                    shorten        = TRUE,
+                    shorten_length = 5,
+                    format         = "bold"),
+               c("**Machi**", "**Narci**", "**Psych**"))
+  expect_equal(dark(constellation  = "triad", 
+                    shorten        = TRUE,
+                    shorten_length = 5,
+                    format         = "bold",
+                    latex          = TRUE),
+               c("\\textbf{Machi}", "\\textbf{Narci}", "\\textbf{Psych}"))
+  expect_equal(dark(constellation  = "tetrad", 
+                    shorten        = TRUE,
+                    shorten_length = 2,
+                    format         = "italic",
+                    latex          = TRUE),
+               c("\\textit{Ma}", 
+                 "\\textit{Na}", 
+                 "\\textit{Ps}", 
+                 "\\textit{Sa}"))
+  expect_equal(dark_triad(),
+               c("Machiavellianism", "Narcissism", "Psychopathy"))
+  expect_equal(dark_tetrad(),
+               c("Machiavellianism", "Narcissism", "Psychopathy", "Sadism"))
+  expect_warning(dark("hello"),
+                 "constellation must be \"triad\" or \"tetrad\"")
+})
+
 # test scuttle
 test_that("scuttle returns correct values", {
   expect_equal(scuttle(num_example, split = "quantile"),
