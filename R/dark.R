@@ -56,13 +56,13 @@ dark <- function(constellation  = "triad",
 #' @rdname dark
 #' @export
 
-dark_triad <- function(x, ...) {
-  dark(constellation = "triad")
+dark_triad <- function(...) {
+  dark(constellation = "triad", ...)
 }
 
 #' @rdname dark
 #' @export
 
-dark_tetrad <- function(x, ...) {
+dark_tetrad <- function(...) {
   dark(constellation = "tetrad", ...)
 }

@@ -14,9 +14,9 @@ dark(
   ...
 )
 
-dark_triad(x, ...)
+dark_triad(...)
 
-dark_tetrad(x, ...)
+dark_tetrad(...)
 }
 \arguments{
 \item{constellation}{a character scalar specifying whether to return the names of the Dark Triad traits or the names of the Dark Tetrad traits. Defaults to "Triad".}
