@@ -17,9 +17,10 @@ coverage](https://codecov.io/gh/camkay/panoply/branch/master/graph/badge.svg)](h
 A panoply of miscellaneous functions: `column_find`, `column_alpha`,
 `column_combine`, `capply`, `scuttle`, `spround`, `perble`, `lenique`,
 `pasterisk`, `bolder`, `paste_paren`, `paste_ci`, `centre`, `mat_merge`,
-`delta_rsq`, `delta_aic`, `delta_bic`, `group_compare`, `text_format`
-(including `bold`, `bold_tex`, `italic`, and `italic_tex`), and
-`build_models`. `scuttle` was created in collaboration with
+`delta_rsq`, `delta_aic`, `delta_bic`, `group_compare`, `build_models`,
+`text_format` (including `bold`, `bold_tex`, `italic`, and
+`italic_tex`), and `dark` (including `dark_triad` and `dark_tetrad`).
+`scuttle` was created in collaboration with
 [AshLynnMiller](https://github.com/AshLynnMiller). A large debt of
 gratitude is also owed to [datalorax](https://github.com/datalorax) and
 his functional programming course. His instruction, course materials,
@@ -607,6 +608,38 @@ zo(data_example_3, cols = c("mach", "narc", "psyc"), split = "group", pasterisk 
 #> 3. psyc    .32    .46   1.00   .604   .434   .000
 ```
 
+### build\_models
+
+`build_models` takes an outcome string (i.e., `outcome`) and a list of
+predictor strings (i.e., `predictors`) and builds a set of models.
+
+``` r
+# create a set of linear models
+build_models(outcome = "y", predictors = list("1", "x1", "x2"))
+#> [1] "y ~ 1"           "y ~ 1 + x1"      "y ~ 1 + x1 + x2"
+
+# create a set of linear models with predictors added simultaneously
+build_models(outcome = "y", predictors = list("1", "x1", c("z1", "z2")))
+#> [1] "y ~ 1"                "y ~ 1 + x1"           "y ~ 1 + x1 + z1 + z2"
+
+# create a set of linear models with interactions
+build_models(outcome = "y", predictors = list("1", 
+                                              "x1", 
+                                              c("z1", "z2"),
+                                              c("x1 * z1", "x1 * z2")))
+#> [1] "y ~ 1"                                   
+#> [2] "y ~ 1 + x1"                              
+#> [3] "y ~ 1 + x1 + z1 + z2"                    
+#> [4] "y ~ 1 + x1 + z1 + z2 + x1 * z1 + x1 * z2"
+
+# create a set of linear mixed-effects models
+build_models(outcome = "y", predictors = list("1 + (1 |id)", 
+                                              "x1", 
+                                              "x2"))
+#> [1] "y ~ 1 + (1 |id)"           "y ~ 1 + (1 |id) + x1"     
+#> [3] "y ~ 1 + (1 |id) + x1 + x2"
+```
+
 ### text\_format
 
 `text_format` formats strings as bold or italicized using markdown or
@@ -669,34 +702,46 @@ text_format(char_example, format = "sub", latex = TRUE)
 #> [5] "\\textsubscript{dog}"     "\\textsubscript{giraffe}"
 ```
 
-### build\_models
+### dark
 
-`build_models` takes an outcome string (i.e., `outcome`) and a list of
-predictor strings (i.e., `predictors`) and builds a set of models.
+`dark` returns a vector of aversive personality trait names (e.g., the
+Dark Triad or Dark Tetrad traits).
 
 ``` r
-# create a set of linear models
-build_models(outcome = "y", predictors = list("1", "x1", "x2"))
-#> [1] "y ~ 1"           "y ~ 1 + x1"      "y ~ 1 + x1 + x2"
+# return the dark triad traits
+dark("triad")
+#> [1] "Machiavellianism" "Narcissism"       "Psychopathy"
 
-# create a set of linear models with predictors added simultaneously
-build_models(outcome = "y", predictors = list("1", "x1", c("z1", "z2")))
-#> [1] "y ~ 1"                "y ~ 1 + x1"           "y ~ 1 + x1 + z1 + z2"
+# you can also use the dark_triad shortcut
+dark_triad()
+#> [1] "Machiavellianism" "Narcissism"       "Psychopathy"
 
-# create a set of linear models with interactions
-build_models(outcome = "y", predictors = list("1", 
-                                              "x1", 
-                                              c("z1", "z2"),
-                                              c("x1 * z1", "x1 * z2")))
-#> [1] "y ~ 1"                                   
-#> [2] "y ~ 1 + x1"                              
-#> [3] "y ~ 1 + x1 + z1 + z2"                    
-#> [4] "y ~ 1 + x1 + z1 + z2 + x1 * z1 + x1 * z2"
+# return the dark tetrad traits
+dark("tetrad")
+#> [1] "Machiavellianism" "Narcissism"       "Psychopathy"      "Sadism"
 
-# create a set of linear mixed-effects models
-build_models(outcome = "y", predictors = list("1 + (1 |id)", 
-                                              "x1", 
-                                              "x2"))
-#> [1] "y ~ 1 + (1 |id)"           "y ~ 1 + (1 |id) + x1"     
-#> [3] "y ~ 1 + (1 |id) + x1 + x2"
+# you can also use the dark_tetrad shortcut
+dark_tetrad()
+#> [1] "Machiavellianism" "Narcissism"       "Psychopathy"      "Sadism"
+
+# if you want shortened names, you can set shorten to `TRUE`
+dark("triad", shorten = TRUE)
+#> [1] "Mach" "Narc" "Psyc"
+
+# and if you want it to be shortened to some other length, `shorten_length`
+dark("triad", shorten = TRUE, shorten_length = 3)
+#> [1] "Mac" "Nar" "Psy"
+
+# maybe you want it in italics...
+dark("triad", format = "italic")
+#> [1] "*Machiavellianism*" "*Narcissism*"       "*Psychopathy*"
+
+# ...or bold
+dark("triad", format = "bold")
+#> [1] "**Machiavellianism**" "**Narcissism**"       "**Psychopathy**"
+
+# ...or in latex italics
+dark("triad", format = "italic", latex = TRUE)
+#> [1] "\\textit{Machiavellianism}" "\\textit{Narcissism}"      
+#> [3] "\\textit{Psychopathy}"
 ```

@@ -14,9 +14,9 @@
 \alias{subs_tex}
 \title{text_format}
 \usage{
-dark_triad(x)
+dark_triad(x, ...)
 
-dark_tetrad(x)
+dark_tetrad(x, ...)
 
 text_format(x, format = "italic", latex = FALSE)
 
