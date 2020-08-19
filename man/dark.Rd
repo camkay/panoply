@@ -2,6 +2,8 @@
 % Please edit documentation in R/dark.R
 \name{dark}
 \alias{dark}
+\alias{dark_triad}
+\alias{dark_tetrad}
 \title{dark}
 \usage{
 dark(
@@ -11,6 +13,10 @@ dark(
   format = "none",
   ...
 )
+
+dark_triad(x, ...)
+
+dark_tetrad(x, ...)
 }
 \arguments{
 \item{constellation}{a character scalar specifying whether to return the names of the Dark Triad traits or the names of the Dark Tetrad traits. Defaults to "Triad".}

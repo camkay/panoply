@@ -53,14 +53,14 @@ dark <- function(constellation  = "triad",
   return(traits)
 }
 
-#' @rdname text_format
+#' @rdname dark
 #' @export
 
 dark_triad <- function(x, ...) {
   dark(constellation = "triad")
 }
 
-#' @rdname text_format
+#' @rdname dark
 #' @export
 
 dark_tetrad <- function(x, ...) {
