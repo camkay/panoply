@@ -39,13 +39,32 @@ mat_b <- psych::corr.test(matrix(rnorm(5 * 7),
 # create example models
 mod_a_example <- lm(scale1_item1 ~ scale2_item1, data = data_example)
 
-mod_b_example <- lm(scale1_item1 ~ scale2_item1 + scale2_item2, data = data_example)
+mod_b_example <- lm(scale1_item1 ~ scale2_item1 + scale2_item2, 
+                    data = data_example)
 
-mod_c_example <- lm(scale1_item1 ~ scale2_item1 + scale2_item2 + scale1_item3, data = data_example)
+mod_c_example <- lm(scale1_item1 ~ scale2_item1 + scale2_item2 + scale1_item3, 
+                    data = data_example)
 
 # test lenique
 test_that("lenique results are equal to length(unique(x)) results", {
   expect_equal(lenique(char_example), length(unique(char_example)))
+})
+
+# test reverse
+test_that("reverse returns the correct values", {
+  expect_equal(reverse(5), 1)
+  expect_equal(reverse(2), 4)
+  expect_equal(reverse(2, 1, 6), 5)
+  expect_equal(reverse(3, 1, 6), 4)
+  expect_equal(reverse(-2, -2, 2), 2)
+  expect_equal(reverse(-1, -2, 2), 1)
+  expect_equal(reverse(-4, -4, 2), 2)
+  expect_equal(reverse(-3, -4, 2), 1)
+  expect_equal(reverse(-2, -4, 2), 0)
+  expect_error(reverse("hello"), "x is of type character.")
+  expect_error(reverse(1, "hello", 1), "low is of type character.")
+  expect_error(reverse(1, 1, "hello"), "high is of type character.")
+  expect_error(reverse(6, 1, 5), "x \\(6\\) is not a value between low \\(1\\)")
 })
 
 # test column_find
@@ -371,7 +390,8 @@ test_that("spround returns correct values", {
   expect_equal(spround(x =  0.06, digits = 1, leading0 = FALSE), ".1")
   expect_equal(spround(x = 0.001, digits = 2, leading0 = TRUE, less_than = TRUE), 
                "< 0.01")
-  expect_equal(spround(x = 0.001, digits = 2, leading0 = FALSE, less_than = TRUE), 
+  expect_equal(spround(x = 0.001, digits = 2, leading0 = FALSE, 
+                       less_than = TRUE), 
                "< .01")
   expect_equal(spround(x = 0.001, digits = 0, less_than = FALSE), 
                "0")
@@ -706,7 +726,8 @@ test_that("check that mat_merge is working properly", {
                            0.112260687304124, 0.258491261135742, 
                            0.258491261135742, 0, 0.668811955414348, 
                            0.072871889778637, 0.258491261135742, 
-                           0.258491261135742, 0.023044260056649, 0), .Dim = c(5L, 5L)))
+                           0.258491261135742, 0.023044260056649, 0), 
+                         .Dim = c(5L, 5L)))
   expect_error(mat_merge(mat_a, 
                          mat_b, 
                          x_from = "lower", 
