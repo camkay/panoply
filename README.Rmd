@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-A panoply of miscellaneous functions: `column_find`, `column_alpha`, `column_combine`, `capply`, `scuttle`, `spround`, `perble`, `lenique`, `pasterisk`, `bolder`, `paste_paren`, `paste_ci`, `centre`, `mat_merge`, `delta_rsq`, `delta_aic`, `delta_bic`, `group_compare`, `build_models`, `text_format` (including `bold`, `bold_tex`, `italic`, and `italic_tex`), and `dark` (including `dark_triad` and `dark_tetrad`). `scuttle` was created in collaboration with [AshLynnMiller](https://github.com/AshLynnMiller). A large debt of gratitude is also owed to [datalorax](https://github.com/datalorax) and his functional programming course. His instruction, course materials, and feedback were instrumental in creating this package. 
+A panoply of miscellaneous functions: `column_find`, `column_alpha`, `column_combine`, `capply`, `scuttle`, `spround`, `perble`, `lenique`, `pasterisk`, `bolder`, `paste_paren`, `paste_ci`, `centre`, `reverse`, `mat_merge`, `delta_rsq`, `delta_aic`, `delta_bic`, `group_compare`, `build_models`, `text_format` (including `bold`, `bold_tex`, `italic`, and `italic_tex`), and `dark` (including `dark_triad` and `dark_tetrad`). `scuttle` was created in collaboration with [AshLynnMiller](https://github.com/AshLynnMiller). A large debt of gratitude is also owed to [datalorax](https://github.com/datalorax) and his functional programming course. His instruction, course materials, and feedback were instrumental in creating this package. 
 
 ## Installation
 
@@ -313,6 +313,18 @@ num_example
 
 # centre num_example
 centre(num_example)
+```
+
+### reverse
+
+`reverse` reverse scores a value based on (1) the value (i.e., `x`), (2) the lowest possible value (i.e., `low`), and (3) the highest possible value (i.e., `high`).
+
+```{r reverse_example}
+# reverse score 2 on a scale from 1 to 5
+reverse(2, 1, 5)
+
+# reverse score -1 on a scale from -2 to 2
+reverse(-1, -2, 2)
 ```
 
 ### delta_rsq, delta_aic, and delta_bic
