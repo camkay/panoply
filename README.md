@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![Travis build
-status](https://travis-ci.org/camkay/panoply.svg?branch=master)](https://travis-ci.org/camkay/panoply)
+status](https://travis-ci.com/camkay/panoply.svg?branch=master)](https://travis-ci.com/camkay/panoply)
 [![Build
 status](https://ci.appveyor.com/api/projects/status/63wlqbusgqetyx9u?svg=true)](https://ci.appveyor.com/project/camkay/panoply)
 [![Codecov test
