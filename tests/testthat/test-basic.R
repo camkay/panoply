@@ -614,6 +614,8 @@ test_that("check paste_paren is combining the values correctly", {
                  "The x value")
   expect_warning(paste_paren(c("2.20", "10.10"), "20.19"),
                  regexp = "The y value")
+  expect_equal(paste_paren(10),
+               "(10)")
 })
 
 # test paren_ci

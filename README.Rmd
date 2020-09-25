@@ -249,9 +249,12 @@ bolder(ef = num_example, threshold = 1.00)
 
 ### paste_paren
 
-`paste_paren` combines two numbers (e.g., 10.12 and 2.22) by wrapping the latter in parentheses (e.g., 10.12 (2.22)). This function was made to streamline the creation of tables that include cells formatted as "mean(sd)".
+If only `x` is provided, `paste_paren` wraps the value in parentheses (e.g., "10.12" becomes "(10.12)"). If `x` and `y` are both provided, it combines the two values (e.g., "10.12" and "2.22") by wrapping the latter in parentheses (e.g., "10.12 (2.22)"). This part of the function was made to streamline the creation of tables that include cells formatted mean(sd).
 
 ```{r paste_paren_example}
+# wrap a single number in parentheses
+paste_paren(10.12)
+
 # combine two numbers
 paste_paren(10.12, 2.22)
 ```
