@@ -1,8 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-panoply <img src="tools/panoply_hex.png" width = 167 align="right"/>
-====================================================================
+# panoply <img src="tools/panoply_hex.png" width = 167 align="right"/>
 
 <!-- badges: start -->
 
@@ -27,8 +26,7 @@ gratitude is also owed to [datalorax](https://github.com/datalorax) and
 his functional programming course. His instruction, course materials,
 and feedback were instrumental in creating this package.
 
-Installation
-------------
+## Installation
 
 The development version of `panoply` can be installed from
 [GitHub](https://github.com/) with:
@@ -36,8 +34,7 @@ The development version of `panoply` can be installed from
     # install.packages("devtools")
     devtools::install_github("camkay/panoply")
 
-Descriptions and Examples
--------------------------
+## Descriptions and Examples
 
 ### column\_find
 
@@ -46,10 +43,11 @@ frame that match a `pattern` specified through a string. The default
 behaviour is to return a logical vector, indicating the columns that
 match the `pattern`. Using the `return` argument, users can request that
 a vector of column numbers (“numeric”) or column names (“character”) be
-returned. `invert` works for all return types, identifying or extracting
-the columns of interest. Users can also request that a data frame with
-only those columns be returned (“data.frame”). `column_find` can
-interpret [regular
+returned. Users can also request that a data frame with only those
+columns be returned (“data.frame”). `invert` works for all return types,
+identifying or extracting the columns that DO NOT match the pattern.
+`antipattern` allows you to exclude columns from the matched output.
+`column_find` can interpret [regular
 expressions](https://en.wikipedia.org/wiki/Regular_expression).
 
     # look at example data
@@ -103,6 +101,13 @@ expressions](https://en.wikipedia.org/wiki/Regular_expression).
     # return a logical vector using a regular expression
     column_find(pattern = "2$", return = "logical", data = data_example)
     #> [1] FALSE  TRUE FALSE FALSE  TRUE
+
+    # return a character vector that matches `scale1` but not `item2`
+    column_find(pattern     = "scale1", 
+                return      = "character", 
+                data        = data_example,
+                antipattern = "item2")
+    #> [1] "scale1_item1" "scale1_item3"
 
 ### column\_alpha
 

@@ -83,7 +83,7 @@ mod_c_example <- lm(scale1_item1 ~ scale2_item1 + scale2_item2 + scale1_item3, d
 
 ### column_find
 
-`column_find` is a function for quickly identifying columns of a data frame that match a `pattern` specified through a string. The default behaviour is to return a logical vector, indicating the columns that match the `pattern`. Using the `return` argument, users can request that a vector of column numbers ("numeric") or column names ("character") be returned. `invert` works for all return types, identifying or extracting the columns of interest. Users can also request that a data frame with only those columns be returned ("data.frame"). `column_find` can interpret [regular expressions](https://en.wikipedia.org/wiki/Regular_expression). 
+`column_find` is a function for quickly identifying columns of a data frame that match a `pattern` specified through a string. The default behaviour is to return a logical vector, indicating the columns that match the `pattern`. Using the `return` argument, users can request that a vector of column numbers ("numeric") or column names ("character") be returned. Users can also request that a data frame with only those columns be returned ("data.frame"). `invert` works for all return types, identifying or extracting the columns that DO NOT match the pattern. `antipattern` allows you to exclude columns from the matched output. `column_find` can interpret [regular expressions](https://en.wikipedia.org/wiki/Regular_expression). 
 
 ```{r column_find_example}
 # look at example data
@@ -109,6 +109,12 @@ column_find(pattern = "scale1",
 
 # return a logical vector using a regular expression
 column_find(pattern = "2$", return = "logical", data = data_example)
+
+# return a character vector that matches `scale1` but not `item2`
+column_find(pattern     = "scale1", 
+            return      = "character", 
+            data        = data_example,
+            antipattern = "item2")
 ```
 
 ### column_alpha
