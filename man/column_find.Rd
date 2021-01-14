@@ -4,7 +4,7 @@
 \alias{column_find}
 \title{column_find}
 \usage{
-column_find(pattern, data, return = "logical", invert = FALSE)
+column_find(pattern, data, return = "logical", invert = FALSE, antipattern)
 }
 \arguments{
 \item{pattern}{a character string that is used to find the columns of interest. It can be a regular expression.}
@@ -14,6 +14,8 @@ column_find(pattern, data, return = "logical", invert = FALSE)
 \item{return}{a string specifying the output desired. "logical" (the default) returns a logical vector with TRUE indicating that a column name includes the pattern. "numeric" returns a numeric vector that identifies the column numbers matching the pattern. "character" returns a character vector with the column names that match the pattern. "data.frame" returns a data frame that includes only those columns whose names match the pattern.}
 
 \item{invert}{if TRUE, identifies or extracts columns that DO NOT match the pattern.}
+
+\item{antipattern}{an optional character string that is used to identify columns that should not be returned. It can be a regular expression.}
 }
 \description{
 Identifies or extracts columns in a dataframe using a string.

@@ -5,6 +5,7 @@
 #' @param data a data frame. 
 #' @param return a string specifying the output desired. "logical" (the default) returns a logical vector with TRUE indicating that a column name includes the pattern. "numeric" returns a numeric vector that identifies the column numbers matching the pattern. "character" returns a character vector with the column names that match the pattern. "data.frame" returns a data frame that includes only those columns whose names match the pattern.
 #' @param invert if TRUE, identifies or extracts columns that DO NOT match the pattern.
+#' @param antipattern an optional character string that is used to identify columns that should not be returned. It can be a regular expression.
 #' @export
 #' @examples
 #' x <- data.frame(my_column_x  = 1:10,
@@ -20,35 +21,41 @@
 #' column_find(pattern = "x", data = x, return = "data.frame")
 #' 
 
-column_find <- function(pattern, data, return = "logical", invert = FALSE) {
+column_find <- function(pattern, data, return = "logical", invert = FALSE, antipattern) {
   
   # check arguments
   argument_check(pattern, "pattern", "character", len_check = TRUE)
   argument_check(data, "data", "data.frame")
   argument_check(return, "return", "character", len_check = TRUE)
   argument_check(invert, "invert", "logical", len_check = TRUE)
+  if (!missing(antipattern)) argument_check(antipattern, 
+                                            "antipattern", 
+                                            "character", 
+                                            len_check = TRUE)
   return <- choice_check(return, "return type", c("logical", 
                                                   "numeric",
                                                   "character",
                                                   "data.frame"))
   
+  # identify columns
+  if (invert == FALSE) {
+    out <- grepl(pattern, names(data))
+    if (!missing(antipattern)) out <- out &!grepl(antipattern, names(data))
+  } else {
+    out <- !grepl(pattern, names(data))
+    if (!missing(antipattern)) out <- out &!grepl(antipattern, names(data))
+  }
+  
   # format x for output
-  if (return == "logical") {
-    if (invert == FALSE) {
-      out <- grepl(pattern, names(data))
-    } else {
-      out <- !grepl(pattern, names(data))
-    }
-  } else if (return == "numeric") {
-    out <- grep(pattern, names(data), invert = invert)
+  if (return == "numeric") {
+    out <- which(out)
   } else if (return == "character" ) {
-    out <- grep(pattern, names(data), value = TRUE, invert = invert)
+    out <- colnames(data)[out]
   } else if (return == "data.frame") {
-    out <- data[, grep(pattern, names(data), invert = invert)]
+    out <- data[, out]
   } 
+  
   
   # return out
   out
 }
-
-
