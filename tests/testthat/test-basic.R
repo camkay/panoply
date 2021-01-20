@@ -672,6 +672,16 @@ test_that("check paste_paren is combining the values correctly", {
                "(10)")
 })
 
+# test collapse
+test_that("check collapse is collapsing the values correctly", {
+  expect_equal(collapse(char_example),
+               "cat + dog + cat + dog + giraffe")
+  expect_equal(collapse(char_example, sep = ""),
+               "catdogcatdoggiraffe")
+  expect_error(collapse(char_example, sep = 5),
+                 regexp = "sep must be of type character")
+})
+
 # test paren_ci
 test_that("check paste_ci is combining the values correctly", {
   expect_equal(paste_ci(5, 10),
