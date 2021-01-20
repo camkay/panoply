@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-A panoply of miscellaneous functions: `column_find`, `column_alpha`, `column_combine`, `capply`, `scuttle`, `spround`, `perble`, `lenique`, `pasterisk`, `bolder`, `paste_paren`, `paste_ci`, `centre`, `reverse`, `mat_merge`, `delta_rsq`, `delta_aic`, `delta_bic`, `group_compare`, `build_models`, `text_format` (including `bold`, `bold_tex`, `italic`, and `italic_tex`), and `dark` (including `dark_triad` and `dark_tetrad`). `scuttle` was created in collaboration with [AshLynnMiller](https://github.com/AshLynnMiller). A large debt of gratitude is also owed to [datalorax](https://github.com/datalorax) and his functional programming course. His instruction, course materials, and feedback were instrumental in creating this package. 
+A panoply of miscellaneous functions: `column_find`, `column_alpha`, `column_combine`, `capply`, `scuttle`, `spround`, `perble`, `lenique`, `pasterisk`, `bolder`, `collapse`, `paste_paren`, `paste_ci`, `centre`, `reverse`, `mat_merge`, `delta_rsq`, `delta_aic`, `delta_bic`, `group_compare`, `build_models`, `text_format` (including `bold`, `bold_tex`, `italic`, and `italic_tex`), and `dark` (including `dark_triad` and `dark_tetrad`). `scuttle` was created in collaboration with [AshLynnMiller](https://github.com/AshLynnMiller). A large debt of gratitude is also owed to [datalorax](https://github.com/datalorax) and his functional programming course. His instruction, course materials, and feedback were instrumental in creating this package. 
 
 ## Installation
 
@@ -251,6 +251,18 @@ bolder(ef = num_example, threshold = .30)
 
 # bold values that are larger than 1.00
 bolder(ef = num_example, threshold = 1.00)
+```
+
+### collapse
+
+A shortcut of `paste(x, collapse = y)` for collapsing character vectors into a single string separated by some character. For example, running `collapse(c("item 1", "item 2"), sep = " + ")` is identical to running `paste(c("item 1", "item 2"), collapse = " + ")`.
+
+```{r collapse}
+# collapse a vector of item labels with the default separator
+collapse(c("item1", "item2", "item3"))
+
+# collapse a vector of item labels with spaces
+collapse(c("item1", "item2", "item3"), sep = " ")
 ```
 
 ### paste_paren
