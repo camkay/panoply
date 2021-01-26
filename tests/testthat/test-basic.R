@@ -53,6 +53,10 @@ mod_b_example <- lm(scale1_item1 ~ scale2_item1 + scale2_item2,
 mod_c_example <- lm(scale1_item1 ~ scale2_item1 + scale2_item2 + scale1_item3, 
                     data = data_example)
 
+# create reorder string
+ro_ex   <- "scale1_item2|scale1_item3|scale1_item1|scale2_item1|scale2_item2"
+ro_ex_2 <- "scale2_item1+scale2_item2+scale1_item2+scale1_item3+scale1_item1"
+
 # test lenique
 test_that("lenique results are equal to length(unique(x)) results", {
   expect_equal(lenique(char_example), length(unique(char_example)))
@@ -198,6 +202,31 @@ test_that("column_alpha returns correct values", {
                               data    = data_example,
                               message = FALSE), 
                  NA)
+})
+
+# test reorder
+test_that("reorder returns correct values", {
+  expect_equal(reorder(data_example, ro_ex), 
+               structure(list(scale1_item2 = c(7, 2, 4, 5, 4, 8, 9), 
+                              scale1_item3 = c(8, 1, 5, 4, 4, 9, 8), 
+                              scale1_item1 = c(6, 1, 3, 4, 5, 9, 9), 
+                              scale2_item1 = c(9, 9, 9, 8, 4, 2, 2), 
+                              scale2_item2 = c(7, 8, 7, 9, 5, 1, 2)), 
+                         class = "data.frame", 
+                         row.names = c(NA, -7L)))
+  expect_equal(reorder(data_example, ro_ex_2, sep = "\\+"), 
+             structure(list(scale2_item1 = c(9, 9, 9, 8, 4, 2, 2), 
+                            scale2_item2 = c(7, 8, 7, 9, 5, 1, 2),
+                            scale1_item2 = c(7, 2, 4, 5, 4, 8, 9), 
+                            scale1_item3 = c(8, 1, 5, 4, 4, 9, 8), 
+                            scale1_item1 = c(6, 1, 3, 4, 5, 9, 9)), 
+                       class = "data.frame", 
+                       row.names = c(NA, -7L)))
+  expect_error(reorder(data_example, ro_ex_2, sep = "\\|"), 
+               "reorder was unable to split the key using sep")
+  expect_error(reorder(data_example_2, ro_ex_2, sep = "\\+"), 
+               "could not find key labels in provided dataframe")
+
 })
 
 # test capply
