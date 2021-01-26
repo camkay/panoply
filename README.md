@@ -18,13 +18,14 @@ A panoply of miscellaneous functions: `column_find`, `column_alpha`,
 `column_combine`, `capply`, `scuttle`, `spround`, `perble`, `lenique`,
 `pasterisk`, `bolder`, `collapse`, `paste_paren`, `paste_ci`, `centre`,
 `reverse`, `mat_merge`, `delta_rsq`, `delta_aic`, `delta_bic`,
-`group_compare`, `build_models`, `text_format` (including `bold`,
-`bold_tex`, `italic`, and `italic_tex`), and `dark` (including
-`dark_triad` and `dark_tetrad`). `scuttle` was created in collaboration
-with [AshLynnMiller](https://github.com/AshLynnMiller). A large debt of
-gratitude is also owed to [datalorax](https://github.com/datalorax) and
-his functional programming course. His instruction, course materials,
-and feedback were instrumental in creating this package.
+`group_compare`, `zo`, `reorder`, `build_models`, `text_format`
+(including `bold`, `bold_tex`, `italic`, and `italic_tex`), and `dark`
+(including `dark_triad` and `dark_tetrad`). `scuttle` was created in
+collaboration with [AshLynnMiller](https://github.com/AshLynnMiller). A
+large debt of gratitude is also owed to
+[datalorax](https://github.com/datalorax) and his functional programming
+course. His instruction, course materials, and feedback were
+instrumental in creating this package.
 
 ## Installation
 
@@ -653,6 +654,51 @@ zo(data_example_3, cols = c("mach", "narc", "psyc"), split = "group", pasterisk 
 #> 1. mach   1.00    .99   -.46   .000   .002   .438
 #> 2. narc    .97   1.00   -.36   .005   .000   .553
 #> 3. psyc    .32    .46   1.00   .604   .434   .000
+```
+
+### reorder
+
+`reorder` reorders columns based on a string with separators. `reorder`
+defaults to splitting using “\|”, because that is what is used by
+qualtrics.
+
+``` r
+# look at example data and reorder strings
+data_example
+#>   scale1_item1 scale1_item2 scale1_item3 scale2_item1 scale2_item2
+#> 1            6            7            8            9            7
+#> 2            1            2            1            9            8
+#> 3            3            4            5            9            7
+#> 4            4            5            4            8            9
+#> 5            5            4            4            4            5
+#> 6            9            8            9            2            1
+#> 7            9            9            8            2            2
+ro_ex 
+#> [1] "scale1_item2|scale1_item3|scale1_item1|scale2_item1|scale2_item2"
+ro_ex_2
+#> [1] "scale2_item1+scale2_item2+scale1_item2+scale1_item3+scale1_item1"
+
+# reorder that data using a string with `|` separators
+reorder(data_example, ro_ex)
+#>   scale1_item2 scale1_item3 scale1_item1 scale2_item1 scale2_item2
+#> 1            7            8            6            9            7
+#> 2            2            1            1            9            8
+#> 3            4            5            3            9            7
+#> 4            5            4            4            8            9
+#> 5            4            4            5            4            5
+#> 6            8            9            9            2            1
+#> 7            9            8            9            2            2
+
+# reorder that data using a string with `+` separators
+reorder(data_example, ro_ex_2, sep = "\\+")
+#>   scale2_item1 scale2_item2 scale1_item2 scale1_item3 scale1_item1
+#> 1            9            7            7            8            6
+#> 2            9            8            2            1            1
+#> 3            9            7            4            5            3
+#> 4            8            9            5            4            4
+#> 5            4            5            4            4            5
+#> 6            2            1            8            9            9
+#> 7            2            2            9            8            9
 ```
 
 ### build\_models
