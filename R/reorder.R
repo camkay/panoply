@@ -14,6 +14,9 @@ reorder <- function(data, key_column, sep = "\\|") {
   argument_check(key_column, "key_column", "character")
   argument_check(sep, "sep", "character", len_check = TRUE)
   
+  # convert data.frame from tibble
+  data <- data.frame(data)
+  
   # separate string by separation
   key_column <- strsplit(data[,key_column], sep)
   
