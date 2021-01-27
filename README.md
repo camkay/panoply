@@ -659,46 +659,53 @@ zo(data_example_3, cols = c("mach", "narc", "psyc"), split = "group", pasterisk 
 ### reorder
 
 `reorder` reorders columns based on a string with separators. `reorder`
-defaults to splitting using “\|”, because that is what is used by
+defaults to splitting using `"\\|"`, because that is what is used by
 qualtrics.
 
 ``` r
-# look at example data and reorder strings
-data_example
-#>   scale1_item1 scale1_item2 scale1_item3 scale2_item1 scale2_item2
-#> 1            6            7            8            9            7
-#> 2            1            2            1            9            8
-#> 3            3            4            5            9            7
-#> 4            4            5            4            8            9
-#> 5            5            4            4            4            5
-#> 6            9            8            9            2            1
-#> 7            9            9            8            2            2
-ro_ex 
-#> [1] "scale1_item2|scale1_item3|scale1_item1|scale2_item1|scale2_item2"
-ro_ex_2
-#> [1] "scale2_item1+scale2_item2+scale1_item2+scale1_item3+scale1_item1"
+# look at example data 
+data_example_5
+#>   item1 item2 item3           order_1           order_2  order_3
+#> 1     6     7     8 item1|item2|item3 item3+item2+item1 i3+i2+i1
+#> 2     1     2     3 item3|item2|item1 item1+item2+item3 i1+i2+i3
+#> 3     3     4     5 item1|item3|item2 item3+item1+item2 i3+i1+i2
+#> 4     4     5     6 item3|item1|item2 item1+item3+item2 i1+i3+i2
 
 # reorder that data using a string with `|` separators
-reorder(data_example, ro_ex)
-#>   scale1_item2 scale1_item3 scale1_item1 scale2_item1 scale2_item2
-#> 1            7            8            6            9            7
-#> 2            2            1            1            9            8
-#> 3            4            5            3            9            7
-#> 4            5            4            4            8            9
-#> 5            4            4            5            4            5
-#> 6            8            9            9            2            1
-#> 7            9            8            9            2            2
+reorder(data_example_5, "order_1")
+#> [[1]]
+#>   item1 item2 item3
+#> 1     6     7     8
+#> 
+#> [[2]]
+#>   item3 item2 item1
+#> 2     3     2     1
+#> 
+#> [[3]]
+#>   item1 item3 item2
+#> 3     3     5     4
+#> 
+#> [[4]]
+#>   item3 item1 item2
+#> 4     6     4     5
 
 # reorder that data using a string with `+` separators
-reorder(data_example, ro_ex_2, sep = "\\+")
-#>   scale2_item1 scale2_item2 scale1_item2 scale1_item3 scale1_item1
-#> 1            9            7            7            8            6
-#> 2            9            8            2            1            1
-#> 3            9            7            4            5            3
-#> 4            8            9            5            4            4
-#> 5            4            5            4            4            5
-#> 6            2            1            8            9            9
-#> 7            2            2            9            8            9
+reorder(data_example_5, "order_2", sep = "\\+")
+#> [[1]]
+#>   item3 item2 item1
+#> 1     8     7     6
+#> 
+#> [[2]]
+#>   item1 item2 item3
+#> 2     1     2     3
+#> 
+#> [[3]]
+#>   item3 item1 item2
+#> 3     5     3     4
+#> 
+#> [[4]]
+#>   item1 item3 item2
+#> 4     4     6     5
 ```
 
 ### build\_models

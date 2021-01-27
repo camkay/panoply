@@ -59,15 +59,27 @@ data_example_3 <- data.frame(group  = c("A", "B", "A", "A", "B",
                              narc   = c(10, 20, 35, 50, 65, 71, 80, 96, 99, 90),
                              psyc   = c(-1, -7, -1, -1, -3, -4, 1, -9, -9, -1))
 
+data_example_5 <- data.frame(item1   = c(6, 1, 3, 4),
+                             item2   = c(7, 2, 4, 5),
+                             item3   = c(8, 3, 5, 6),
+                             order_1 = c("item1|item2|item3",
+                                         "item3|item2|item1",
+                                         "item1|item3|item2",
+                                         "item3|item1|item2"),
+                             order_2 = c("item3+item2+item1",
+                                         "item1+item2+item3",
+                                         "item3+item1+item2",
+                                         "item1+item3+item2"),
+                             order_3 = c("i3+i2+i1",
+                                         "i1+i2+i3",
+                                         "i3+i1+i2",
+                                         "i1+i3+i2"))
+
 # create example numeric vector
 num_example  <- c(5, 1, 0, .5, .1, .05, .01, .005, .001, .0005)
 
 # create example character vector
 char_example  <- c("cat", "cat", "dog", "cat", "dog", "giraffe")
-
-# create example reorder strings
-ro_ex   <- "scale1_item2|scale1_item3|scale1_item1|scale2_item1|scale2_item2"
-ro_ex_2 <- "scale2_item1+scale2_item2+scale1_item2+scale1_item3+scale1_item1"
 
 # create example mats
 mat_a <- matrix(rep( "apple", 25), nrow = 5)
@@ -407,19 +419,17 @@ zo(data_example_3, cols = c("mach", "narc", "psyc"), split = "group", pasterisk 
 
 ### reorder
 
-`reorder` reorders columns based on a string with separators. `reorder` defaults to splitting using "\|", because that is what is used by qualtrics.
+`reorder` reorders columns based on a string with separators. `reorder` defaults to splitting using `"\\|"`, because that is what is used by qualtrics.
 
 ```{r reorder_example}
-# look at example data and reorder strings
-data_example
-ro_ex 
-ro_ex_2
+# look at example data 
+data_example_5
 
 # reorder that data using a string with `|` separators
-reorder(data_example, ro_ex)
+reorder(data_example_5, "order_1")
 
 # reorder that data using a string with `+` separators
-reorder(data_example, ro_ex_2, sep = "\\+")
+reorder(data_example_5, "order_2", sep = "\\+")
 
 ```
 
