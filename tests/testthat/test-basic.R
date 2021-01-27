@@ -31,6 +31,22 @@ data_example_4 <- data.frame(scale1_item1 = c(6, 1, 3, 4, 5, 9, 9),
                              scale3_item1 = c(6, 6, 6, 6, 6, 6, 6),
                              scale3_item2 = c(7, 7, 7, 7, 7, 7, 7))
 
+data_example_5 <- data.frame(item1   = c(6, 1, 3, 4),
+                             item2   = c(7, 2, 4, 5),
+                             item3   = c(8, 3, 5, 6),
+                             order_1 = c("item1|item2|item3",
+                                         "item3|item2|item1",
+                                         "item1|item3|item2",
+                                         "item3|item1|item2"),
+                             order_2 = c("item3+item2+item1",
+                                         "item1+item2+item3",
+                                         "item3+item1+item2",
+                                         "item1+item3+item2"),
+                             order_3 = c("i3+i2+i1",
+                                         "i1+i2+i3",
+                                         "i3+i1+i2",
+                                         "i1+i3+i2"))
+
 data_example_profile <- data.frame(profile_1 = c(50, 55, 60, 65, 70),
                                    profile_2 = c(25, 30, 35, 40, 45))
 
@@ -52,10 +68,6 @@ mod_b_example <- lm(scale1_item1 ~ scale2_item1 + scale2_item2,
 
 mod_c_example <- lm(scale1_item1 ~ scale2_item1 + scale2_item2 + scale1_item3, 
                     data = data_example)
-
-# create reorder string
-ro_ex   <- "scale1_item2|scale1_item3|scale1_item1|scale2_item1|scale2_item2"
-ro_ex_2 <- "scale2_item1+scale2_item2+scale1_item2+scale1_item3+scale1_item1"
 
 # test lenique
 test_that("lenique results are equal to length(unique(x)) results", {
@@ -206,25 +218,27 @@ test_that("column_alpha returns correct values", {
 
 # test reorder
 test_that("reorder returns correct values", {
-  expect_equal(reorder(data_example, ro_ex), 
-               structure(list(scale1_item2 = c(7, 2, 4, 5, 4, 8, 9), 
-                              scale1_item3 = c(8, 1, 5, 4, 4, 9, 8), 
-                              scale1_item1 = c(6, 1, 3, 4, 5, 9, 9), 
-                              scale2_item1 = c(9, 9, 9, 8, 4, 2, 2), 
-                              scale2_item2 = c(7, 8, 7, 9, 5, 1, 2)), 
-                         class = "data.frame", 
-                         row.names = c(NA, -7L)))
-  expect_equal(reorder(data_example, ro_ex_2, sep = "\\+"), 
-             structure(list(scale2_item1 = c(9, 9, 9, 8, 4, 2, 2), 
-                            scale2_item2 = c(7, 8, 7, 9, 5, 1, 2),
-                            scale1_item2 = c(7, 2, 4, 5, 4, 8, 9), 
-                            scale1_item3 = c(8, 1, 5, 4, 4, 9, 8), 
-                            scale1_item1 = c(6, 1, 3, 4, 5, 9, 9)), 
-                       class = "data.frame", 
-                       row.names = c(NA, -7L)))
-  expect_error(reorder(data_example, ro_ex_2, sep = "\\|"), 
+  expect_equal(reorder(data_example_5, "order_1"), 
+               list(structure(list(item1 = 6, item2 = 7, item3 = 8), 
+                              row.names = 1L, class = "data.frame"), 
+                    structure(list(item3 = 3, item2 = 2, item1 = 1), 
+                              row.names = 2L, class = "data.frame"), 
+                    structure(list(item1 = 3, item3 = 5, item2 = 4), 
+                              row.names = 3L, class = "data.frame"), 
+                    structure(list(item3 = 6, item1 = 4, item2 = 5), 
+                              row.names = 4L, class = "data.frame")))
+  expect_equal(reorder(data_example_5, "order_2", "\\+"), 
+               list(structure(list(item3 = 8, item2 = 7, item1 = 6), 
+                              row.names = 1L, class = "data.frame"), 
+                    structure(list(item1 = 1, item2 = 2, item3 = 3), 
+                              row.names = 2L, class = "data.frame"), 
+                    structure(list(item3 = 5, item1 = 3, item2 = 4), 
+                              row.names = 3L, class = "data.frame"), 
+                    structure(list(item1 = 4, item3 = 6, item2 = 5), 
+                              row.names = 4L, class = "data.frame")))
+  expect_error(reorder(data_example_5, "order_1", "\\="),  
                "reorder was unable to split the key using sep")
-  expect_error(reorder(data_example_2, ro_ex_2, sep = "\\+"), 
+  expect_error(reorder(data_example_5, "order_3", "\\+"), 
                "could not find key labels in provided dataframe")
 
 })
