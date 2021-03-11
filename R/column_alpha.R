@@ -7,6 +7,7 @@
 #' @param verbose specifies whether all column names used should be listed in the message, regardless of length. 
 #' @param message if TRUE, messages are generated telling the user which columns were used to calculate Cronbach's Alpha.
 #' @param na.rm a logical value indicating whether `NA` values should be removed prior to computation.
+#' @param rij a logical value indicating whether the average correlation between the items should be returned instead of Cronbach's alpha. 
 #' @export
 #' 
 
@@ -14,8 +15,9 @@ column_alpha <- function(pattern,
                          data, 
                          full    = FALSE, 
                          verbose = FALSE,
-                         message =  TRUE,
-                         na.rm   = TRUE) {
+                         message = TRUE,
+                         na.rm   = TRUE,
+                         rij     = FALSE) {
   
   # check arguments
   argument_check(pattern, "pattern", "character", len_check = TRUE)
@@ -37,10 +39,25 @@ column_alpha <- function(pattern,
   
   # return only raw alpha if FULL == FALSE
   if (full == FALSE) {
-    alpha_out <- alpha_out[["total"]][["raw_alpha"]]  
+    # return RIJ if rij == TRUE
+    if(rij) {
+      alpha_out <- alpha_out[["total"]][["average_r"]]  
+    } else{
+      alpha_out <- alpha_out[["total"]][["raw_alpha"]]  
+    }
   } 
   
   # return alphas
   alpha_out
 
+}
+
+#' @rdname column_alpha
+#' @export
+
+column_rij <- function(pattern, data, ...) {
+  column_alpha(pattern = pattern, 
+               data    = data, 
+               rij     = TRUE,
+               ...)
 }

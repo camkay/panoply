@@ -199,6 +199,17 @@ test_that("column_alpha returns correct values", {
                             data    = data_example), 
                0.974039829302987)
   expect_equal(column_alpha(pattern = "scale1", 
+                            data    = data_example,
+                            rij     = TRUE), 
+             0.9347283)
+  expect_equal(column_rij(pattern = "scale1", 
+                          data    = data_example), 
+             0.9347283)
+  expect_equal(column_rij(pattern = "scale1", 
+                              data    = data_example,
+                              full    = TRUE)[[1]],
+               alpha(data_example[, 1:3], warnings = FALSE)[[1]])
+  expect_equal(column_alpha(pattern = "scale1", 
                               data    = data_example,
                               full    = TRUE)[[1]],
                alpha(data_example[, 1:3], warnings = FALSE)[[1]])
