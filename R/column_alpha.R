@@ -8,6 +8,7 @@
 #' @param message if TRUE, messages are generated telling the user which columns were used to calculate Cronbach's Alpha.
 #' @param na.rm a logical value indicating whether `NA` values should be removed prior to computation.
 #' @param rij a logical value indicating whether the average correlation between the items should be returned instead of Cronbach's alpha. 
+#' @param ... additional arguments passed to `column_alpha`.
 #' @export
 #' 
 

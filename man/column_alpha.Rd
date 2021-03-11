@@ -31,6 +31,8 @@ column_rij(pattern, data, ...)
 \item{na.rm}{a logical value indicating whether `NA` values should be removed prior to computation.}
 
 \item{rij}{a logical value indicating whether the average correlation between the items should be returned instead of Cronbach's alpha.}
+
+\item{...}{additional arguments passed to `column_alpha`.}
 }
 \description{
 Estimates Cronbach's Alpha--an indicator of internal consistency--using only columns that have names that match a pattern. The analysis relies on `psych::alpha`.

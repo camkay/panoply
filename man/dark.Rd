@@ -27,7 +27,7 @@ dark_tetrad(...)
 
 \item{format}{a character scalar indicating whether to italicize or bold the string. Defaults to "none.}
 
-\item{...}{additional arguments are assed to `text_format`.}
+\item{...}{additional arguments passed to `text_format`.}
 }
 \description{
 A function for returning a vector of aversive personality trait names (e.g., the Dark Triad or Dark Tetrad traits).

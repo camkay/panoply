@@ -6,7 +6,7 @@
 #' @param shorten a logical scalar indicating whether to shorten the trait names. Defaults to `FALSE`.
 #' @param shorten_length a numeric scaler indicating the number of letters to return (e.g., `4` would return "Mach" instead of "Machiavellianism"). Defaults to `4`.
 #' @param format a character scalar indicating whether to italicize or bold the string. Defaults to "none.
-#' @param ... additional arguments are assed to `text_format`.
+#' @param ... additional arguments passed to `text_format`.
 #' @export
 
 dark <- function(constellation  = "triad", 
