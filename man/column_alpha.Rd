@@ -2,6 +2,7 @@
 % Please edit documentation in R/column_alpha.R
 \name{column_alpha}
 \alias{column_alpha}
+\alias{column_rij}
 \title{column_alpha}
 \usage{
 column_alpha(
@@ -10,8 +11,11 @@ column_alpha(
   full = FALSE,
   verbose = FALSE,
   message = TRUE,
-  na.rm = TRUE
+  na.rm = TRUE,
+  rij = FALSE
 )
+
+column_rij(pattern, data, ...)
 }
 \arguments{
 \item{pattern}{a character string that is used to find the columns of interest. It can be a regular expression.}
@@ -25,6 +29,8 @@ column_alpha(
 \item{message}{if TRUE, messages are generated telling the user which columns were used to calculate Cronbach's Alpha.}
 
 \item{na.rm}{a logical value indicating whether `NA` values should be removed prior to computation.}
+
+\item{rij}{a logical value indicating whether the average correlation between the items should be returned instead of Cronbach's alpha.}
 }
 \description{
 Estimates Cronbach's Alpha--an indicator of internal consistency--using only columns that have names that match a pattern. The analysis relies on `psych::alpha`.
