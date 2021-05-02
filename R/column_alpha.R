@@ -31,8 +31,14 @@ column_alpha <- function(pattern,
   data_found <- column_find(pattern, data, return = "data.frame")
   
   # message user how the composites were created if message == TRUE
+  if (rij) {
+    message_value <- "An average inter-item correlation"
+  } else {
+    message_value <- "Cronbach's Alpha"
+  }
+
   if (message == TRUE) {
-    column_message(data_found, "Cronbach's Alpha", verbose = verbose)
+    column_message(data_found, message_value, verbose = verbose)
   }
 
   # calculate and extract the alpha value
