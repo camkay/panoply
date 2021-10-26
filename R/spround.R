@@ -27,8 +27,8 @@ spround <- function(x, digits = 2, leading0 = TRUE, less_than = FALSE) {
   if (less_than == TRUE) {
     if (digits != 0) {
       out[as.numeric(out) == 0] <- paste0("< 0.",
-                                    rep("0", digits - 1),
-                                    "1")
+                                          paste(rep("0", digits - 1), collapse = ""),
+                                          "1")
     } else {
       out[as.numeric(out) == 0] <- paste0("< 1")
     }
