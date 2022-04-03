@@ -208,9 +208,28 @@ test_that("column_alpha returns correct values", {
                             data    = data_example), 
                0.974039829302987)
   expect_equal(column_alpha(pattern = "scale1", 
+                            data    = data_example), 
+               psych::alpha(data_example[, 1:3], 
+                            warnings = FALSE)[[1]]$raw_alpha)
+  expect_equal(column_rij(pattern = "scale1", 
+                            data    = data_example), 
+               psych::alpha(data_example[, 1:3], 
+                            warnings = FALSE)[[1]]$average_r)
+  expect_equal(column_alpha(pattern = "scale1", 
                             data    = data_example,
-                            rij     = TRUE), 
+                            return  = "alpha"), 
+               0.974039829302987)
+  expect_equal(column_alpha(pattern = "scale1", 
+                            data    = data_example,
+                            return  = "rij"), 
              0.9347283)
+  expect_equal(column_alpha(pattern = "scale1", 
+                            data    = data_example,
+                            return  = "both"), 
+             c(0.974039829302987, 0.9347283))
+  expect_equal(column_both(pattern = "scale1", 
+                            data    = data_example), 
+             c(0.974039829302987, 0.9347283))
   expect_equal(column_rij(pattern = "scale1", 
                           data    = data_example), 
              0.9347283)
@@ -234,6 +253,14 @@ test_that("column_alpha returns correct values", {
                               data    = data_example,
                               message = FALSE), 
                  NA)
+  expect_warning(column_alpha(pattern = "scale1", 
+                              data    = data_example,
+                              return  = "hello"), 
+                 "used instead")
+  expect_equal(suppressWarnings(column_alpha(pattern = "scale1", 
+                          data    = data_example,
+                          return  = "hello")), 
+             0.974039829302987)
 })
 
 # test reorder
