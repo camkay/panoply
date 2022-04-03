@@ -12,7 +12,9 @@ Imports:
   psych,
   stats,
   effectsize,
-  broom
+  broom,
+  cocor,
+  multcompView
 License: MIT + file LICENSE
 Date: 2019-06-18
 Encoding: UTF-8

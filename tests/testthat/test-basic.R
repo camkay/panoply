@@ -1,3 +1,6 @@
+# set.seed 
+set.seed(1)
+
 # create example character vector
 char_example <- c("cat", "dog", "cat", "dog", "giraffe")
 
@@ -47,18 +50,24 @@ data_example_5 <- data.frame(item1   = c(6, 1, 3, 4),
                                          "i3+i1+i2",
                                          "i1+i3+i2"))
 
+data_example_6 <- data.frame(scale1_item1 = rep(c(6, 1, 3, 4, 5, 9, 9), 4),
+                             scale1_item2 = rep(c(7, 2, 4, 5, 4, 8, 9), 4),
+                             scale1_item3 = rep(c(8, 1, 5, 4, 4, 9, 8), 4),
+                             scale2_item1 = rep(c(9, 9, 9, 8, 4, 2, 2), 4),
+                             scale2_item2 = rep(c(7, 8, 7, 9, 5, 1, 2), 4))
+
 data_example_profile <- data.frame(profile_1 = c(50, 55, 60, 65, 70),
                                    profile_2 = c(25, 30, 35, 40, 45))
 
 # create example mats
 mat_a <- psych::corr.test(data_example)$p
 
-set.seed(1)
-
 mat_b <- psych::corr.test(matrix(rnorm(5 * 7), 
                           nrow = 7, 
                           dimnames = list(rownames(data_example), 
                                           colnames(data_example))))$p
+
+mat_c <- psych::corr.test(data_example_6)
 
 # create example models
 mod_a_example <- lm(scale1_item1 ~ scale2_item1, data = data_example)
@@ -1161,6 +1170,246 @@ test_that("check that zo is working properly", {
                "zo is only able to distinguish between 2 groups")
   expect_error(zo(data_example_2, split = "group"),
                NA)
+
+})
+
+test_that("check that compare_rs is working properly", {
+  expect_equal(compare_rs(mat_c, 
+                          predictors = c("scale1_item1", 
+                                         "scale1_item2", 
+                                         "scale1_item3"), 
+                          outcome = "scale2_item2", 
+                          adjust.p = "none", 
+                          threshold = .05)$comparisons[1, "p"],
+               cocor::cocor.dep.groups.overlap(
+                 r.jk         = mat_c$r["scale2_item2", "scale1_item1"],
+                 r.jh         = mat_c$r["scale2_item2", "scale1_item2"],
+                 r.kh         = mat_c$r["scale1_item1", "scale1_item2"],
+                 n            = mat_c$n,
+                 return.htest = TRUE)$hittner2003$p.value
+               )
+  expect_equal(compare_rs(mat_c, 
+                          predictors = c("scale1_item1", 
+                                         "scale1_item2", 
+                                         "scale1_item3"), 
+                          outcome = "scale2_item2", 
+                          adjust.p = "none", 
+                          threshold = .05)$comparisons[1, "statistic"],
+               cocor::cocor.dep.groups.overlap(
+                 r.jk         = mat_c$r["scale2_item2", "scale1_item1"],
+                 r.jh         = mat_c$r["scale2_item2", "scale1_item2"],
+                 r.kh         = mat_c$r["scale1_item1", "scale1_item2"],
+                 n            = mat_c$n,
+                 return.htest = TRUE)$hittner2003$statistic[[1]]
+               )
+  expect_equal(compare_rs(mat_c, 
+                          predictors = c("scale1_item1", 
+                                         "scale1_item2", 
+                                         "scale1_item3"), 
+                          outcome = "scale2_item2", 
+                          adjust.p = "none", 
+                          threshold = .05)$comparisons[2, "p"],
+               cocor::cocor.dep.groups.overlap(
+                 r.jk         = mat_c$r["scale2_item2", "scale1_item1"],
+                 r.jh         = mat_c$r["scale2_item2", "scale1_item3"],
+                 r.kh         = mat_c$r["scale1_item1", "scale1_item3"],
+                 n            = mat_c$n,
+                 return.htest = TRUE)$hittner2003$p.value
+               )
+  expect_equal(compare_rs(mat_c, 
+                          predictors = c("scale1_item1", 
+                                         "scale1_item2", 
+                                         "scale1_item3"), 
+                          outcome   = "scale2_item1", 
+                          adjust.p  = "none", 
+                          threshold = .05)$comparisons[2, "p"],
+               cocor::cocor.dep.groups.overlap(
+                 r.jk         = mat_c$r["scale2_item1", "scale1_item1"],
+                 r.jh         = mat_c$r["scale2_item1", "scale1_item3"],
+                 r.kh         = mat_c$r["scale1_item1", "scale1_item3"],
+                 n            = mat_c$n,
+                 return.htest = TRUE)$hittner2003$p.value
+               )
+  expect_equal(compare_rs(mat_c, 
+                          predictors = c("scale1_item1", 
+                                         "scale1_item2", 
+                                         "scale1_item3"), 
+                          outcome   = "scale2_item1", 
+                          test      = "hotelling1940",
+                          adjust.p  = "none", 
+                          threshold = .05)$comparisons[2, "p"],
+               cocor::cocor.dep.groups.overlap(
+                 r.jk         = mat_c$r["scale2_item1", "scale1_item1"],
+                 r.jh         = mat_c$r["scale2_item1", "scale1_item3"],
+                 r.kh         = mat_c$r["scale1_item1", "scale1_item3"],
+                 n            = mat_c$n,
+                 return.htest = TRUE)$hotelling1940$p.value
+               )
+  expect_equal(compare_rs(mat_c, 
+                        predictors = c("scale1_item1", 
+                                       "scale1_item2", 
+                                       "scale1_item3"), 
+                        outcome   = "scale2_item1", 
+                        test      = "hotelling1940",
+                        adjust.p  = "none", 
+                        threshold = .05)$cld,
+             c(scale1_item1 = "a", scale1_item2 = "b", scale1_item3 = "b")
+             )
+  expect_equal(compare_rs(mat_c, 
+                        predictors = c("scale1_item1", 
+                                       "scale1_item2", 
+                                       "scale1_item3"), 
+                        outcome   = "scale2_item1", 
+                        test      = "hotelling1940",
+                        adjust.p  = "none", 
+                        threshold = -Inf)$cld,
+             c(scale1_item1 = "a", scale1_item2 = "a", scale1_item3 = "a")
+             )
+  expect_equal(compare_rs(mat_c, 
+                          predictors = c("scale1_item1", 
+                                         "scale1_item2", 
+                                         "scale1_item3"), 
+                          outcome = "scale2_item2", 
+                          adjust.p = "bonferroni", 
+                          threshold = .05)$comparisons[1, "p"],
+               cocor::cocor.dep.groups.overlap(
+                 r.jk         = mat_c$r["scale2_item2", "scale1_item1"],
+                 r.jh         = mat_c$r["scale2_item2", "scale1_item2"],
+                 r.kh         = mat_c$r["scale1_item1", "scale1_item2"],
+                 n            = mat_c$n,
+                 return.htest = TRUE)$hittner2003$p.value * 3
+               )
+
+  expect_warning(compare_rs(mat_c, 
+                        predictors = c("scale1_item1", 
+                                       "scale1_item2", 
+                                       "scale1_item3"), 
+                        outcome   = "scale2_item1", 
+                        test      = "hotelling19401",
+                        adjust.p  = "none", 
+                        threshold = .05),
+                 "is not a recognized test")
+  expect_error(compare_rs(99, 
+                        predictors = c("scale1_item1", 
+                                       "scale1_item2", 
+                                       "scale1_item3"), 
+                        outcome   = "scale2_item1", 
+                        test      = "hotelling1940",
+                        adjust.p  = "none", 
+                        threshold = .05),
+                 "cor_mat must be of type list")
+  expect_error(compare_rs(list(1, 2, 3), 
+                        predictors = c("scale1_item1", 
+                                       "scale1_item2", 
+                                       "scale1_item3"), 
+                        outcome   = "scale2_item1", 
+                        test      = "hotelling1940",
+                        adjust.p  = "none", 
+                        threshold = .05),
+                 "cor_mat must be of length 14")
+  expect_error(compare_rs(mat_c, 
+                          predictors = c("scale1_item1"), 
+                          outcome = "scale2_item2", 
+                          adjust.p = "none", 
+                          threshold = .05),
+               "The length of predictors must be between 2 and Inf"
+               )
+  expect_error(compare_rs(mat_c, 
+                        predictors = c("scale1_item1", "hello"), 
+                        outcome = "scale2_item2", 
+                        adjust.p = "none", 
+                        threshold = .05),
+             "predictors not found in data"
+             )
+  expect_error(compare_rs(mat_c, 
+                        predictors = 99, 
+                        outcome = "scale2_item2", 
+                        adjust.p = "none", 
+                        threshold = .05),
+             "predictors must be of type character"
+             )
+  expect_error(compare_rs(mat_c, 
+                        predictors = c("scale1_item1", 
+                                       "scale1_item2", 
+                                       "scale1_item3"), 
+                        outcome   = 99, 
+                        test      = "hotelling1940",
+                        adjust.p  = "none", 
+                        threshold = .05),
+                 "outcome must be of type character")
+  expect_error(compare_rs(mat_c, 
+                        predictors = c("scale1_item1", 
+                                       "scale1_item2", 
+                                       "scale1_item3"), 
+                        outcome   = c("scale2_item2",
+                                      "scale2_item3"),
+                        test      = "hotelling1940",
+                        adjust.p  = "none", 
+                        threshold = .05),
+                 "outcome must be of length 1")
+  expect_error(compare_rs(mat_c, 
+                        predictors = c("scale1_item1", 
+                                       "scale1_item2", 
+                                       "scale1_item3"), 
+                        outcome   = "scale2_item3",
+                        test      = "hotelling1940",
+                        adjust.p  = "none", 
+                        threshold = .05),
+                 "outcome not found in data")
+  expect_error(compare_rs(mat_c, 
+                        predictors = c("scale1_item1", 
+                                       "scale1_item2", 
+                                       "scale1_item3"), 
+                        outcome   = "scale2_item2",
+                        test      = 99,
+                        adjust.p  = "none", 
+                        threshold = .05),
+                 "test must be of type character")
+  expect_error(compare_rs(mat_c, 
+                        predictors = c("scale1_item1", 
+                                       "scale1_item2", 
+                                       "scale1_item3"), 
+                        outcome   = "scale2_item2",
+                        test      = c("hittner2003", "hotelling1940"),
+                        adjust.p  = "none", 
+                        threshold = .05),
+                 "test must be of length 1")
+  expect_error(compare_rs(mat_c, 
+                        predictors = c("scale1_item1", 
+                                       "scale1_item2", 
+                                       "scale1_item3"), 
+                        outcome   = "scale2_item2",
+                        test      = "hittner2003",
+                        adjust.p  = 99, 
+                        threshold = .05),
+                 "adjust.p must be of type character")
+  expect_error(compare_rs(mat_c, 
+                        predictors = c("scale1_item1", 
+                                       "scale1_item2", 
+                                       "scale1_item3"), 
+                        outcome   = "scale2_item2",
+                        test      = "hittner2003",
+                        adjust.p  = c("none", "holm"), 
+                        threshold = .05),
+                 "adjust.p is of length 2")
+  expect_error(compare_rs(mat_c, 
+                        predictors = c("scale1_item1", 
+                                       "scale1_item2", 
+                                       "scale1_item3"), 
+                        outcome   = "scale2_item2",
+                        test      = "hittner2003",
+                        adjust.p  = "none", 
+                        threshold = "hello"),
+                 "threshold must be of type numeric")
+  expect_error(compare_rs(mat_c, 
+                        predictors = c("scale1_item1", 
+                                       "scale1_item2", 
+                                       "scale1_item3"), 
+                        outcome   = "scale2_item2",
+                        test      = "hittner2003",
+                        adjust.p  = "none", 
+                        threshold = c(.001, .05)),
+                 "threshold must be of length 1")
 
 })
 
