@@ -226,10 +226,10 @@ test_that("column_alpha returns correct values", {
   expect_equal(column_alpha(pattern = "scale1", 
                             data    = data_example,
                             return  = "both"), 
-             c(0.974039829302987, 0.9347283))
+             data.frame(alpha = 0.974039829302987, rij = 0.9347283))
   expect_equal(column_both(pattern = "scale1", 
                             data    = data_example), 
-             c(0.974039829302987, 0.9347283))
+             data.frame(alpha = 0.974039829302987, rij = 0.9347283))
   expect_equal(column_rij(pattern = "scale1", 
                           data    = data_example), 
              0.9347283)

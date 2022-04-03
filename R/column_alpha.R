@@ -59,8 +59,8 @@ column_alpha <- function(pattern,
     } else if (return == "alpha") {
       alpha_out <- alpha_out[["total"]][["raw_alpha"]]  
     } else {
-      alpha_out <- c(alpha_out[["total"]][["raw_alpha"]],
-                     alpha_out[["total"]][["average_r"]])
+      alpha_out <- data.frame(alpha = alpha_out[["total"]][["raw_alpha"]],
+                              rij   = alpha_out[["total"]][["average_r"]])
     }
   } 
   
