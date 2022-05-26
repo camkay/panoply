@@ -10,6 +10,8 @@ profile(data, method = "de")
 \item{data}{a dataset containing the two columns you wish to conduct a profile similarity analysis on.}
 
 \item{method}{a string indicating the type of profile similarity analysis you wish to conduct. Defaults to "de" or double-entry q correlations.}
+
+\item{...}{optional arguments to be passed to cor.}
 }
 \description{
 Calculates the profile similarity between two profiles. Currently only supports "de" (double-entry *q* correlations) and "r" (Pearson correlation) methods.
