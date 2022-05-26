@@ -10,7 +10,6 @@ column_combine(
   fun = mean,
   verbose = FALSE,
   message = TRUE,
-  na.rm = TRUE,
   invert = FALSE
 )
 }
@@ -24,8 +23,6 @@ column_combine(
 \item{verbose}{specifies whether all column names should be listed, regardless of length.}
 
 \item{message}{if TRUE, messages are generated telling the user which columns were used to create the composite.}
-
-\item{na.rm}{a logical value indicating whether `NA` values should be removed prior to computation.}
 
 \item{invert}{if TRUE, combines columns that DO NOT match the pattern.}
 }
