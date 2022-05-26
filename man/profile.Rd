@@ -4,7 +4,7 @@
 \alias{profile}
 \title{profile}
 \usage{
-profile(data, method = "de")
+profile(data, method = "de", ...)
 }
 \arguments{
 \item{data}{a dataset containing the two columns you wish to conduct a profile similarity analysis on.}

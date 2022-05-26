@@ -7,7 +7,7 @@
 #' @export
 
 
-profile <- function(data, method = "de") {
+profile <- function(data, method = "de", ...) {
   
   # check arguments
   argument_check(data, "data", "data.frame", len_check = TRUE, len_req = 2)
