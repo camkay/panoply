@@ -225,11 +225,67 @@ test_that("column_alpha returns correct values", {
              0.9347283)
   expect_equal(column_alpha(pattern = "scale1", 
                             data    = data_example,
-                            return  = "both"), 
-             data.frame(alpha = 0.974039829302987, rij = 0.9347283))
-  expect_equal(column_both(pattern = "scale1", 
+                            return  = "o_h"), 
+             0.034041966954079953822)
+  expect_equal(column_alpha(pattern = "scale1", 
+                            data    = data_example,
+                            return  = "o_t"), 
+             0.9781251764622046485087)
+  expect_equal(column_o_h(pattern = "scale1", 
+                            data    = data_example),
+             0.034041966954079953822)
+  expect_equal(column_o_t(pattern = "scale1", 
+                            data    = data_example),
+             0.9781251764622046485087)
+  expect_equal(column_alpha(pattern = "scale1", 
+                            data    = data_example,
+                            return  = "all"), 
+             data.frame(alpha = 0.974039829302987, 
+                        rij   = 0.9347283,
+                        o_h   = 0.034041966954079953822,
+                        o_t   = 0.9781251764622046485087))
+  expect_equal(column_alpha(pattern = "scale1", 
+                            data    = data_example,
+                            return  = "alpha",
+                            spround = TRUE), 
+               ".97")
+  expect_equal(column_alpha(pattern = "scale1", 
+                            data    = data_example,
+                            return  = "rij", 
+                            spround = TRUE), 
+               ".93")
+  expect_equal(column_alpha(pattern = "scale1", 
+                            data    = data_example,
+                            return  = "o_h", 
+                            spround = TRUE), 
+               ".03")
+  expect_equal(column_alpha(pattern = "scale1", 
+                            data    = data_example,
+                            return  = "o_t", 
+                            spround = TRUE), 
+               ".98")
+  expect_equal(column_o_h(pattern = "scale1", 
+                            data    = data_example,
+                            spround = TRUE), 
+               ".03")
+  expect_equal(column_o_t(pattern = "scale1", 
+                            data    = data_example,
+                            spround = TRUE), 
+               ".98")
+  expect_equal(column_alpha(pattern = "scale1", 
+                            data    = data_example,
+                            return  = "all",
+                            spround = TRUE), 
+             data.frame(alpha = ".97",
+                        rij   = ".93",
+                        o_h   = ".03",
+                        o_t   = ".98"))
+  expect_equal(column_all(pattern = "scale1", 
                             data    = data_example), 
-             data.frame(alpha = 0.974039829302987, rij = 0.9347283))
+             data.frame(alpha = 0.974039829302987, 
+                        rij   = 0.9347283,
+                        o_h   = 0.034041966954079953822,
+                        o_t   = 0.9781251764622046485087))
   expect_equal(column_rij(pattern = "scale1", 
                           data    = data_example), 
              0.9347283)

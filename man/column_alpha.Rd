@@ -3,7 +3,9 @@
 \name{column_alpha}
 \alias{column_alpha}
 \alias{column_rij}
-\alias{column_both}
+\alias{column_all}
+\alias{column_o_h}
+\alias{column_o_t}
 \title{column_alpha}
 \usage{
 column_alpha(
@@ -13,12 +15,17 @@ column_alpha(
   verbose = FALSE,
   message = TRUE,
   na.rm = TRUE,
-  return = "alpha"
+  return = "alpha",
+  spround = FALSE
 )
 
 column_rij(pattern, data, ...)
 
-column_both(pattern, data, ...)
+column_all(pattern, data, ...)
+
+column_o_h(pattern, data, ...)
+
+column_o_t(pattern, data, ...)
 }
 \arguments{
 \item{pattern}{a character string that is used to find the columns of interest. It can be a regular expression.}
@@ -33,7 +40,9 @@ column_both(pattern, data, ...)
 
 \item{na.rm}{a logical value indicating whether `NA` values should be removed prior to computation.}
 
-\item{return}{a string indicating whether column_alpha should return Cronbach's alpha (`"alpha"`), the average correlation between the items (`"rij"`), or both (`"both"`). Defaults to `"alpha"`.`}
+\item{return}{a string indicating whether column_alpha should return Cronbach's alpha (`"alpha"`), the average correlation between the items (`"rij"`), omega hierarchical (`"o_h"`), omega total (`"o_t"`), or all four (`"all"`). Defaults to `"alpha"`.}
+
+\item{spround}{a logical value indicating whether values should be rounded for printing. Defaults to FALSE.}
 
 \item{...}{additional arguments passed to `column_alpha`.}
 }

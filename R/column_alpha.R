@@ -7,7 +7,8 @@
 #' @param verbose specifies whether all column names used should be listed in the message, regardless of length. 
 #' @param message if TRUE, messages are generated telling the user which columns were used to calculate Cronbach's Alpha.
 #' @param na.rm a logical value indicating whether `NA` values should be removed prior to computation.
-#' @param return a string indicating whether column_alpha should return Cronbach's alpha (`"alpha"`), the average correlation between the items (`"rij"`), or both (`"both"`). Defaults to `"alpha"`.`
+#' @param return a string indicating whether column_alpha should return Cronbach's alpha (`"alpha"`), the average correlation between the items (`"rij"`), omega hierarchical (`"o_h"`), omega total (`"o_t"`), or all four (`"all"`). Defaults to `"alpha"`.
+#' @param spround a logical value indicating whether values should be rounded for printing. Defaults to FALSE.
 #' @param ... additional arguments passed to `column_alpha`.
 #' @export
 #' 
@@ -18,7 +19,8 @@ column_alpha <- function(pattern,
                          verbose = FALSE,
                          message = TRUE,
                          na.rm   = TRUE,
-                         return  = "alpha") {
+                         return  = "alpha",
+                         spround = FALSE) {
   
   # check arguments
   argument_check(pattern, "pattern", "character", len_check = TRUE)
@@ -27,10 +29,13 @@ column_alpha <- function(pattern,
   argument_check(message, "message", "logical", len_check = TRUE)
   argument_check(na.rm, "na.rm", "logical", len_check = TRUE)
   argument_check(return, "return", "character", len_check = TRUE)
+  argument_check(spround, "spround",   "logical", TRUE, 1)
   
   return <- choice_check(return, "return", c("alpha",
                                              "rij",
-                                             "both"))
+                                             "o_h",
+                                             "o_t",
+                                             "all"))
   
   # find columns that match the pattern
   data_found <- column_find(pattern, data, return = "data.frame")
@@ -50,6 +55,8 @@ column_alpha <- function(pattern,
 
   # calculate and extract the alpha value
   alpha_out <- psych::alpha(x = data_found, na.rm = na.rm, warnings = FALSE)
+  omega_tmp <- suppressWarnings(suppressMessages(psych::omega(data_found, 
+                                                              plot = FALSE)))
   
   # return only raw alpha if FULL == FALSE
   if (full == FALSE) {
@@ -58,11 +65,30 @@ column_alpha <- function(pattern,
       alpha_out <- alpha_out[["total"]][["average_r"]]  
     } else if (return == "alpha") {
       alpha_out <- alpha_out[["total"]][["raw_alpha"]]  
+    } else if (return == "o_h") {
+      alpha_out <- omega_tmp$omega_h
+    } else if (return == "o_t") {
+      alpha_out <- omega_tmp$omega.tot
     } else {
       alpha_out <- data.frame(alpha = alpha_out[["total"]][["raw_alpha"]],
-                              rij   = alpha_out[["total"]][["average_r"]])
+                              rij   = alpha_out[["total"]][["average_r"]],
+                              o_h   = omega_tmp$omega_h,
+                              o_t   = omega_tmp$omega.tot)
     }
   } 
+  
+  # spround if TRUE
+  if (spround) {
+    if (return == "all") {
+      alpha_out <- data.frame(alpha = spround(alpha_out[1, "alpha"], 2, F),
+                              rij   = spround(alpha_out[1, "rij"], 2, F),
+                              o_h   = spround(alpha_out[1, "o_h"], 2, F),
+                              o_t   = spround(alpha_out[1, "o_t"], 2, F))
+    } else {
+      alpha_out <- spround(alpha_out, 2, F)
+    }
+
+  }
   
   # return alphas
   alpha_out
@@ -82,10 +108,30 @@ column_rij <- function(pattern, data, ...) {
 #' @rdname column_alpha
 #' @export
 
-column_both <- function(pattern, data, ...) {
+column_all <- function(pattern, data, ...) {
   column_alpha(pattern = pattern, 
                data    = data, 
-               return  = "both",
+               return  = "all",
+               ...)
+}
+
+#' @rdname column_alpha
+#' @export
+
+column_o_h <- function(pattern, data, ...) {
+  column_alpha(pattern = pattern, 
+               data    = data, 
+               return  = "o_h",
+               ...)
+}
+
+#' @rdname column_alpha
+#' @export
+
+column_o_t <- function(pattern, data, ...) {
+  column_alpha(pattern = pattern, 
+               data    = data, 
+               return  = "o_t",
                ...)
 }
 
