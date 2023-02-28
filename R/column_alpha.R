@@ -39,24 +39,16 @@ column_alpha <- function(pattern,
   
   # find columns that match the pattern
   data_found <- column_find(pattern, data, return = "data.frame")
-  
-  # message user how the composites were created if message == TRUE
-  if (return == "rij") {
-    message_value <- "An average inter-item correlation"
-  } else if (return == "alpha") {
-    message_value <- "Cronbach's Alpha"
-  } else {
-    message_value <- "Cronbach's Alpha and an average inter-item correlation"
-  }
-
-  if (message == TRUE) {
-    column_message(data_found, message_value, verbose = verbose)
-  }
 
   # calculate and extract the alpha value
-  alpha_out <- psych::alpha(x = data_found, na.rm = na.rm, warnings = FALSE)
-  omega_tmp <- suppressWarnings(suppressMessages(psych::omega(data_found, 
+  if (return == "alpha" | return == "rij" | return == "all") {
+    alpha_out <- psych::alpha(x = data_found, na.rm = na.rm, warnings = FALSE)
+  }
+  
+  if (return == "o_h" | return == "o_t" | return == "all") {
+      omega_tmp <- suppressWarnings(suppressMessages(psych::omega(data_found, 
                                                               plot = FALSE)))
+  }
   
   # return only raw alpha if FULL == FALSE
   if (full == FALSE) {
@@ -87,7 +79,19 @@ column_alpha <- function(pattern,
     } else {
       alpha_out <- spround(alpha_out, 2, F)
     }
+  }
+  
+  # message user how the composites were created if message == TRUE
+  if (return == "rij") {
+    message_value <- "An average inter-item correlation"
+  } else if (return == "alpha") {
+    message_value <- "Cronbach's Alpha"
+  } else {
+    message_value <- "Cronbach's Alpha and an average inter-item correlation"
+  }
 
+  if (message == TRUE) {
+    column_message(data_found, message_value, verbose = verbose)
   }
   
   # return alphas
