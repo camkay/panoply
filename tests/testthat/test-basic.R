@@ -1151,6 +1151,26 @@ test_that("check that zo is working properly", {
                                        "3. scale1_item3", "4. scale2_item1", 
                                        "5. scale2_item2"), 
                          class = "data.frame"))
+  expect_equal(zo(data_example, method = "kendall"),
+               structure(list(`1.` = c("-", ".85*", ".72", "-.71", "-.65"), 
+                              `2.` = c(" ", "-", ".72", "-.54", "-.45"), 
+                              `3.` = c(" ", " ", "-", "-.39", "-.62"), 
+                              `4.` = c(" ", " ", " ", "-", ".60"), 
+                              `5.` = c(" ", " ", " ", " ", "-")), 
+                         row.names = c("1. scale1_item1", "2. scale1_item2", 
+                                       "3. scale1_item3", "4. scale2_item1", 
+                                       "5. scale2_item2"), 
+                         class = "data.frame"))
+  expect_equal(zo(data_example, method = "spearman"),
+               structure(list(`1.` = c("-", ".93**", ".85*", "-.77*", "-.80*"), 
+                              `2.` = c(" ", "-", ".85*", "-.68", "-.61"), 
+                              `3.` = c(" ", " ", "-", "-.49", "-.74"), 
+                              `4.` = c(" ", " ", " ", "-", ".74"), 
+                              `5.` = c(" ", " ", " ", " ", "-")), 
+                         row.names = c("1. scale1_item1", "2. scale1_item2", 
+                                       "3. scale1_item3", "4. scale2_item1", 
+                                       "5. scale2_item2"), 
+                         class = "data.frame"))
   expect_equal(zo(data_example_2, split = "group"),
                structure(list(`1.` = c("-", "1.00***", "1.00***", "1.00***",
                                        "1.00***"),
@@ -1253,6 +1273,8 @@ test_that("check that zo is working properly", {
                "zo is only able to distinguish between 2 groups")
   expect_error(zo(data_example_2, split = "group"),
                NA)
+  expect_warning(zo(data_example, method = "what"),
+                 "is not a recognized method")
 
 })
 

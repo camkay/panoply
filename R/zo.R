@@ -4,12 +4,13 @@
 #' @param data a data frame. 
 #' @param cols the names of the columns to be included in the correlation matrix. Defaults to every column except the split column (if a split column is provided).
 #' @param split an optional string indicating the column that includes the grouping variable for producing different matrices above and below the diagonal.
-#' @param adjust.p a string indicating what type of correction for multiple comparisons should be used. Defaults to "none."
-#' @param spround a logical value indicating whether values should be rounded for printing. Defaults to TRUE.
-#' @param pasterisk a logical value indicating whether p-values should be replaced with asterisks and combined with the regression coefficients. Defaults to TRUE.
-#' @param bold_script if TRUE, bolds correlations over a certain size.  Defaults to FALSE.
-#' @param bold_val a numeric scalar that indicates the value or greater that should be bolded. Defaults to .3. 
-#' @param message if TRUE, messages are generated telling the user which group is above and below the diagonal. Defaults to TRUE.
+#' @param method a string indicating whether `zo()` should return Pearson (`"pearson"`), Kendall (`"kendall"`), or Spearman (`"spearman`) correlations. Defaults to `"pearson"`.
+#' @param adjust.p a string indicating what type of correction for multiple comparisons should be used. Defaults to `"none"`.
+#' @param spround a logical value indicating whether values should be rounded for printing. Defaults to `TRUE`.
+#' @param pasterisk a logical value indicating whether p-values should be replaced with asterisks and combined with the regression coefficients. Defaults to `TRUE`.
+#' @param bold_script if TRUE, bolds correlations over a certain size.  Defaults to `FALSE`.
+#' @param bold_val a numeric scalar that indicates the value or greater that should be bolded. Defaults to `.3`. 
+#' @param message if TRUE, messages are generated telling the user which group is above and below the diagonal. Defaults to `TRUE`.
 #' @param ... optional arguments to be passed to pasterisk. 
 #' @export
 
@@ -17,6 +18,7 @@
 zo <- function(data, 
                cols, 
                split, 
+               method      = "pearson",
                adjust.p    = "none", 
                spround     = TRUE,
                pasterisk   = TRUE,
@@ -27,12 +29,17 @@ zo <- function(data,
   
   # check arguments
   argument_check(data,           "data", "data.frame")
+  argument_check(method,   "method", "character", TRUE, 1)
   argument_check(adjust.p,   "adjust.p", "character", TRUE, 1)
   argument_check(spround,     "spround",   "logical", TRUE, 1)
   argument_check(pasterisk, "pasterisk",   "logical", TRUE, 1)
   argument_check(bold_script, "bold_script", "logical", len_check = TRUE)
   argument_check(bold_val, "bold_val", "numeric", len_check = TRUE)
   argument_check(message, "message", "logical", len_check = TRUE)
+  
+  method <- choice_check(method, "method", c("pearson",
+                                               "kendall",
+                                               "spearman"))
 
   # if cols is missing, use all columns
   if (missing(cols)) {
@@ -63,18 +70,26 @@ zo <- function(data,
   
   # run correlations
   if (!missing(split)) {
-    cor_1  <- psych::corr.test(data[[1]][, cols], adjust = adjust.p)
-    cor_2  <- psych::corr.test(data[[2]][, cols], adjust = adjust.p)
+    cor_1  <- psych::corr.test(data[[1]][, cols], adjust = adjust.p, method = method)
+    cor_2  <- psych::corr.test(data[[2]][, cols], adjust = adjust.p, method = method)
     cor_r <- mat_merge(cor_1$r, cor_2$r, "upper", "upper", diagonal = 1)
     cor_p <- mat_merge(cor_1$p, cor_2$p, "upper", "upper", diagonal = 0)
     out   <- data.frame(cbind(cor_r, cor_p))
   } else {
-    cor_r <- mat_merge(psych::corr.test(data[, cols], adjust = adjust.p)$r,
-                       psych::corr.test(data[, cols], adjust = adjust.p)$r,
+    cor_r <- mat_merge(psych::corr.test(data[, cols], 
+                                        adjust = adjust.p, 
+                                        method = method)$r,
+                       psych::corr.test(data[, cols], 
+                                        adjust = adjust.p, 
+                                        method = method)$r,
                        "upper",
                        "upper")
-    cor_p <- mat_merge(psych::corr.test(data[, cols], adjust = adjust.p)$p,
-                       psych::corr.test(data[, cols], adjust = adjust.p)$p,
+    cor_p <- mat_merge(psych::corr.test(data[, cols], 
+                                        adjust = adjust.p, 
+                                        method = method)$p,
+                       psych::corr.test(data[, cols], 
+                                        adjust = adjust.p, 
+                                        method = method)$p,
                        "upper",
                        "upper")
     out <- data.frame(cbind(cor_r, cor_p))

@@ -8,6 +8,7 @@ zo(
   data,
   cols,
   split,
+  method = "pearson",
   adjust.p = "none",
   spround = TRUE,
   pasterisk = TRUE,
@@ -24,17 +25,19 @@ zo(
 
 \item{split}{an optional string indicating the column that includes the grouping variable for producing different matrices above and below the diagonal.}
 
-\item{adjust.p}{a string indicating what type of correction for multiple comparisons should be used. Defaults to "none."}
+\item{method}{a string indicating whether `zo()` should return Pearson (`"pearson"`), Kendall (`"kendall"`), or Spearman (`"spearman`) correlations. Defaults to `"pearson"`.}
 
-\item{spround}{a logical value indicating whether values should be rounded for printing. Defaults to TRUE.}
+\item{adjust.p}{a string indicating what type of correction for multiple comparisons should be used. Defaults to `"none"`.}
 
-\item{pasterisk}{a logical value indicating whether p-values should be replaced with asterisks and combined with the regression coefficients. Defaults to TRUE.}
+\item{spround}{a logical value indicating whether values should be rounded for printing. Defaults to `TRUE`.}
 
-\item{bold_script}{if TRUE, bolds correlations over a certain size.  Defaults to FALSE.}
+\item{pasterisk}{a logical value indicating whether p-values should be replaced with asterisks and combined with the regression coefficients. Defaults to `TRUE`.}
 
-\item{bold_val}{a numeric scalar that indicates the value or greater that should be bolded. Defaults to .3.}
+\item{bold_script}{if TRUE, bolds correlations over a certain size.  Defaults to `FALSE`.}
 
-\item{message}{if TRUE, messages are generated telling the user which group is above and below the diagonal. Defaults to TRUE.}
+\item{bold_val}{a numeric scalar that indicates the value or greater that should be bolded. Defaults to `.3`.}
+
+\item{message}{if TRUE, messages are generated telling the user which group is above and below the diagonal. Defaults to `TRUE`.}
 
 \item{...}{optional arguments to be passed to pasterisk.}
 }
