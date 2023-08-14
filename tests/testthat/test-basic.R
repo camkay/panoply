@@ -56,6 +56,17 @@ data_example_6 <- data.frame(scale1_item1 = rep(c(6, 1, 3, 4, 5, 9, 9), 4),
                              scale2_item1 = rep(c(9, 9, 9, 8, 4, 2, 2), 4),
                              scale2_item2 = rep(c(7, 8, 7, 9, 5, 1, 2), 4))
 
+data_example_7 <- data.frame(scale1_item1 = rep(c( 6,  1,  3,  4, 
+                                                   5,  9,  9,  8), 4),
+                             scale1_item2 = rep(c(NA,  2,  4,  5, 
+                                                   4,  8,  9,  8), 4),
+                             scale1_item3 = rep(c( 8, NA, NA,  4, 
+                                                   4,  9,  8,  2), 4),
+                             scale2_item1 = rep(c( 9,  9, NA,  8, 
+                                                   4, NA,  2, NA), 4),
+                             scale2_item2 = rep(c( 7,  8,  7,  9, 
+                                                   5,  1,  2,  1), 4))
+
 data_example_profile <- data.frame(profile_1 = c(50, 55, 60, 65, 70),
                                    profile_2 = c(25, 30, 35, 40, 45))
 
@@ -68,6 +79,8 @@ mat_b <- psych::corr.test(matrix(rnorm(5 * 7),
                                           colnames(data_example))))$p
 
 mat_c <- psych::corr.test(data_example_6)
+
+mat_d <- psych::corr.test(data_example_7)
 
 # create example models
 mod_a_example <- lm(scale1_item1 ~ scale2_item1, data = data_example)
@@ -1279,7 +1292,37 @@ test_that("check that zo is working properly", {
 })
 
 test_that("check that compare_rs is working properly", {
-  expect_equal(compare_rs(mat_c, 
+  expect_equal(compare_rs(mat_d, 
+                          predictors = c("scale1_item1", 
+                                         "scale1_item2", 
+                                         "scale1_item3"), 
+                          outcome = "scale2_item2", 
+                          adjust.p = "none", 
+                          threshold = .05)$comparisons[1, "n"],
+               floor(mean(c(mat_d$n["scale2_item2", "scale1_item1"],
+                            mat_d$n["scale2_item2", "scale1_item2"])))
+               )
+  expect_equal(compare_rs(mat_d, 
+                          predictors = c("scale1_item1", 
+                                         "scale1_item2", 
+                                         "scale1_item3"), 
+                          outcome = "scale2_item2", 
+                          adjust.p = "none", 
+                          threshold = .05)$comparisons[2, "n"],
+               floor(mean(c(mat_d$n["scale2_item2", "scale1_item1"],
+                            mat_d$n["scale2_item2", "scale1_item3"])))
+               )
+  expect_equal(compare_rs(mat_d, 
+                          predictors = c("scale1_item1", 
+                                         "scale1_item2", 
+                                         "scale1_item3"), 
+                          outcome = "scale2_item2", 
+                          adjust.p = "none", 
+                          threshold = .05)$comparisons[3, "n"],
+               floor(mean(c(mat_d$n["scale2_item2", "scale1_item2"],
+                            mat_d$n["scale2_item2", "scale1_item3"])))
+               )
+    expect_equal(compare_rs(mat_c, 
                           predictors = c("scale1_item1", 
                                          "scale1_item2", 
                                          "scale1_item3"), 

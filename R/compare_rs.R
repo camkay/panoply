@@ -77,16 +77,23 @@ compare_rs <- function(cor_mat,
     jk <- cor_mat_r[outcome, col_comp[1]]
     jh <- cor_mat_r[outcome, col_comp[2]]
     kh <- cor_mat_r[col_comp[1], col_comp[2]]
+    
+    if (length(cor_mat_n) == 1) {
+      n  <- cor_mat_n
+    } else {
+      n  <- floor(mean(c(cor_mat_n[outcome, col_comp[1]],
+                         cor_mat_n[outcome, col_comp[2]])))
+    }
 
     results <- cocor::cocor.dep.groups.overlap(r.jk         = jk,
                                                r.jh         = jh,
                                                r.kh         = kh,
-                                               n            = cor_mat_n,
+                                               n            = n,
                                                return.htest = TRUE)
 
     results <- data.frame(lhs       = col_comp[1],
                           rhs       = col_comp[2],
-                          n         = cor_mat_n,
+                          n         = n,
                           r.jk      = jk,
                           r.jh      = jh,
                           r.kh      = kh,
