@@ -16,6 +16,7 @@ column_alpha(
   message = TRUE,
   na.rm = TRUE,
   return = "alpha",
+  ci = FALSE,
   spround = FALSE
 )
 
@@ -41,6 +42,8 @@ column_o_t(pattern, data, ...)
 \item{na.rm}{a logical value indicating whether `NA` values should be removed prior to computation.}
 
 \item{return}{a string indicating whether column_alpha should return Cronbach's alpha (`"alpha"`), the average correlation between the items (`"rij"`), omega hierarchical (`"o_h"`), omega total (`"o_t"`), or all four (`"all"`). Defaults to `"alpha"`.}
+
+\item{ci}{a logical value indicating whether Cronbach's alpha should be returned with Feldt et al. (1987) confidence intervals. Defaults to `FALSE`.}
 
 \item{spround}{a logical value indicating whether values should be rounded for printing. Defaults to FALSE.}
 

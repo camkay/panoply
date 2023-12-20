@@ -8,6 +8,7 @@
 #' @param message if TRUE, messages are generated telling the user which columns were used to calculate Cronbach's Alpha.
 #' @param na.rm a logical value indicating whether `NA` values should be removed prior to computation.
 #' @param return a string indicating whether column_alpha should return Cronbach's alpha (`"alpha"`), the average correlation between the items (`"rij"`), omega hierarchical (`"o_h"`), omega total (`"o_t"`), or all four (`"all"`). Defaults to `"alpha"`.
+#' @param ci a logical value indicating whether Cronbach's alpha should be returned with Feldt et al. (1987) confidence intervals. Defaults to `FALSE`.
 #' @param spround a logical value indicating whether values should be rounded for printing. Defaults to FALSE.
 #' @param ... additional arguments passed to `column_alpha`.
 #' @export
@@ -20,6 +21,7 @@ column_alpha <- function(pattern,
                          message = TRUE,
                          na.rm   = TRUE,
                          return  = "alpha",
+                         ci      = FALSE,
                          spround = FALSE) {
   
   # check arguments
@@ -29,6 +31,7 @@ column_alpha <- function(pattern,
   argument_check(message, "message", "logical", len_check = TRUE)
   argument_check(na.rm, "na.rm", "logical", len_check = TRUE)
   argument_check(return, "return", "character", len_check = TRUE)
+  argument_check(ci, "ci", "logical", len_check = TRUE)
   argument_check(spround, "spround",   "logical", TRUE, 1)
   
   return <- choice_check(return, "return", c("alpha",
@@ -56,28 +59,59 @@ column_alpha <- function(pattern,
     if (return == "rij") {
       alpha_out <- alpha_out[["total"]][["average_r"]]  
     } else if (return == "alpha") {
-      alpha_out <- alpha_out[["total"]][["raw_alpha"]]  
+      if (ci) {
+        alpha_out <- data.frame(alpha       = alpha_out[["total"]][["raw_alpha"]],
+                                alpha_lower = unname(alpha_out[["feldt"]][["lower.ci"]]),
+                                alpha_upper = unname(alpha_out[["feldt"]][["upper.ci"]]))
+      } else {
+        alpha_out <- alpha_out[["total"]][["raw_alpha"]]
+      }
     } else if (return == "o_h") {
       alpha_out <- omega_tmp$omega_h
     } else if (return == "o_t") {
       alpha_out <- omega_tmp$omega.tot
     } else {
-      alpha_out <- data.frame(alpha = alpha_out[["total"]][["raw_alpha"]],
-                              rij   = alpha_out[["total"]][["average_r"]],
-                              o_h   = omega_tmp$omega_h,
-                              o_t   = omega_tmp$omega.tot)
+      if (ci) {
+        alpha_out <- data.frame(alpha       = alpha_out[["total"]][["raw_alpha"]],
+                                alpha_lower = unname(alpha_out[["feldt"]][["lower.ci"]]),
+                                alpha_upper = unname(alpha_out[["feldt"]][["upper.ci"]]),
+                                rij         = alpha_out[["total"]][["average_r"]],
+                                o_h         = omega_tmp$omega_h,
+                                o_t         = omega_tmp$omega.tot)
+      } else {
+        alpha_out <- data.frame(alpha       = alpha_out[["total"]][["raw_alpha"]],
+                                rij         = alpha_out[["total"]][["average_r"]],
+                                o_h         = omega_tmp$omega_h,
+                                o_t         = omega_tmp$omega.tot) 
+      }
     }
   } 
   
   # spround if TRUE
   if (spround) {
     if (return == "all") {
-      alpha_out <- data.frame(alpha = spround(alpha_out[1, "alpha"], 2, F),
-                              rij   = spround(alpha_out[1, "rij"], 2, F),
-                              o_h   = spround(alpha_out[1, "o_h"], 2, F),
-                              o_t   = spround(alpha_out[1, "o_t"], 2, F))
+      if (ci) {
+        alpha_out <- data.frame(alpha       = spround(alpha_out[1, "alpha"], 2, F),
+                                alpha_lower = spround(alpha_out[1, "alpha_lower"], 2, F),
+                                alpha_upper = spround(alpha_out[1, "alpha_upper"], 2, F),
+                                rij         = spround(alpha_out[1, "rij"], 2, F),
+                                o_h         = spround(alpha_out[1, "o_h"], 2, F),
+                                o_t         = spround(alpha_out[1, "o_t"], 2, F))
+      } else {
+        alpha_out <- data.frame(alpha = spround(alpha_out[1, "alpha"], 2, F),
+                                rij   = spround(alpha_out[1, "rij"], 2, F),
+                                o_h   = spround(alpha_out[1, "o_h"], 2, F),
+                                o_t   = spround(alpha_out[1, "o_t"], 2, F))
+      }
     } else {
-      alpha_out <- spround(alpha_out, 2, F)
+      if (ci) {
+        alpha_out <- data.frame(alpha       = spround(alpha_out[1, "alpha"], 2, F),
+                                alpha_lower = spround(alpha_out[1, "alpha_lower"], 2, F),
+                                alpha_upper = spround(alpha_out[1, "alpha_upper"], 2, F))
+      } else {
+        alpha_out <- spround(alpha_out, 2, F)
+      }
+      
     }
   }
   

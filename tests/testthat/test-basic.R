@@ -237,6 +237,11 @@ test_that("column_alpha returns correct values", {
                             return  = "rij"), 
              0.9347283)
   expect_equal(column_alpha(pattern = "scale1", 
+                          data      = data_example,
+                          return    = "rij",
+                          ci        = TRUE), 
+           0.9347283)
+  expect_equal(column_alpha(pattern = "scale1", 
                             data    = data_example,
                             return  = "o_h"), 
              0.034041966954079953822)
@@ -330,6 +335,64 @@ test_that("column_alpha returns correct values", {
                           data    = data_example,
                           return  = "hello")), 
              0.974039829302987)
+  expect_equal(column_alpha(pattern = "scale1", 
+                            data    = data_example,
+                            return  = "all",
+                            ci      = TRUE,
+                            spround = FALSE), 
+             data.frame(alpha = 0.974039829302987, 
+                        alpha_lower = 0.903212900276083,
+                        alpha_upper = 0.995162320062215,
+                        rij   = 0.9347283,
+                        o_h   = 0.034041966954079953822,
+                        o_t   = 0.9781251764622046485087))
+  expect_equal(column_alpha(pattern = "scale1", 
+                            data    = data_example,
+                            return  = "all",
+                            ci      = TRUE,
+                            spround = TRUE), 
+             data.frame(alpha = ".97", 
+                        alpha_lower = ".90",
+                        alpha_upper = "1.00",
+                        rij   = ".93",
+                        o_h   = ".03",
+                        o_t   = ".98"))
+  expect_equal(column_alpha(pattern = "scale1", 
+                            data    = data_example,
+                            return  = "alpha",
+                            ci      = TRUE,
+                            spround = FALSE), 
+             data.frame(alpha = 0.974039829302987, 
+                        alpha_lower = 0.903212900276083,
+                        alpha_upper = 0.995162320062215))
+  expect_equal(column_alpha(pattern = "scale1", 
+                            data    = data_example,
+                            return  = "alpha",
+                            ci      = TRUE,
+                            spround = TRUE), 
+             data.frame(alpha = ".97", 
+                        alpha_lower = ".90",
+                        alpha_upper = "1.00"))
+  expect_equal(column_alpha(pattern = "scale1", 
+                            data    = data_example,
+                            return  = "all",
+                            ci      = TRUE,
+                            spround = FALSE)[[2]], 
+           unname(unlist(alpha(data_example[, 1:3], warnings = FALSE)$feldt$lower.ci)))
+  expect_equal(column_alpha(pattern = "scale1", 
+                            data    = data_example,
+                            return  = "all",
+                            ci      = TRUE,
+                            spround = FALSE)[[3]], 
+           unname(unlist(alpha(data_example[, 1:3], warnings = FALSE)$feldt$upper.ci)))
+  expect_error(column_alpha(pattern = "scale1", 
+                              data    = data_example,
+                              ci      = "hello"), 
+               "ci is of type character")
+  expect_error(column_alpha(pattern = "scale1", 
+                              data    = data_example,
+                              ci      = c(T,F)), 
+               "ci must be of length 1")
 })
 
 # test reorder
