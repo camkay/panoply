@@ -521,3 +521,18 @@ dark("triad", format = "bold")
 # ...or in latex italics
 dark("triad", format = "italic", latex = TRUE)
 ```
+
+### first_diff
+
+`first_diff` takes a numeric vector and returns a scalar representing the difference between the first element and the sum of all of the other elements.
+
+```{r first_diff}
+# look at the example numeric vector
+num_example
+
+# manually calculate the difference between the first element and the sum of all of the other elements
+num_example[1] - sum(num_example[-1], na.rm = TRUE)
+
+# automatically calculate the difference between the first element and the sum of all of the other elements
+first_diff(num_example)
+```

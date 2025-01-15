@@ -39,7 +39,7 @@ devtools::install_github("camkay/panoply")
 
 ## Descriptions and Examples
 
-### column\_find
+### column_find
 
 `column_find` is a function for quickly identifying columns of a data
 frame that match a `pattern` specified through a string. The default
@@ -114,7 +114,7 @@ column_find(pattern     = "scale1",
 #> [1] "scale1_item1" "scale1_item3"
 ```
 
-### column\_alpha
+### column_alpha
 
 `column_alpha` estimates Cronbach’s Alpha–an indicator of internal
 consistency–using only columns that have names that match a `pattern`.
@@ -146,8 +146,10 @@ column_alpha(pattern = "scale1", full = TRUE, data = data_example)
 #>   raw_alpha std.alpha G6(smc) average_r S/N   ase mean  sd median_r
 #>       0.97      0.98    0.97      0.93  43 0.016  5.5 2.7     0.94
 #> 
-#>  lower alpha upper     95% confidence boundaries
-#> 0.94 0.97 1.01 
+#>     95% confidence boundaries 
+#>          lower alpha upper
+#> Feldt     0.90  0.97  1.00
+#> Duhachek  0.94  0.97  1.01
 #> 
 #>  Reliability if an item is dropped:
 #>              raw_alpha std.alpha G6(smc) average_r S/N alpha se var.r med.r
@@ -173,7 +175,7 @@ column_alpha(pattern = "scale1", full = FALSE, data = data_example)
 #> [1] 0.9740398
 ```
 
-### column\_combine
+### column_combine
 
 `column_combine` creates a composite column using only columns in a data
 frame that have names that match a `pattern`. The argument `fun`
@@ -335,7 +337,7 @@ lenique(x = char_example)
 and returns a scalar or atomic vector of asterisks corresponding to
 different significance levels. The argument `thresholds` can be used to
 set the cut-off valuess for the different values. Any number of
-thresholds can be set. By default, an asterisk (i.e., "\*") is used as
+thresholds can be set. By default, an asterisk (i.e., “\*“) is used as
 the `sig_symbol`, but any single character vector can be used.
 
 ``` r
@@ -395,7 +397,7 @@ collapse(c("item1", "item2", "item3"), sep = " ")
 #> [1] "item1 item2 item3"
 ```
 
-### paste\_paren
+### paste_paren
 
 If only `x` is provided, `paste_paren` wraps the value in parentheses
 (e.g., “10.12” becomes “(10.12)”). If `x` and `y` are both provided, it
@@ -414,7 +416,7 @@ paste_paren(10.12, 2.22)
 #> [1] "10.12 (2.22)"
 ```
 
-### paste\_ci
+### paste_ci
 
 `paste_ci` combines two numbers (e.g., .20 and .33) by wrapping them in
 square brackets (e.g., \[.20, .33\]). This function was made to
@@ -426,7 +428,7 @@ paste_ci(.20, .33)
 #> [1] "[0.2, 0.33]"
 ```
 
-### mat\_merge
+### mat_merge
 
 `mat_merge` combines two matrices by drawing values from either below or
 above the diagonal and placing them either below and above the diagonal.
@@ -538,7 +540,7 @@ reverse(-1, -2, 2)
 #> [1] 1
 ```
 
-### delta\_rsq, delta\_aic, and delta\_bic
+### delta_rsq, delta_aic, and delta_bic
 
 `delta_rsq`, `delta_aic`, and `delta_bic` calculate the change to
 R-Squared, AIC, and BIC across two or more models.
@@ -574,7 +576,7 @@ delta_bic(models = list(mod_a_example, mod_b_example, mod_c_example))
 #> 3 mod_c_example -20.4237654
 ```
 
-### group\_compare
+### group_compare
 
 `group_compare` creates a group comparison table. It (1) calculates an
 overall mean and sd, as well as a mean and sd for each group, (2) runs a
@@ -708,7 +710,7 @@ reorder(data_example_5, "order_2", sep = "\\+")
 #> 4     4     6     5
 ```
 
-### build\_models
+### build_models
 
 `build_models` takes an outcome string (i.e., `outcome`) and a list of
 predictor strings (i.e., `predictors`) and builds a set of models.
@@ -740,7 +742,7 @@ build_models(outcome = "y", predictors = list("1 + (1 |id)",
 #> [3] "y ~ 1 + (1 |id) + x1 + x2"
 ```
 
-### text\_format
+### text_format
 
 `text_format` formats strings as bold or italicized using markdown or
 LaTeX syntax. `bold(x)` is a shortcut for
@@ -844,4 +846,24 @@ dark("triad", format = "bold")
 dark("triad", format = "italic", latex = TRUE)
 #> [1] "\\textit{Machiavellianism}" "\\textit{Narcissism}"      
 #> [3] "\\textit{Psychopathy}"
+```
+
+### first_diff
+
+`first_diff` takes a numeric vector and returns a scalar representing
+the difference between the first element and the sum of all of the other
+elements.
+
+``` r
+# look at the example numeric vector
+num_example
+#>  [1] 5.0000 1.0000 0.0000 0.5000 0.1000 0.0500 0.0100 0.0050 0.0010 0.0005
+
+# manually calculate the difference between the first element and the sum of all of the other elements
+num_example[1] - sum(num_example[-1], na.rm = TRUE)
+#> [1] 3.3335
+
+# automatically calculate the difference between the first element and the sum of all of the other elements
+first_diff(num_example)
+#> [1] 3.3335
 ```
