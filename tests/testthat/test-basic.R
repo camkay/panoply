@@ -717,6 +717,16 @@ test_that("pasterisk returns correct values", {
                  "\\textsuperscript{++}"))
 })
 
+# test first_diff
+test_that("first_diff returns correct values", {
+  expect_equal(first_diff(num_example), 
+               4.3335)
+  expect_error(first_diff(char_example),
+               "x is of type character")
+  expect_error(first_diff(10),
+               "The length of x must be between 2 and Inf")
+})
+
 # test bolder
 test_that("bolder returns correct values", {
  expect_equal(bolder(num_example), 

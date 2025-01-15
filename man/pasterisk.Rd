@@ -16,7 +16,7 @@ pasterisk(
 \arguments{
 \item{p_vals}{a numeric scalar or atomic vector of p-values or effect sizes (or any other numeric vector).}
 
-\item{thresholds}{a numeric scalar or atomic vector of number tresholds. Defaults to .05, .01, and .001.}
+\item{thresholds}{a numeric scalar or atomic vector of number thresholds. Defaults to .05, .01, and .001.}
 
 \item{sig_symbol}{a character scalar to be used to indicate significance. Defaults to an asterisk (i.e., *).}
 
