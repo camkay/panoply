@@ -727,6 +727,25 @@ test_that("first_diff returns correct values", {
                "The length of x must be between 2 and Inf")
 })
 
+# test d
+test_that("d returns correct values", {
+  expect_equal(d(num_example), 
+               structure(list(n = 9, 
+                              mean   = 0.629611111111111, 
+                              sd     = 1.64677468437887, 
+                              median = 0.01, 
+                              min    = 0, 
+                              max    = 5), 
+                         row.names = "X1", 
+                         class = c("psych", 
+                                   "Pdescribe", 
+                                   "data.frame")))
+  expect_error(d(char_example),
+               "x is of type character")
+  expect_error(d(10),
+               "The length of x must be between 2 and Inf")
+})
+
 # test bolder
 test_that("bolder returns correct values", {
  expect_equal(bolder(num_example), 
