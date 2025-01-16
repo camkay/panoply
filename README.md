@@ -867,3 +867,85 @@ num_example[1] - sum(num_example[-1], na.rm = TRUE)
 first_diff(num_example)
 #> [1] 3.3335
 ```
+
+### qualtrics_states
+
+`states_qualtrics` is a dataframe containing the state names
+(`state_label`) that correspond to the numeric state values
+(`state_value`) used by Qualtrics.
+
+``` r
+# look at the dataframe
+states_qualtrics
+#>    state_value          state_label
+#> 1            1              Alabama
+#> 2            2               Alaska
+#> 3            3              Arizona
+#> 4            4             Arkansas
+#> 5            5           California
+#> 6            6             Colorado
+#> 7            7          Connecticut
+#> 8            8             Delaware
+#> 9            9 District of Columbia
+#> 10          10              Florida
+#> 11          11              Georgia
+#> 12          12               Hawaii
+#> 13          13                Idaho
+#> 14          14             Illinois
+#> 15          15              Indiana
+#> 16          16                 Iowa
+#> 17          17               Kansas
+#> 18          18             Kentucky
+#> 19          19            Louisiana
+#> 20          20                Maine
+#> 21          21             Maryland
+#> 22          22        Massachusetts
+#> 23          23             Michigan
+#> 24          24            Minnesota
+#> 25          25          Mississippi
+#> 26          26             Missouri
+#> 27          27              Montana
+#> 28          28             Nebraska
+#> 29          29               Nevada
+#> 30          30        New Hampshire
+#> 31          31           New Jersey
+#> 32          32           New Mexico
+#> 33          33             New York
+#> 34          34       North Carolina
+#> 35          35         North Dakota
+#> 36          36                 Ohio
+#> 37          37             Oklahoma
+#> 38          38               Oregon
+#> 39          39         Pennsylvania
+#> 40          40          Puerto Rico
+#> 41          41         Rhode Island
+#> 42          42       South Carolina
+#> 43          43         South Dakota
+#> 44          44            Tennessee
+#> 45          45                Texas
+#> 46          46                 Utah
+#> 47          47              Vermont
+#> 48          48             Virginia
+#> 49          49           Washington
+#> 50          50        West Virginia
+#> 51          51            Wisconsin
+#> 52          52              Wyoming
+#> 53          53                Other
+```
+
+### d
+
+`d` is a very simple wrapper for the `describe()` function from the
+`{psych}` package. In addition to having a shorter function name, it
+also returns fewer statistics by default.
+
+``` r
+# look at the example numeric vector
+num_example
+#>  [1] 5.0000 1.0000 0.0000 0.5000 0.1000 0.0500 0.0100 0.0050 0.0010 0.0005
+
+# calculate statistics
+d(num_example)
+#>     n mean   sd median min max
+#> X1 10 0.67 1.56   0.03   0   5
+```

@@ -536,3 +536,24 @@ num_example[1] - sum(num_example[-1], na.rm = TRUE)
 # automatically calculate the difference between the first element and the sum of all of the other elements
 first_diff(num_example)
 ```
+
+### qualtrics_states
+
+`states_qualtrics` is a dataframe containing the state names (`state_label`) that correspond to the numeric state values (`state_value`) used by Qualtrics.
+
+```{r states_qualtrics}
+# look at the dataframe
+states_qualtrics
+```
+
+### d
+
+`d` is a very simple wrapper for the `describe()` function from the `{psych}` package. In addition to having a shorter function name, it also returns fewer statistics by default.
+
+```{r d}
+# look at the example numeric vector
+num_example
+
+# calculate statistics
+d(num_example)
+```
