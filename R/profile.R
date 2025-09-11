@@ -23,8 +23,6 @@ profile <- function(data, method = "de", ...) {
     data <- rbind(data, cbind(data[,2], data[,1]))
     out  <- cor(data[,1], data[,2], ...) 
   } else if (method == "r") {
-    print(data[,1])
-    print(data[,2])
     out <- cor(data[,1], data[,2], ...)
   }
   
