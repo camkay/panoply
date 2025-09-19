@@ -54,6 +54,21 @@ test_that("column_reliability returns correct values", {
                                         data_example, 
                                         "data.frame"))[[1]]$average_r)
   
+  # no_omega
+  expect_equal(column_reliability(data    = data_example,
+                                  pattern = "scale1",
+                                  return  = "no_omega")$alpha,
+               psych::alpha(column_find("scale1", 
+                                        data_example, 
+                                        "data.frame"))[[1]]$raw_alpha)
+  
+  expect_equal(column_reliability(data    = data_example,
+                                  pattern = "scale1",
+                                  return  = "no_omega")$rij,
+               psych::alpha(column_find("scale1", 
+                                        data_example, 
+                                        "data.frame"))[[1]]$average_r)
+  
   # uses all columns if no pattern provided
   expect_equal(suppressWarnings(column_reliability(data   = data_example,
                                                    return = "all")$omega),
