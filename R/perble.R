@@ -55,4 +55,13 @@ perble <- function(x, tidy = TRUE, spround = FALSE){
   out
 }
 
+#' @rdname perble
+#' @export
+
+p <- function(x) {
+  perble(x       = x, 
+         tidy    = TRUE, 
+         spround = TRUE)
+}
+
 

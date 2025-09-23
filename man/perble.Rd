@@ -2,9 +2,12 @@
 % Please edit documentation in R/perble.R
 \name{perble}
 \alias{perble}
+\alias{p}
 \title{perble}
 \usage{
 perble(x, tidy = TRUE, spround = FALSE)
+
+p(x)
 }
 \arguments{
 \item{x}{a scalar, atomic vector, or list.}
