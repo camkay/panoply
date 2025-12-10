@@ -18,7 +18,7 @@ column_reliability(
 
 \item{pattern}{a character string that is used to find the columns of interest. It can be a regular expression. Defaults to all columns in data.}
 
-\item{return}{a string indicating whether the function should return Cronbach's alpha (`"alpha"`), McDonald's omega (`"omega"`), the average inter-item correlation (`"rij"`), Cronbach's alpha and the average inter-item correlation (`"no_omega"`), or all three estimates (`"all"`). Defaults to `"all"`.}
+\item{return}{a string indicating whether the function should return Cronbach's alpha (`"alpha"`); McDonald's omega (`"omega"`); the R-C unidimensionality index (`"unidim"`); the average inter-item correlation (`"rij"`); Cronbach's alpha, the R-C unidimensionality index, and the average inter-item correlation (`"no_omega"`); or all four estimates (`"all"`). Defaults to `"all"`.}
 
 \item{spround}{a logical value indicating whether values should be rounded for printing. Defaults to FALSE.}
 

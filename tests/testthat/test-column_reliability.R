@@ -24,6 +24,14 @@ test_that("column_reliability returns correct values", {
                                                  data_example, 
                                                  "data.frame"))$est)
   
+  # r-c unidimensionality
+  expect_equal(column_reliability(data    = data_example,
+                                  pattern = "scale1",
+                                  return  = "unidim"),
+               psych::unidim(column_find("scale1", 
+                                         data_example, 
+                                         "data.frame"))$uni[["u"]])
+  
   # rij
   expect_equal(column_reliability(data    = data_example,
                                   pattern = "scale1",
@@ -49,6 +57,13 @@ test_that("column_reliability returns correct values", {
   
   expect_equal(column_reliability(data    = data_example,
                                   pattern = "scale1",
+                                  return  = "all")$unidim,
+               psych::unidim(column_find("scale1", 
+                          data_example, 
+                          "data.frame"))$uni[["u"]])
+  
+  expect_equal(column_reliability(data    = data_example,
+                                  pattern = "scale1",
                                   return  = "all")$rij,
                psych::alpha(column_find("scale1", 
                                         data_example, 
@@ -61,6 +76,13 @@ test_that("column_reliability returns correct values", {
                psych::alpha(column_find("scale1", 
                                         data_example, 
                                         "data.frame"))[[1]]$raw_alpha)
+  
+  expect_equal(column_reliability(data    = data_example,
+                                  pattern = "scale1",
+                                  return  = "no_omega")$unidim,
+               psych::unidim(column_find("scale1", 
+                          data_example, 
+                          "data.frame"))$uni[["u"]])
   
   expect_equal(column_reliability(data    = data_example,
                                   pattern = "scale1",
@@ -91,6 +113,13 @@ test_that("column_reliability returns correct sprounded values", {
                                   spround = TRUE),
                ".98")
   
+  # r-c unidimensionality index
+  expect_equal(column_reliability(data    = data_example,
+                                  pattern = "scale1",
+                                  return  = "unidim",
+                                  spround = TRUE),
+               "1.00")
+  
   # rij
   expect_equal(column_reliability(data    = data_example,
                                   pattern = "scale1",
@@ -110,6 +139,12 @@ test_that("column_reliability returns correct sprounded values", {
                                   return  = "all",
                                   spround = TRUE)$omega,
                ".98")
+  
+  expect_equal(column_reliability(data    = data_example,
+                                  pattern = "scale1",
+                                  return  = "all",
+                                  spround = TRUE)$unidim,
+               "1.00")
   
   expect_equal(column_reliability(data    = data_example,
                                  pattern = "scale1",
@@ -142,7 +177,7 @@ test_that("column_reliability produces the correct warnings", {
   expect_equal(suppressWarnings(length(column_reliability(data    = data_example,
                                                           pattern = "scale1",
                                                           return  = "huh"))),
-               3)
+               4)
   
 })
 
