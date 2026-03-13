@@ -72,7 +72,16 @@ group_compare <- function(data,
       df <- overall_n - 2
     }
     p_val     <- 2 * pt(q = abs(t_val), df = df, lower = FALSE)
-    d_val     <- t_val * sqrt((1 / group1_n) + (1 / group2_n))
+    if (var.equal == FALSE) {
+      d_val_num    <- group1_mean - group2_mean
+      d_val_dem_1a <- (group1_n - 1) * group1_sd^2
+      d_val_dem_1b <- (group2_n - 1) * group2_sd^2
+      d_val_dem_2  <- group1_n + group2_n - 2
+      d_val_dem    <- sqrt((d_val_dem_1a + d_val_dem_1b) / d_val_dem_2)
+      d_val        <- d_val_num / d_val_dem
+    } else {
+      d_val <- t_val * sqrt((1/group1_n) + (1/group2_n))
+    }
     if (adjust.d == TRUE) {
       d_val <- d_val * (1 - (3 / (4 * (overall_n) - 9)))
     }

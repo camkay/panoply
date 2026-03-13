@@ -498,7 +498,7 @@ test_that("group_compare returns correct values", {
                               df = c(3.000599999994, 3.00416057565331), 
                               p = c(0.00333298849657998, 
                                     0.00194201346275585), 
-                              d = c(-6.06218401176513, -6.64627181143344)), 
+                              d = c(-6.06218401176513, -8.40257756992084)), 
                          class = "data.frame", 
                          row.names = c(NA, -2L)))
   expect_equal(group_compare(data_example_2, 
@@ -518,7 +518,7 @@ test_that("group_compare returns correct values", {
                               t = c("-8.57", "-10.30"), 
                               df = c("3", "3"), 
                               p = c(".003", ".002"), 
-                              d = c("-6.06", "-6.65")),
+                              d = c("-6.06", "-8.40")),
                          class = "data.frame", 
                          row.names = c(NA, -2L)))
   expect_equal(group_compare(data_example_2, 
@@ -540,7 +540,7 @@ test_that("group_compare returns correct values", {
                               df = c("3", "3"), 
                               p = c(0.003332988496579981398116, 
                                     0.001942013462755851679192), 
-                              d = c("-6.06", "-6.65")),
+                              d = c("-6.06", "-8.40")),
                          class = "data.frame", 
                          row.names = c(NA, -2L)))
   expect_equal(group_compare(data_example_2, 
@@ -560,7 +560,7 @@ test_that("group_compare returns correct values", {
                               t = c("-8.57", "-10.30"), 
                               df = c("3", "3"), 
                               p = c(".003", ".002"), 
-                              d = c("-6.06", "-6.65")),
+                              d = c("-6.06", "-8.40")),
                          class = "data.frame", 
                          row.names = c(NA, -2L)))
   expect_equal(group_compare(data_example_2, 
@@ -611,7 +611,7 @@ test_that("group_compare returns correct values", {
                              cols = c("mach", "narc", "psyc"), 
                              split = "group",
                              adjust.d = TRUE)[, "d"],
-               c(-5.27146435805663, -6.00308421677859, -19.1461294666445))
+               c(-5.27146435805663, -7.58942490186398, -24.2174245136455))
   expect_equal(group_compare(data_example_2, 
                              cols = c("mach", "narc", "psyc"), 
                              split = "group",
