@@ -7,7 +7,8 @@ Authors@R:
            role = c("aut", "cre"),
            email = "cameronstuartkay@gmail.com")
 Description: Contains a number of miscellaneous functions for making data manipulation and analysis more convenient. 
-Depends: R (>= 3.3.0)
+Depends: 
+    R (>= 3.5)
 Imports: 
   psych,
   MBESS,
@@ -20,7 +21,7 @@ License: MIT + file LICENSE
 Date: 2019-06-18
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Suggests: 
     covr,
     testthat (>= 2.1.0)
