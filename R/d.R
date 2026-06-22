@@ -1,14 +1,16 @@
 #' d
 #'
-#' A very simple wrapper for the `describe()` function from the `{psych}` package. In addition to having a shorter function name, it also returns fewer statistics by default.
+#' A very simple wrapper for the `describe()` function from the `{psych}` package. In addition to having a shorter function name, it also returns fewer statistics and a data.frame by default.
 #' @param x a numeric vector.
 #' @param shorten a logical value indicating whether only the n, mean, standard deviation, minimum, and maximum should be returned. Defaults to `TRUE`.
+#' @param data_frame a logical value indicating whether an object of class `data.frame` should be returned. Defaults to `TRUE`.
 #' @param ... additional arguments passed to `describe()`.
 #' @export
 
 
 d <- function(x,
-              shorten = TRUE,
+              shorten    = TRUE,
+              data_frame = TRUE,
               ...) {
   
   # check arguments
@@ -16,6 +18,11 @@ d <- function(x,
   
   # describe the data
   out <- psych::describe(x)
+  
+  # convert to data.frame if requested
+  if (data_frame) {
+    out <- data.frame(out)
+  }
   
   # shorten if requested
   if (shorten) {

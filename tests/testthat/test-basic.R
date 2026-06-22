@@ -729,7 +729,7 @@ test_that("first_diff returns correct values", {
 
 # test d
 test_that("d returns correct values", {
-  expect_equal(d(num_example), 
+  expect_equal(d(num_example, data_frame = FALSE), 
                structure(list(n = 9, 
                               mean   = 0.629611111111111, 
                               sd     = 1.64677468437887, 
@@ -740,6 +740,15 @@ test_that("d returns correct values", {
                          class = c("psych", 
                                    "Pdescribe", 
                                    "data.frame")))
+  expect_equal(d(num_example), 
+               structure(list(n = 9, 
+                              mean   = 0.629611111111111, 
+                              sd     = 1.64677468437887, 
+                              median = 0.01, 
+                              min    = 0, 
+                              max    = 5), 
+                         row.names = "X1", 
+                         class = c("data.frame")))
   expect_error(d(char_example),
                "x is of type character")
   expect_error(d(10),

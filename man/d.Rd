@@ -4,15 +4,17 @@
 \alias{d}
 \title{d}
 \usage{
-d(x, shorten = TRUE, ...)
+d(x, shorten = TRUE, data_frame = TRUE, ...)
 }
 \arguments{
 \item{x}{a numeric vector.}
 
 \item{shorten}{a logical value indicating whether only the n, mean, standard deviation, minimum, and maximum should be returned. Defaults to `TRUE`.}
 
+\item{data_frame}{a logical value indicating whether an object of class `data.frame` should be returned. Defaults to `TRUE`.}
+
 \item{...}{additional arguments passed to `describe()`.}
 }
 \description{
-A very simple wrapper for the `describe()` function from the `{psych}` package. In addition to having a shorter function name, it also returns fewer statistics by default.
+A very simple wrapper for the `describe()` function from the `{psych}` package. In addition to having a shorter function name, it also returns fewer statistics and a data.frame by default.
 }
